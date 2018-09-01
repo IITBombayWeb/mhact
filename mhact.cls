@@ -403,8 +403,9 @@ Maharashtra State, Mumbai - 400 004}
 \newcommand{\explanation}[1]{\emph{Explanation}: #1}
 
 %\newcommand{\actref}[1]{\marginpar{\raggedright\footnotesize{#1}}}
-\usepackage{marginnote}
-\newcommand{\actref}[2][]{\marginnote{\footnotesize{#2}}[#1]}
+%\usepackage{marginnote}
+%\newcommand{\actref}[2][]{\marginnote{\footnotesize{#2}}[#1]}
+\newcommand{\actref}[1]{\footnote{\footnotesize{#1}}}
 
 
 
