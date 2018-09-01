@@ -101,16 +101,17 @@
 %% Adjusted to a4 paper (29.7 x 21 cm)
 
 \usepackage[
-papersize={16cm,25.5cm},
+%papersize={16cm,25.5cm},
 width=15cm,
 height=21cm,
-headheight=1.5cm,
 marginparwidth=2cm,
-includemp,
-top=2.5cm,
+includeall,
+bindingoffset=1cm,
+margin=2cm,
+headheight=1.5cm,
 heightrounded]{geometry}
 
-\RequirePackage[cam,a4,center]{crop}
+%\RequirePackage[cam,a4,center]{crop}
 
 
 %******************notations with nomecl***************************
@@ -401,7 +402,9 @@ Maharashtra State, Mumbai - 400 004}
 
 \newcommand{\explanation}[1]{\emph{Explanation}: #1}
 
-\newcommand{\actref}[1]{\marginpar{\raggedright\footnotesize{#1}}}
+%\newcommand{\actref}[1]{\marginpar{\raggedright\footnotesize{#1}}}
+\usepackage{marginnote}
+\newcommand{\actref}[2][]{\marginnote{\footnotesize{#2}}[#1]}
 
 
 
