@@ -86,7 +86,10 @@
             pdffitwindow=true,%
             pdfstartview=Fit,%
             pdfcenterwindow=true,%
-            linkbordercolor={0 0 1},%
+            colorlinks,
+            linkcolor={red!50!black},
+            citecolor={blue!50!black},
+            urlcolor={blue!80!black}
 	        pdfusetitle]
             {hyperref}
 
@@ -180,8 +183,15 @@ heightrounded]{geometry}
   \gdef\@shortactlabel{#1}
 }
 
-\global\let\@actdate\@empty
-\def\actdate#1{\gdef\@actdate{#1}}
+\global\let\@actedition\@empty
+\def\actedition#1{\gdef\@actedition{#1}}
+
+\global\let\@actedyear\@empty
+\def\actedyear#1{\gdef\@actedyear{#1}}
+
+\global\let\@price\@empty
+\def\price#1{\gdef\@price{#1}}
+
 
 % \global\let\@assent\@empty
 % \def\assent#1{\gdef\@assent{#1}}
@@ -192,14 +202,34 @@ heightrounded]{geometry}
 \renewcommand{\maketitle}{%
 \begin{titlepage}
     \renewcommand{\baselinestretch}{1}\normalsize
-    % \pdfbookmark[0]{Title}{Title}  
   \thispagestyle{empty}
   \begin{center}
-      %\putgovlogo\par
-    { \LARGE \bfseries \@actlabel \par}
-      { \Large \bfseries \@title \par}
-      \vspace{\stretch{0.3}}
+      \putgovlogo\par
+      \vskip 10pt
+      {\large Government of Maharashtra}\par
+      {\Large Law and Judiciary Department}\par
+      \vskip 40pt
+    { \Huge \bfseries \@actlabel \par}
+      \vskip 40pt
+      { \huge \bfseries \@title \par}
+
+      \vskip 60pt
+      {\large (\@actedition)}
+
+      
                 
+      \vspace{\stretch{0.2}}
+
+{\small PRINTED IN INDIA BY THE MANAGER, GOVERNMENT PHOTOZINCO PRESS, PUNE
+AND PUBLISHED BY THE DIRECTOR, GOVERNMENT PRINTING AND STATIONERY,
+MAHARASHTRA STATE, MUMBAI - 400 004}
+
+{\small \bfseries \@actedyear}
+
+      \vspace{\stretch{0.2}}
+
+{\Large \bfseries [Price---\@price]}
+      
     \end{center}
     \end{titlepage}
   } 
@@ -366,7 +396,7 @@ heightrounded]{geometry}
 
 \newcommand{\explanation}[1]{\emph{Explanation}: #1}
 
-\newcommand{\actref}[1]{\marginpar{\footnotesize{#1}}}
+\newcommand{\actref}[1]{\marginpar{\raggedright\footnotesize{#1}}}
 
 
 
