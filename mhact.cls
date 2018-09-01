@@ -302,7 +302,7 @@ Maharashtra State, Mumbai - 400 004}
         \bfseries\MakeUppercase\@chapapp\space \thechapter% <-- Chapter #
         \par\nobreak
         %\vskip 20\p@% <-------------- Space between Chapter # and title
-    \bfseries\scshape #1\par\nobreak% <------------------ Chapter title
+    {\large \bfseries\scshape #1}\par\nobreak% <------------------ Chapter title
     %\vskip 40\p@% <------------------ Space between chapter title and first paragraph
   }}
 
@@ -328,7 +328,7 @@ Maharashtra State, Mumbai - 400 004}
   \thispagestyle{actstart}
   \setcounter{page}{1}
   \begin{center}
-    {\bfseries\MakeUppercase\@actlabel}\footnote{#1}\par
+    {\large\bfseries\scshape\@actlabel}\footnote{#1}\par
     {[\scshape \@title]}
   \end{center}
 }
