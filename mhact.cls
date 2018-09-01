@@ -220,9 +220,9 @@ heightrounded]{geometry}
                 
       \vspace{\stretch{0.2}}
 
-{\small PRINTED IN INDIA BY THE MANAGER, GOVERNMENT PHOTOZINCO PRESS, PUNE
-AND PUBLISHED BY THE DIRECTOR, GOVERNMENT PRINTING AND STATIONERY,
-MAHARASHTRA STATE, MUMBAI - 400 004}
+{\small Printed in India by the Manager, Government Photozinco Press, Pune
+and Published by the Director, Government Printing and Stationery,
+Maharashtra State, Mumbai - 400 004}
 
 {\small \bfseries \@actedyear}
 
