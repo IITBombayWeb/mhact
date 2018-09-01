@@ -76,7 +76,6 @@
 \RequirePackage[T1]{fontenc}
 \RequirePackage{xcolor}
 \RequirePackage{fancyhdr}
-\RequirePackage[center,a4]{crop}
 \RequirePackage[super]{nth}
 
 \RequirePackage[bookmarks,%
@@ -102,11 +101,16 @@
 %% Adjusted to a4 paper (29.7 x 21 cm)
 
 \usepackage[
+papersize={16cm,25.5cm},
+width=15cm,
 height=21cm,
-width=12.7cm,
 headheight=1.5cm,
 marginparwidth=2cm,
+includemp,
+top=2.5cm,
 heightrounded]{geometry}
+
+\RequirePackage[cam,a4,center]{crop}
 
 
 %******************notations with nomecl***************************
@@ -201,6 +205,7 @@ heightrounded]{geometry}
 
 \renewcommand{\maketitle}{%
 \begin{titlepage}
+  %\marginparwidth=0pt
     \renewcommand{\baselinestretch}{1}\normalsize
   \thispagestyle{empty}
   \begin{center}
