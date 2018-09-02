@@ -102,12 +102,15 @@
 
 \usepackage[
 %papersize={16cm,25.5cm},
-width=15cm,
-height=21cm,
-marginparwidth=2cm,
-includeall,
+%width=15cm,
+%height=21cm,
+%includeall,
+%includeheadfoot,
+includehead,
+nofoot,
+nomarginpar,
 bindingoffset=1cm,
-margin=2cm,
+margin=2.5cm,
 headheight=1.5cm,
 heightrounded]{geometry}
 
@@ -136,7 +139,8 @@ heightrounded]{geometry}
 \fancyhead[LE,RO]{\bfseries\thepage}
 \fancyhead[LO]{\bfseries\nouppercase\@shortactlabel]}
 \fancyhead[RE]{\bfseries\nouppercase[\@shortactlabel}
-\chead{\parbox[t]{8cm}{ \vskip 10pt  \textsl{\@title}}}
+%\chead{\parbox[t]{8cm}{ \vskip 10pt  \textsl{\@title}}}
+\chead{\parbox[b]{8cm}{\textsl{\shorttitle}}}
 
 \fancypagestyle{actstart}{
  \chead{}
@@ -167,6 +171,9 @@ heightrounded]{geometry}
 % \title, and \date are already defined in report
 % Some new commands are defined here
 %**********************************************************************
+
+\renewcommand*{\title}[2][]{\gdef\shorttitle{#1}\gdef\@title{#2}}
+
 \newcommand{\Usefont}[1]{\fontfamily{#1}\selectfont}
 
 %% Indian date format DD Month YYYY
