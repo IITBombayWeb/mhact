@@ -271,6 +271,7 @@ Maharashtra State, Mumbai - 400 004}
 \renewcommand\tableofcontents{%
   
   \cleardoublepage
+  \setcounter{page}{1}
   \thispagestyle{actstart}
   \begin{center}
       {\Large \bfseries \scshape \@title}
