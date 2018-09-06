@@ -325,6 +325,7 @@ Maharashtra State, Mumbai - 400 004}
 
 \newcommand{\assent}[1]{(#1)}
 \newcommand{\longtitle}[1]{#1}
+\newcommand{\enactingtext}[1]{#1}
 
 %**********************Section/subsection styles********************
 
