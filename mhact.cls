@@ -94,7 +94,7 @@
 
 \RequirePackage[varg]{txfonts}
 \RequirePackage{graphicx}
-\newcommand{\putgovlogo}{\includegraphics[width=1cm]{indiaemblem.pdf}}
+\newcommand{\putgovlogo}{\includegraphics[width=2cm]{indiaemblem.pdf}}
 
 
 %****************** page layout ******************************
@@ -137,8 +137,8 @@ heightrounded]{geometry}
 \renewcommand{\headrulewidth}{0pt}
 \fancyhead{} % clear old format
 \fancyhead[LE,RO]{\bfseries\thepage}
-\fancyhead[LO]{\bfseries\nouppercase\@shortactlabel]}
-\fancyhead[RE]{\bfseries\nouppercase[\@shortactlabel}
+\fancyhead[LO]{\bfseries\nouppercase\@actname]}
+\fancyhead[RE]{\bfseries\nouppercase[\@actname}
 %\chead{\parbox[t]{8cm}{ \vskip 10pt  \textsl{\@title}}}
 \chead{\parbox[b]{8cm}{\textsl{\shorttitle}}}
 
@@ -172,7 +172,7 @@ heightrounded]{geometry}
 % Some new commands are defined here
 %**********************************************************************
 
-\renewcommand*{\title}[2][]{\gdef\shorttitle{#1}\gdef\@title{#2}}
+\newcommand{\shorttitle}[2][]{\gdef\@shorttitle{#1}\gdef\@title{#2}}
 
 \newcommand{\Usefont}[1]{\fontfamily{#1}\selectfont}
 
@@ -187,12 +187,10 @@ heightrounded]{geometry}
 
 \nonstopmode   % Do not stop if the font is not available
 
-%\global\let\@actlabel\@empty
-%\def\actlabel#1{\gdef\@actlabel{#1}}
 
-\newcommand\actlabel[2][]{%
-  \gdef\@actlabel{#2}
-  \gdef\@shortactlabel{#1}
+\newcommand\actnamealias[2]{%
+  \gdef\@actname{#1}
+  \gdef\@actalias{#2}
 }
 
 \global\let\@actedition\@empty
@@ -222,7 +220,7 @@ heightrounded]{geometry}
       {\large Government of Maharashtra}\par
       {\Large Law and Judiciary Department}\par
       \vskip 40pt
-    { \Huge \bfseries \@actlabel \par}
+    { \Huge \bfseries \@actalias \par}
       \vskip 40pt
       { \huge \bfseries \@title \par}
 
@@ -328,7 +326,7 @@ Maharashtra State, Mumbai - 400 004}
   }}
 
 \newcommand{\assent}[1]{(#1)}
-\newcommand{\summary}[1]{#1}
+\newcommand{\longtitle}[1]{#1}
 
 %**********************Section/subsection styles********************
 
@@ -336,13 +334,13 @@ Maharashtra State, Mumbai - 400 004}
 \pagenumbering{roman}
 \setcounter{page}{1}
 
-\newcommand{\startact}[1]{%
+\newcommand{\startact}[1][]{%
   \cleardoublepage
   \pagenumbering{arabic}
   \thispagestyle{actstart}
   \setcounter{page}{1}
   \begin{center}
-    {\large\bfseries\scshape\@actlabel}\footnote{#1}\par
+    {\large\bfseries\scshape\@actalias}\footnote{#1}\par
     {[\scshape \@title]}
   \end{center}
 }

@@ -1,0 +1,104 @@
+<akomaNtoso xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	    xsi:schemaLocation="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/CSD13 ./akomantoso30.xsd "
+	    xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0/CSD13">
+  
+  <act name="MaharashtraPublicAct">
+    <meta>
+      <identification source="#source">
+	<FRBRWork>
+	  <FRBRthis
+	      value="http://legislation.maharashtra.gov.in/maha/2000/18/enacted"/>
+	  <FRBRuri value="http://legislation.maharashtra.gov.in/maha/2000/18/enacted"/>
+	  <FRBRdate date="2000-03-02" name="enacted"/>
+	  <FRBRauthor href="http://legislation.maharashtra.gov.in/legislature"/>
+	  <FRBRcountry value="IN"/>
+	  <FRBRnumber value="18"/>
+	  <FRBRname value="2000: Maha. XVIII"/>
+	  <FRBRalias value="Maharashtra Act No. XVIII of 2000"/>
+	  <FRBRprescriptive value="true"/>
+	</FRBRWork>
+	<FRBRExpression>
+	  <FRBRthis value="http://legislation.maharashtra.gov.in/maha/2000/18/enacted"/>
+	  <FRBRuri value="http://legislation.maharashtra.gov.in/maha/2000/18/enacted"/>
+	  <FRBRdate date="2000-03-02" name="enacted"/>
+	  <FRBRauthor href="#source"/>
+	  <FRBRlanguage language="eng"/>
+	</FRBRExpression>
+	<FRBRManifestation>
+	  <FRBRthis
+	      value="http://legislation.maharashtra.gov.in/maha/2000/18/enacted/data.akn"/>
+	  <FRBRuri
+	      value="http://legislation.maharashtra.gov.in/maha/2000/18/enacted/data.akn"/>
+	  <FRBRdate date="2000-03-02" name="transform"/>
+	  <FRBRauthor href="http://legislation.maharashtra.gov.in"/>
+	  <FRBRformat value="application/akn+xml"/>
+	</FRBRManifestation>
+      </identification>
+      <lifecycle source="#source">
+	<eventRef date="2000-03-02" type="generation" eId="eRef_1" source="#source" refersTo="#DateOfEnactment"/>
+      </lifecycle>
+    </meta>
+    <preface>
+      <shortTitle>
+	Bombay Rents, Hotel and Lodging House Rates Control, Bombay Land
+	Requisition and Bombay Government Premises (Eviction) (Amendment) Act,
+	1999
+      </shortTitle>
+	<docNumber>2000 C 18</docNumber>
+      <longTitle>
+	An Act to unify, consolidate and amend the law relating to the
+	control of rent and repairs of certain premises and of eviction and
+	for encouraging the construction of new houses by assuring a fair
+	return on the investment by landlords and to provide for the matters
+	connected with the purposes aforesaid.
+      </longTitle>
+      <docDate eId="date_1" date="2013-05-21"
+	       refersTo="#DateOfEnactment">[21 May 2013]</docDate>
+    </preface>
+
+    <preamble>
+      WHEREAS it is expedient to unify, consolidate and amend the laws
+      prevailing in the different parts of the State relating to the control
+      of rents and repairs of certain premises and of eviction and for
+      encouraging the construction of new houses by assuring a fair return
+      and to provide for the matters connected with the purposes aforesaid;
+      It is hereby enacted in the Fiftieth Year of the Republic of India as
+      follows:---
+    </preamble>
+
+    <body>
+      <chapter>
+	<heading> Preliminary </heading>
+	<section>
+	  <heading>Short title, extent and commencement}</heading>
+	  <subsection>
+	    <content>
+	      This Act may be called the Maharashtra Rent Control Act, 1999.
+	    </content>
+	  </subsection>
+
+	  <subsection>
+	    <content>
+	      It shall extend to the whole of the State of Maharashtra. Short title, extent and
+	      commencement.
+	    </content>
+	  </subsection>
+
+
+	  <subsection>
+	    <content>
+	      It shall come into force on such date
+	      <note>
+		31 March 2000, vide, G. N., H & SAD., No. MEA. 2000/CR-14/Bhanika, dated
+		the 30 March 2000, published in Maharashtra Government
+		Gazette, 2000, Part-IV-B, Extra No. 84, p. 297 
+	      </note>
+	      as the State Government may, by notification in the Official Gazette, appoint.
+	    </content>
+	  </subsection>
+	</section>
+      </chapter>
+    </body>
+      
+  </act>
+</akomaNtoso>
