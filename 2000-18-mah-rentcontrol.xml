@@ -39,12 +39,27 @@
       </lifecycle>
     </meta>
     <preface>
+
+      
       <shortTitle>
 	Bombay Rents, Hotel and Lodging House Rates Control, Bombay Land
 	Requisition and Bombay Government Premises (Eviction) (Amendment) Act,
 	1999
       </shortTitle>
-	<docNumber>2000 C 18</docNumber>
+
+      <note>
+	For Statement of Objects and Reasons, see. Maharashtra
+	Government Gazette, Part-V-A, pages 347 to 349.
+      </note>
+
+      <formula name="AssentText">
+	This Act received the assent of the President on 8 March 2000; assent
+	was first published in the Maharashtra Government Gazette, Part-IV, on 
+	10 March 2000.
+      </formula>
+      
+
+      <docNumber>2000 C 18</docNumber>
       <longTitle>
 	An Act to unify, consolidate and amend the law relating to the
 	control of rent and repairs of certain premises and of eviction and
@@ -57,13 +72,15 @@
     </preface>
 
     <preamble>
-      WHEREAS it is expedient to unify, consolidate and amend the laws
-      prevailing in the different parts of the State relating to the control
-      of rents and repairs of certain premises and of eviction and for
-      encouraging the construction of new houses by assuring a fair return
-      and to provide for the matters connected with the purposes aforesaid;
-      It is hereby enacted in the Fiftieth Year of the Republic of India as
-      follows:---
+      <formula name="EnactingText">
+	WHEREAS it is expedient to unify, consolidate and amend the laws
+	prevailing in the different parts of the State relating to the control
+	of rents and repairs of certain premises and of eviction and for
+	encouraging the construction of new houses by assuring a fair return
+	and to provide for the matters connected with the purposes aforesaid;
+	It is hereby enacted in the Fiftieth Year of the Republic of India as
+	follows:---
+      </formula>
     </preamble>
 
     <body>

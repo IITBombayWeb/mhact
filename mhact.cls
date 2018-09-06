@@ -30,8 +30,6 @@
 %%    https://github.com/IITBombayWeb/mhact/issues/new
 %%          or 
 %%      P Sunthar  <p.sunthar@gmail.com> 
-%%           or 
-%%      Chandra Has <chandrahashbti@gmail.com>
 %% 
 %%
 %%====================================================================
