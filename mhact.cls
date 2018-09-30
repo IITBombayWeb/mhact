@@ -137,8 +137,16 @@ heightrounded]{geometry}
 \fancyhead[LE,RO]{\bfseries\thepage}
 \fancyhead[LO]{\bfseries\nouppercase\@actname]}
 \fancyhead[RE]{\bfseries\nouppercase[\@actname}
+\fancyhead[CE]{\parbox[t]{8cm}{ \textsl{\@shorttitle}}}
+\fancyhead[CO]{\parbox[t]{8cm}{ \textsl{\rightmark}}}
+
+%\fancyhead[CE]{\textsl{\@shorttitle}}
+%\fancyhead[CO]{\textsl{\rightmark}}
+
+
 %\chead{\parbox[t]{8cm}{ \vskip 10pt  \textsl{\@title}}}
-\chead{\parbox[b]{8cm}{\textsl{\shorttitle}}}
+%\chead{\parbox[b]{8cm}{\textsl{\@shorttitle}}}
+
 
 \fancypagestyle{actstart}{
  \chead{}
@@ -200,6 +208,19 @@ heightrounded]{geometry}
 \global\let\@price\@empty
 \def\price#1{\gdef\@price{#1}}
 
+\global\let\@introducer\@empty
+\def\introducer#1{\gdef\@introducer{#1}}
+
+\global\let\@introdesig\@empty
+\def\introdesig#1{\gdef\@introdesig{#1}}
+
+\global\let\@psmla\@empty
+\def\psmla#1{\gdef\@psmla{#1}}
+
+\global\let\@intimation\@empty
+\def\intimation#1{\gdef\@intimation{#1}}
+
+
 
 % \global\let\@assent\@empty
 % \def\assent#1{\gdef\@assent{#1}}
@@ -241,7 +262,51 @@ Maharashtra State, Mumbai - 400 004}
       
     \end{center}
     \end{titlepage}
-  } 
+} 
+  
+\newcommand{\makedocket}{%
+  \begin{titlepage}
+    \twocolumn
+      \begin{flushright}
+      \textsc{Maharashtra Legislature Secretariat} \par
+
+      \vspace{\stretch{1}}
+      
+      {\large \@actalias\par}
+
+      \vspace{\stretch{0.3}}
+      \@title
+
+      \vspace{\stretch{0.3}}
+    \end{flushright}
+    
+      \@longtitle
+
+    \begin{flushright}
+      \vskip 20pt
+      \@introducer\par\@introdesig
+
+      \vskip 20pt
+      \textbf{\@intimation}
+
+      
+      \vskip 20pt
+
+      \@psmla,\\
+      Principal Secretary,\\
+      Maharashtra Legislative Assembly
+    \end{flushright}
+
+    \vspace{\stretch{0.5}}
+
+    \begin{flushright}
+      \rule{\linewidth}{0.5pt}\\
+      Government Central Press, Mumbai
+    \end{flushright}
+  
+\end{titlepage}
+  
+}
 
 
 %**************************Copyright page******************************
@@ -257,12 +322,6 @@ Maharashtra State, Mumbai - 400 004}
 
 
 %*************************Abstract*************************************
-\newenvironment{Abstract}[1][Abstract]{%	
-\makeheadtoc{#1}\chapter*{#1}}{%	
-}
-%\renewcommand{\abstractname}{\Large Abstract}
-
-% Adding toc into pdf bookmark
 
 \renewcommand\tableofcontents{%
   
@@ -288,19 +347,6 @@ Maharashtra State, Mumbai - 400 004}
       \addcontentsline{toc}{chapter}{#1}
 }
 
-%% The macros for the  Acknowledgements, List of publications  
-\newcommand*{\acknowledgments}[1][Acknowledgements]{%	
-	\makeheadtoc{#1}
-	\chapter*{#1}
-}
-
-\newcommand*{\listofpublications}[1][List of Publications]{%	
-	\makeheadtoc{#1} 	
-	\chapter*{#1}
-}
-
-
-
 
 
 %**************************Chapter style*****************************
@@ -324,8 +370,9 @@ Maharashtra State, Mumbai - 400 004}
   }}
 
 \newcommand{\assent}[1]{(#1)}
-\newcommand{\longtitle}[1]{#1}
-\newcommand{\enactingtext}[1]{#1}
+\newcommand{\longtitle}[1]{\gdef\@longtitle{#1}#1}
+\newcommand{\enactingtext}[1]{#1 :---}
+\newcommand{\intro}[1]{#1}
 
 %**********************Section/subsection styles********************
 
@@ -339,8 +386,11 @@ Maharashtra State, Mumbai - 400 004}
   \thispagestyle{actstart}
   \setcounter{page}{1}
   \begin{center}
-    {\large\bfseries\scshape\@actalias}\footnote{#1}\par
-    {[\scshape \@title]}
+    {\large\bfseries\scshape\@actalias}
+    \ifx#1\@empty
+    \else\footnote{#1}
+    \fi
+    \par{[\scshape \@title]}
   \end{center}
 }
 
@@ -349,6 +399,7 @@ Maharashtra State, Mumbai - 400 004}
 \patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
 \patchcmd{\chapter}{\thispagestyle{plain}}{}{}{}
 
+\RequirePackage{lineno}
                     %
  
 \renewcommand{\thechapter}{\Roman{chapter}}
