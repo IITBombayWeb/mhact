@@ -1,0 +1,134 @@
+% Sample Marathi act text
+\documentclass[12pt]{article}
+\usepackage{fontspec}
+\usepackage{fullpage}
+\usepackage{polyglossia}
+\setmainlanguage{sanskrit}
+\setotherlanguages{english}
+
+\newfontfamily\devanagarifont[Script=Devanagari]{Lohit Devanagari} 
+
+%%% Justify without hyphenation
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+
+
+\makeatletter
+% https://tex.stackexchange.com/questions/70414/how-to-get-devanagari-numerals-in-latex-or-xetex
+
+\newcommand{\devanagarinumeral}[1]{%
+  \devanagaridigits{\number\csname c@#1\endcsname}}
+
+% https://tex.stackexchange.com/questions/366321/numbering-enumerate-environments-and-pages-with-devanagari-alphabet
+
+\def\devanagari@alph#1{%
+ \ifcase#1\or क\or ख\or ग\or घ\or ङ\or च\or छ\or ज\or झ\or ञ\or
+  ट\or ठ\or ड\or ढ\or ण\or त\or थ\or द\or ध\or न\or प\or फ\or ब\or भ\or म\or
+   य\or र\or ल\or व\or श\or ष\or स\or ह\else\@ctrerr\fi}
+%%Imitating xgreek.sty and xepersian.sty
+\let\@alph\devanagari@alph
+\let\@Alph\devanagari@alph
+\let\@roman\devanagari@alph
+\let\@Roman\devanagari@alph
+
+% Change appearance of enumerate at levels 2, 3, 4.
+%\renewcommand{\theenumi}{\devanagarinumeral{enumi}}
+\renewcommand{\labelenumii}{\theenumii.} % Instead of: (\theenumii)
+\renewcommand{\labelenumiii}{(\theenumiii)} % Instead of: \theenumiii.
+\renewcommand{\theenumiii}{\@arabic\c@enumiii} % Instead of: \@roman\c@enumiii
+\renewcommand{\labelenumiv}{(\theenumiv)} % Instead of: \theenumiv.
+
+\makeatother
+
+% renew all representation of counters
+ \renewcommand{\thesection}{\devanagarinumeral{section}}
+ \renewcommand{\thesubsection}{\thesection.\devanagarinumeral{subsection}}
+ %\renewcommand{\thepage}{\devanagarinumeral{page}}
+
+\begin{document}
+
+
+\newcommand{\setin}[1]{%
+  \clearpage
+%  \newfontfamily\devanagarifont[Script=Devanagari]{#1}
+  \fontspec{#1}[Script=Devanagari,
+  % Language=Marathi,
+  Mapping=devanagarinumerals,
+  StylisticSet=2]
+  
+  \section{\foreignlanguage{english}{#1}}
+  
+  \subsection{प्रारंभिक} 
+  %\section{प्रारंभिक  \foreignlanguage{english}{#1}}
+
+१	२	३ 	४       ५	६	७	८	९\\
+श्र	त्क	द्व	द्य	द्द	द्म	त्त त्र	र्य	र्‍य	प्र	ट्र	ह्य	ह्म\\
+  
+\begin{enumerate}
+\item \textbf{नियोजन} {\Large \bfseries समतीचा} अहवाल मिळाल्यानंतर, दोन
+    महिन्यापेक्षा अधिक नसेल अशा
+कालावधीत, योजनेच्या मसुद्यात त्याला योग्य वाटतील असे फेरबदल किंवा बदल करील. नियोजन
+प्राधिकरण किंवा उक्त अधिकारी, जनतेच्या माहितीसाठी विकास योजनेच्या मसुद्यात करण्यात
+आलेल्या फेरबद\-लांची किंवा बदलांची सूची राजपत्रात व दोनपेक्षा कमी नसतील अशा स्थानिक
+वर्तमानपत्रांत प्रसिद्ध करील.
+
+\item अशाप्रकारे फेरबदल करण्यात आलेला विकास योजनेचा मसुदा मंजुरीसाठी राज्य शासनाकडे
+सादर करण्यापूर्वी किमान एक महिना अगोदर तो मसुदा राजपत्रात आणि विहित करण्यात येईल
+अशा अन्य रीतीने प्रसिद्ध करण्यात येईल.
+
+\item नियोजन प्राधिकरण किंवा, यथास्थिति, उक्त अधिकारी कलम 26 अन्वये 4[अशी
+  योजना, तयार केली असल्याबद्दलची नोटीस राजपत्रामध्ये प्रसिद्ध करण्यात आल्याच्या
+  दिनांकापासून] सहा महिन्यांच्या कालावधीत, कलम 28 च्या पोट-कलम (4) अन्वये,
+  विकास योजनेच्या मसुद्यात करण्यात आलेल्या फेरबदलांच्या किंवा बदलांच्या सूचीसह,
+  विकास योजनेचा मसुदा मंजुरीसाठी राज्य शासनास सादर करील; परंतु तो कालावधी कोणत्याही परिस्थितीत,---
+  \begin{enumerate}
+  \item अलिकडच्या जनगणनेच्या आकडेवारीनुसार, एक कोटी किंवा त्यापेक्षा अधिक लोकसंख्या
+    असलेल्या महानगरपालिकांच्या बाबतीत, एकूण चोवीस महिने ;
+  \item अलिकडच्या
+    जनगणनेच्या आकडेवारीनुसार, दहा लाख किंवा त्यापेक्षा अधिक, परंतु एक कोटीपेक्षा
+    कमी लोकसंख्या असलेल्या महानगर\-पालिकांच्या बाबतीत, एकूण बारा महिने ; आणि
+    \item इतर कोणत्याही बाबतीत, एकूण सहा महिने, यापेक्षा अधिक असणार नाही.
+
+    \item यामध्ये काहीही अंतर्भूत असले तरी, लोकहिताच्या दृष्टीने, अंतिम विकास
+      योजनेच्या कोण\-त्याही भागात किंवा त्यामध्ये केलेल्या कोणत्याही प्रस्तावात,
+      याबाबत राज्य शासनाची खात्री पटल्यास, अशा प्रकरणात, राज्य शासनास,
+      नियोजित फेरबदलाच्या संबंधात
+      \begin{enumerate}
+      \item राज्य शासन विनिर्दिष्ट कालावधीनंतर, अशा सर्व आक्षेपांची व सूचनांची
+        प्रत नियो\-जन प्राधिकरणाकडे त्याच्या विचारार्थ पाठवील. त्यानंतर, नियोजन
+        प्राधिकरण, शासना\-कडून अशा आक्षेपांची व सूचनांची प्रत मिळाल्यापासून एक
+        महिन्याच्या काला\-वधीत त्याचे म्हणणे शासनाकडे सादर करील.
+\end{enumerate}
+
+      
+\end{enumerate}
+
+\end{enumerate}
+
+}
+
+%\begin{raggedright}
+
+\setin{Lohit Devanagari}
+\setin{Chandas}
+\setin{Gargi}
+\setin{Kalimati}
+\setin{Nakula}
+\setin{Samanata}
+\setin{Samyak Devanagari}
+\setin{SakalBharati}
+\setin{Mukta Regular}
+\setin{Sahadeva} % Old Devanagari
+\setin{Sarai}
+\setin{Shobhika}
+
+%\end{raggedright}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

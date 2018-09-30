@@ -1,0 +1,96 @@
+%%% Marathi Alphabet and Glyphs
+
+\documentclass{article}
+%\usepackage{palatino}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{sanskrit}
+\setotherlanguages{english}
+
+% Serif
+%\newfontfamily\devanagarifont[Script=Devanagari]{Samanata}
+%\newfontfamily\devanagarifont[Script=Devanagari]{Chandas}
+
+% Kalimati does not have ळ
+%\newfontfamily\devanagarifont[Script=Devanagari]{Kalimati} 
+
+% Sans-serif
+%\newfontfamily\devanagarifont[Script=Devanagari]{Gargi} % does not have ૪
+\newfontfamily\devanagarifont[Script=Devanagari]{Lohit Devanagari} 
+
+
+\newfontfamily\englishfont{TeX Gyre Pagella}
+
+\strongfontdeclare{\bfseries,\fontseries{k}\selectfont}
+%\setmainfont{ITF Devanagari Marathi}
+
+
+\newcommand{\setin}[1]{%
+%  \newfontfamily\devanagarifont[Script=Devanagari]{#1}
+  \begin{english}
+    \section{#1}
+  \end{english}
+  \fontspec{#1}
+  \malphabet
+}
+
+\newcommand\malphabet{%
+ % http://www.lipikaar.com/online-editor/marathi-typing
+%  but numeral 4 ४ has a different code here
+
+% correct code for ४ 0x96a taken  from here
+% http://jrgraphix.net/r/Unicode/0900-097F
+
+\noindent अ	आ	ऄ      इ	ई\\
+उ	ऊ      ए	ऐ       ऍ	ऎ\\
+ओ	औ      ऑ	ऒ\\
+ऋ	ॠ	पं	प़	पँ	पः\\
+१	२	३ 	४       ५	६	७	८	९
+०\\
+श्र	त्क	द्व	द्य	द्द	द्म	त्त\\
+त्र	र्य	र्‍य	प्र	ट्र	ह्य	ह्म\\
+ा\\
+क	ख	ग	घ	ङ\\
+च	छ	ज	झ      ञ\\
+ट	ठ	ड	ढ	ण\\
+त	थ	द	ध       न\\
+प	फ	ब	भ	म\\
+य	र	ऱ	ल	व\\
+श	ष	स	ह	ळ	क्ष	ज्ञ\\
+
+
+
+}
+
+
+\begin{document}
+
+
+हे {\bfseries मराठीमध्ये} {\Huge टाइपसेट} आहे 
+
+\setin{Lohit Devanagari}
+\setin{Chandas}
+\setin{Gargi}
+\setin{Kalimati}
+\setin{Nakula}
+\setin{Samanata}
+\setin{Samyak Devanagari}
+\setin{Ek Mukta Regular}
+\setin{Ek Mukta Bold}
+
+
+
+
+\section{English}
+\begin{english}
+This is in English
+\end{english}
+
+\end{document}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
