@@ -393,8 +393,9 @@ Maharashtra State, Mumbai - 400 004}
 %   {\normalfont}}
 
 \RequirePackage{enumitem}
-\newenvironment{subsectionlist}{%
+\newenvironment{subsectionlist}[1][99]{%
   \begin{enumerate}[label=(\arabic*)]
+    \settowidth{\leftmargin}{#1}
   }{\end{enumerate}}
 
 \newenvironment{clause}{%
