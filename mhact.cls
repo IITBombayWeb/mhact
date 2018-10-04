@@ -134,11 +134,11 @@ heightrounded]{geometry}
 % Heading format
 \renewcommand{\headrulewidth}{0pt}
 \fancyhead{} % clear old format
-\fancyhead[LE,RO]{\bfseries\thepage}
-\fancyhead[LO]{\bfseries\nouppercase\@actname]}
-\fancyhead[RE]{\bfseries\nouppercase[\@actname}
-\fancyhead[CE]{\parbox[t]{8cm}{ \textsl{\@shorttitle}}}
-\fancyhead[CO]{\parbox[t]{8cm}{ \textsl{\rightmark}}}
+\fancyhead[LE,RO]{\small\bfseries\thepage}
+\fancyhead[LO]{\small\bfseries\nouppercase\@actname]}
+\fancyhead[RE]{\small\bfseries\nouppercase[\@actname}
+\fancyhead[CE]{\parbox[t]{8cm}{\small \textsl{\@shorttitle}}}
+\fancyhead[CO]{\parbox[t]{8cm}{\small \textsl{\rightmark}}}
 
 %\fancyhead[CE]{\textsl{\@shorttitle}}
 %\fancyhead[CO]{\textsl{\rightmark}}
@@ -149,7 +149,8 @@ heightrounded]{geometry}
 
 
 \fancypagestyle{actstart}{
- \chead{}
+  \fancyhead{}
+  \cfoot{\small\bfseries\thepage}
 }
 
 \cfoot{}
@@ -328,8 +329,13 @@ Maharashtra State, Mumbai - 400 004}
   \cleardoublepage
   \setcounter{page}{1}
   \thispagestyle{actstart}
+
   \begin{center}
-      {\Large \bfseries \scshape \@title}
+    
+    {\huge \@actalias \vskip 40pt
+
+      \Large \bfseries \scshape \@title}
+    
   \end{center}
   
     \chapter*{\contentsname}
