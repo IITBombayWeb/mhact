@@ -274,9 +274,6 @@ Maharashtra State, Mumbai - 400 004}
     \end{titlepage}
 } 
 
-\if@billwithdocket
-  \AtEndDocument{\makedocket}  
-\fi
 
 \newcommand{\makedocket}{%
   \begin{titlepage}
@@ -339,9 +336,9 @@ Maharashtra State, Mumbai - 400 004}
 
 
 
-%*************************Abstract*************************************
+%*************************  Cover pages *************************************
 
-\renewcommand\tableofcontents{%
+\newcommand\billcoverpage{%
   
   \cleardoublepage
   \setcounter{page}{1}
@@ -357,20 +354,34 @@ Maharashtra State, Mumbai - 400 004}
   
     \chapter*{\contentsname}
     \@starttoc{toc}%
+
+    \cleardoublepage
     
     }
 
 
-\newcommand*{\addintoc}[2][chapter]{%
-	\addcontentsline{toc}{#1}{#2}\cleardoublepage\phantomsection
-	}
-\newcommand{\makeheadtoc}[1]{%
-  \cleardoublepage\phantomsection
-    \markboth{#1}{#1}
-      \addcontentsline{toc}{chapter}{#1}
-}
+    \newcommand{\gazBillEngQuota}{%
+
+      \begin{center}
+
+        {\Huge Gazette 5a \vskip 40pt}
+
+        
+      \end{center}
+
+    }
 
 
+    \newcommand{\gazActEngQuota}{%
+
+      \begin{center}
+
+        {\Huge Gazette 8 \vskip 40pt}
+        
+      \end{center}
+
+    }
+    
 
 %**************************Chapter style*****************************
 
@@ -406,14 +417,31 @@ Maharashtra State, Mumbai - 400 004}
 \newcommand{\startact}[1][]{%
   \cleardoublepage
 
+  
+
 
   \pagenumbering{arabic}
   \thispagestyle{actstart}
   \setcounter{page}{1}
 
-  \linenumbers\relax% Start numbering lines
-  % \runninglinenumbers
-  \modulolinenumbers % every 5 by default
+
+  \if@billwithdocket
+    \billcoverpage
+    \linenumbers\relax% Start numbering lines
+    % \runninglinenumbers
+    \modulolinenumbers % every 5 by default
+    \AtEndDocument{\makedocket}  
+  \fi
+  
+  \if@gazbilleng
+    \gazBillEngQuota
+  \fi
+
+  \if@gazacteng
+    \gazActEngQuota
+  \fi
+  
+  
   
   \begin{center}
     {\large\bfseries\scshape\@actalias}
