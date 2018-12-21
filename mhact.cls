@@ -54,6 +54,19 @@
 }
 
 
+\DeclareOption{billwithdocket}{%
+  \@billwithdockettrue
+}
+
+\DeclareOption{gaz5a}{%
+  \@gazbillengtrue
+}
+
+\DeclareOption{gaz8}{%
+  \@gazactengtrue
+}
+
+
 
 %*****************************************************************
 % Process given options
@@ -267,6 +280,7 @@ Maharashtra State, Mumbai - 400 004}
   
 \newcommand{\makedocket}{%
   \begin{titlepage}
+    \nolinenumbers
     \twocolumn
       \begin{flushright}
       \textsc{Maharashtra Legislature Secretariat} \par
@@ -388,9 +402,16 @@ Maharashtra State, Mumbai - 400 004}
 
 \newcommand{\startact}[1][]{%
   \cleardoublepage
+
+
   \pagenumbering{arabic}
   \thispagestyle{actstart}
   \setcounter{page}{1}
+
+  \linenumbers\relax% Start numbering lines
+  % \runninglinenumbers
+  \modulolinenumbers % every 5 by default
+  
   \begin{center}
     {\large\bfseries\scshape\@actalias}
     \ifx#1\@empty
