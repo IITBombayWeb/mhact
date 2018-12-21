@@ -44,14 +44,9 @@
 % seminar report, and thesis, and between different types of  
 % reports. 
 %*******************************************************************
-\newif\if@draft
-\newif\if@seminar
-\newif\if@degree
-
-\DeclareOption{draft}{%
-  \@drafttrue
-  \PassOptionsToClass{draft}{report}
-}
+\newif\if@billwithdocket
+\newif\if@gazbilleng
+\newif\if@gazacteng
 
 
 \DeclareOption{billwithdocket}{%
@@ -100,6 +95,7 @@
             linkcolor={red!50!black},
             citecolor={blue!50!black},
             urlcolor={blue!80!black}
+            pdfpagelabels,
 	        pdfusetitle]
             {hyperref}
 
@@ -277,9 +273,16 @@ Maharashtra State, Mumbai - 400 004}
     \end{center}
     \end{titlepage}
 } 
-  
+
+\if@billwithdocket
+  \AtEndDocument{\makedocket}  
+\fi
+
 \newcommand{\makedocket}{%
   \begin{titlepage}
+
+    \pagenumbering{Alph}
+    \thispagestyle{empty}
     \nolinenumbers
     \twocolumn
       \begin{flushright}
