@@ -8,38 +8,72 @@
 
 \begin{document}
 \pagestyle{empty}
+
+\newcommand{\rowstyle}[1]{{\small \bfseries #1}}
+
+\newcommand{\setin}[1]{%
+ \clearpage
 \begin{flushright}
-  \textbf{RNI No. MAHBIL /2009/40123}
+  (#1) \hspace{\fill} \textbf{RNI No. MAHBIL /2009/40123}
 \end{flushright}
 
 
-\newcommand{\rowstyle}[1]{{\small \bfseries #1}}
 \begin{center}
   \includegraphics[width=1.5cm]{indiaemblem}
 
   \vskip 40pt
 
-\fontspec{Shobhika}[Script=Devanagari, Language=Marathi, Mapping=devanagarinumerals]
+\fontspec{#1}[Script=Devanagari, Mapping=devanagarinumerals]
 
 {\Huge \bfseries महाराष्ट्र शासन राजपत्र}
 
   \vskip 20pt
 
-{\Large \bfseries असाधारण भाग-अ}
+{\Large \bfseries असाधारण भाग पाच-अ}
 
-\rule{\linewidth}{2pt}
+
+\rule[-0.8\baselineskip]{\linewidth}{2pt}
 \rule{\linewidth}{0.5pt}
+
+
 
   \rowstyle{वर्ष ३, अंक २०(१)]} \hspace{\fill}
   \rowstyle{मंगळवार, ऑगस्ट ८, २०१७/ श्रावण १७, शके १९३९} 
   \hspace{\fill}
   \rowstyle{ [प्रष्टे १८, किंमत: रुपये ३६.00} 
 
-
 \rule{\linewidth}{0.5pt}
-\rule{\linewidth}{2pt}
+\rule[0.7\baselineskip]{\linewidth}{2pt}
+
+
+\textbf{असाधारण क्रमांक ४७३}
+
+  \vskip 20pt
+
+{\large\bfseries प्राधिकृत प्रकाशन }
+
+  \vskip 20pt
+
+{\bfseries महाराष्ट्र विधानसभेत  व महाराष्ट्र विधानपरिषदेत सादर केलेली विधेयके
+  (इंग्रिजी अनुवाद) }
+
 
 \end{center}
+
+  \vskip 40pt
+
+\begin{center}
+{\large MAHARASHTRA LEGISLATURE SECRETARIAT}
+\end{center}
+
+The following Bill was introduced in the Maharashtra Legislative Assembly on the
+8th August 2017 is published under Rule 117 of the Maharashtra Legislative Assembly Rules :
+}
+
+\setin{Shobhika}
+\setin{CDAC-GISTSurekh}
+\setin{Murty Sanskrit}
+
 
 \end{document}
 
