@@ -2,9 +2,12 @@
 \documentclass[12pt]{article}
 \usepackage{fontspec}
 \usepackage{fullpage}
+\usepackage{lastpage}
 \usepackage{polyglossia}
 \setmainlanguage{sanskrit}
 \setotherlanguages{english}
+
+\usepackage{refcount}
 
 \newfontfamily\devanagarifont[Script=Devanagari]{Lohit Devanagari} 
 
@@ -113,6 +116,17 @@
 
 %\begin{raggedright}
 
+Number of pages = \pageref{pg:lastpage}
+
+12 in Devanagari: \devanagaridigits{12}
+
+Page Count in devanagari \devanagaridigits{\number\getpagerefnumber{pg:lastpage}}
+
+Page Count in devanagari \devanagaridigits{\number\getpagerefnumber{LastPage}}
+
+%Page number: \devanagaridigits{\pageref{pg:lastpage}} 
+%\devanagaridigits{\getrefbykeydefault{pg:lastpage}{page}{0}}
+
 
 \setin{Shobhika}
 \setin{CDAC-GISTSurekh}
@@ -129,6 +143,8 @@
 \setin{Mukta Regular}
 \setin{Sahadeva} % Old Devanagari
 \setin{Sarai}
+
+\label{pg:lastpage}
 
 %\end{raggedright}
 \end{document}

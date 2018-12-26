@@ -1,0 +1,40 @@
+\documentclass{article}
+
+\makeatletter
+
+\newcommand{\macroval}[2]{%
+  \global\expandafter\let\csname #2\endcsname \@empty
+  %\expandafter\def\csname #1\endcsname##1 {##1}
+  \expandafter\def\csname #1\endcsname##1 {\expandafter\gdef \csname #2\endcsname {##1}}
+  %\expandafter\edef\csname #1\endcsname##1 {\gdef \csname #2\endcsname {##1}}
+}
+
+\newcommand{\printmyvals}{
+  Varsh: \pr@Varsh \\
+  Ank: \pr@Ank
+
+}
+
+
+\makeatother
+
+ \macroval{printVarsh}{pr@Varsh}
+ \macroval{printAnk}{pr@Ank}
+
+
+\begin{document}
+
+
+
+\printVarsh{Varsh=4}
+
+ \printAnk{Ank=3}
+
+\printmyvals
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

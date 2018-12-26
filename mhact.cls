@@ -43,10 +43,11 @@
 % We need command to switch between dissertation, annual progress 
 % seminar report, and thesis, and between different types of  
 % reports. 
-%*******************************************************************
+% *******************************************************************
 \newif\if@billwithdocket
 \newif\if@gazbilleng
 \newif\if@gazacteng
+\newif\if@reprint
 
 
 \DeclareOption{billwithdocket}{%
@@ -61,6 +62,9 @@
   \@gazactengtrue
 }
 
+\DeclareOption{reprint}{%
+  \@reprinttrue
+}
 
 
 %*****************************************************************
@@ -79,7 +83,6 @@
 % fontenc, txfonts: important for character encoding, common font
 % fancyhdr: fancy headr and footer
 %********************************************************************
-\RequirePackage[T1]{fontenc}
 \RequirePackage{xcolor}
 \RequirePackage{fancyhdr}
 \RequirePackage[super]{nth}
@@ -99,10 +102,24 @@
 	        pdfusetitle]
             {hyperref}
 
-\RequirePackage[varg]{txfonts}
+\RequirePackage{refcount}
 \RequirePackage{graphicx}
-\newcommand{\putgovlogo}{\includegraphics[width=2cm]{indiaemblem.pdf}}
+\RequirePackage{lastpage}
 
+
+%%% Font specifications
+
+%\RequirePackage[varg]{txfonts}
+\RequirePackage{libertine}
+
+
+\RequirePackage{fontspec}
+\RequirePackage{polyglossia}
+\setotherlanguages{sanskrit}
+
+
+
+\newcommand{\putgovlogo}{\includegraphics[width=1.5cm]{indiaemblem.pdf}}
 
 %****************** page layout ******************************
 %% Adjusted to a4 paper (29.7 x 21 cm)
@@ -209,31 +226,74 @@ heightrounded]{geometry}
   \gdef\@actalias{#2}
 }
 
-\global\let\@actedition\@empty
-\def\actedition#1{\gdef\@actedition{#1}}
+%%%%%  Generic definition for macros which need to set a variable %%%
+%% Example
+%% \global\let\@actedition\@empty
+%% \def\actedition#1{\gdef\@actedition{#1}}
 
-\global\let\@actedyear\@empty
-\def\actedyear#1{\gdef\@actedyear{#1}}
+% https://tex.stackexchange.com/questions/451/when-to-use-edef-noexpand-and-expandafter
 
-\global\let\@price\@empty
-\def\price#1{\gdef\@price{#1}}
+%% This will define a macro {#2} set by the call {#1}
+%% Eg:
+%% \macroval{docvar}{clsvar}
+%%
+%% \docvar{some value} in the document
+%% "some value" will be assigned to clsvar, which can be used in the
+%% page compositions in the document class design
 
-\global\let\@introducer\@empty
-\def\introducer#1{\gdef\@introducer{#1}}
+\newcommand{\macroval}[2]{%
+  \global\expandafter\let\csname #2\endcsname \@empty
+  \expandafter\def\csname #1\endcsname##1 {\expandafter\gdef \csname #2\endcsname {##1}}
+}
 
-\global\let\@introdesig\@empty
-\def\introdesig#1{\gdef\@introdesig{#1}}
+\macroval{actedition}{@actedition}
+\macroval{actedyear}{@actedyear}
+\macroval{introducer}{@introducer}
+\macroval{introdesig}{@introdesig}
+\macroval{psmla}{@psmla}
+\macroval{intimation}{@intimation}
 
-\global\let\@psmla\@empty
-\def\psmla#1{\gdef\@psmla{#1}}
 
-\global\let\@intimation\@empty
-\def\intimation#1{\gdef\@intimation{#1}}
+%%% Printer Metadata %%%
+\macroval{printRNInumber}{pr@rnino}
+\macroval{printVarshSerial}{pr@varshser}
+\macroval{printAnk}{pr@ank}
+\macroval{printAnkSerial}{pr@ankser}
+\macroval{printDiwas}{pr@diwas}
+\macroval{printTarikh}{pr@tarikh}
+\macroval{printMarathiTarikh}{pr@mrtarikh}
+\macroval{printPrice}{pr@price}
+\macroval{printASKramank}{pr@ask}
 
+% \global\let\@introducer\@empty
+% \def\introducer#1{\gdef\@introducer{#1}}
+
+% \global\let\@introdesig\@empty
+% \def\introdesig#1{\gdef\@introdesig{#1}}
+
+% \global\let\@psmla\@empty
+% \def\psmla#1{\gdef\@psmla{#1}}
+
+% \global\let\@intimation\@empty
+% \def\intimation#1{\gdef\@intimation{#1}}
+
+% \global\let\@rnino\@empty
+% \def\printRNInumber#1{\gdef\@rnino{#1}}
+
+
+
+% \global\let\@prVarsh\@empty
+% \def\printVarshSerial#1{\gdef\@prVarsh{#1}}
+
+% \global\let\@prAnk\@empty
+% \def\printAnk#1{\gdef\@prAnk{#1}}
 
 
 % \global\let\@assent\@empty
 % \def\assent#1{\gdef\@assent{#1}}
+
+
+
 \author{}
 
 
@@ -360,14 +420,81 @@ Maharashtra State, Mumbai - 400 004}
     }
 
 
-    \newcommand{\gazBillEngQuota}{%
+\newcommand\reprintcoverpage{%
+  
+  \cleardoublepage
+  \setcounter{page}{1}
+  \thispagestyle{actstart}
 
-      \begin{center}
+  \begin{center}
+    
+    {\huge \@actalias \vskip 40pt
 
-        {\Huge Gazette 5a \vskip 40pt}
+      \Large \bfseries \scshape \@title}
+    
+  \end{center}
+  
+    \chapter*{\contentsname}
+    \@starttoc{toc}%
 
-        
-      \end{center}
+    \cleardoublepage
+    
+    }
+    
+
+\newcommand{\rowstyle}[1]{{\small \bfseries #1}}
+
+\newcommand{\gazEngQuota}{%
+
+
+\begin{flushright}
+  \hspace{\fill} \textbf{\pr@rnino}
+\end{flushright}
+
+
+\begin{center}
+  \putgovlogo
+
+  \vskip 40pt
+
+  \fontspec{Shobhika}[%
+  Script=Devanagari,
+  Mapping=devanagarinumerals,
+  Scale=.9
+  %SizeFeatures={Size=-10}
+  ]
+
+{\Huge \bfseries महाराष्ट्र शासन राजपत्र}
+
+  \vskip 20pt
+
+{\Large \bfseries \pr@gazpart}
+
+\rule[-\baselineskip]{\linewidth}{2pt}\\
+\rule[4pt] {\linewidth}{0.5pt}\\ % Raising to 4pt centers the text vertically between the lines
+  \rowstyle{वर्ष \pr@varshser, अंक \pr@ank\ (\pr@ankser)]} \hspace{\fill}
+  \rowstyle{\pr@diwas, \pr@tarikh / \pr@mrtarikh} 
+  \hspace{\fill}
+  \rowstyle{ [ पृष्ठे
+    \devanagaridigits{\number\getpagerefnumber{LastPage}},
+    किंमत: रुपये  \pr@price }  \\   % ₹   ]
+\rule{\linewidth}{0.5pt}\\
+\rule[\baselineskip]{\linewidth}{2pt}
+
+\textbf{असाधारण क्रमांक \pr@ask }
+
+  \vskip 20pt
+
+{\large\bfseries प्राधिकृत प्रकाशन }
+
+  \vskip 20pt
+
+{\bfseries \pr@mrint}
+
+
+\end{center}
+
+  \vskip 40pt
 
     }
 
@@ -434,12 +561,28 @@ Maharashtra State, Mumbai - 400 004}
   \fi
   
   \if@gazbilleng
-    \gazBillEngQuota
+    \gdef\pr@gazpart{असाधारण भाग पाच-अ}
+    \gdef\pr@mrint{
+      महाराष्ट्र विधानसभेत  व महाराष्ट्र विधानपरिषदेत सादर केलेली विधेयके
+      (इंग्रिजी अनुवाद).
+    }
+    \gazEngQuota
   \fi
 
   \if@gazacteng
-    \gazActEngQuota
+    \gdef\pr@gazpart{असाधारण भाग आठ}
+    \gdef\pr@mrint{महाराष्ट्र विधानमंडळाचे अधिनियम व राज्यपालांनी प्रख्यापित
+      केलेले अध्यादेश व केलेले विनियम आणि विधी व न्याय विभागाकडून आलेली विधेयके
+      (इंग्रिजी अनुवाद). 
+      }
+    \gazEngQuota
   \fi
+  
+
+  \if@reprint
+    \reprintcoverpage
+  \fi
+
   
   
   
