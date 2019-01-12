@@ -119,7 +119,7 @@
 
 
 
-\newcommand{\putgovlogo}{\includegraphics[width=1.5cm]{indiaemblem.pdf}}
+\newcommand{\putgovlogo}{\includegraphics[width=1.5cm]{india-emblem-shobhika.pdf}}
 
 %****************** page layout ******************************
 %% Adjusted to a4 paper (29.7 x 21 cm)
@@ -145,7 +145,16 @@ heightrounded]{geometry}
 \RequirePackage{ifthen}
 
 
+
+  \newcommand{\devanagarinumeral}[1]{%
+    \devanagaridigits{\number\csname c@#1\endcsname}}
+  \newcommand{\themrpage}{\devanagarinumeral{page}}
+
+
 %******************header-footer from fancyhdr.sty******************
+
+
+
 \pagestyle{fancy}
 % Heading marks
 \renewcommand{\chaptermark}[1]{%
@@ -177,6 +186,32 @@ heightrounded]{geometry}
 \fancypagestyle{actstart}{
   \fancyhead{}
   \cfoot{\small\bfseries\thepage}
+
+
+  \if@gazbilleng
+  \cfoot{
+    \small
+    \fontspec{Shobhika}[%
+    Script=Devanagari,
+    Mapping=devanagarinumerals,
+    ]
+    \themrpage
+  }
+  \fi
+
+  \if@gazacteng
+  \cfoot{
+    \small
+    \fontspec{Shobhika}[%
+    Script=Devanagari,
+    Mapping=devanagarinumerals,
+    ]
+    \themrpage
+  }
+  \fi
+  
+
+  
 }
 
 \cfoot{}
@@ -254,6 +289,9 @@ heightrounded]{geometry}
 \macroval{intimation}{@intimation}
 
 
+%\macroval{longtitle}{@longtitle}
+\macroval{assent}{@assent}
+
 %%% Printer Metadata %%%
 \macroval{printRNInumber}{pr@rnino}
 \macroval{printVarshSerial}{pr@varshser}
@@ -264,6 +302,8 @@ heightrounded]{geometry}
 \macroval{printMarathiTarikh}{pr@mrtarikh}
 \macroval{printPrice}{pr@price}
 \macroval{printASKramank}{pr@ask}
+\macroval{printIntimation}{pr@intimation}
+\macroval{printIntAuth}{pr@intauth}
 
 % \global\let\@introducer\@empty
 % \def\introducer#1{\gdef\@introducer{#1}}
@@ -336,12 +376,14 @@ Maharashtra State, Mumbai - 400 004}
 
 
 \newcommand{\makedocket}{%
-  \begin{titlepage}
+%  \begin{titlepage}
+  \clearpage
 
     \pagenumbering{Alph}
     \thispagestyle{empty}
     \nolinenumbers
-    \twocolumn
+    %\twocolumn
+    .\hfill\begin{minipage}[t][\textheight]{0.5\textwidth}
       \begin{flushright}
       \textsc{Maharashtra Legislature Secretariat} \par
 
@@ -350,12 +392,14 @@ Maharashtra State, Mumbai - 400 004}
       {\large \@actalias\par}
 
       \vspace{\stretch{0.3}}
-      \@title
 
+      \begin{minipage}{\linewidth}
+        \@longtitle
+      \end{minipage}
+    
       \vspace{\stretch{0.3}}
     \end{flushright}
     
-      \@longtitle
 
     \begin{flushright}
       \vskip 20pt
@@ -378,8 +422,9 @@ Maharashtra State, Mumbai - 400 004}
       \rule{\linewidth}{0.5pt}\\
       Government Central Press, Mumbai
     \end{flushright}
+  \end{minipage}
   
-\end{titlepage}
+%\end{titlepage}
   
 }
 
@@ -400,10 +445,6 @@ Maharashtra State, Mumbai - 400 004}
 
 \newcommand\billcoverpage{%
   
-  \cleardoublepage
-  \setcounter{page}{1}
-  \thispagestyle{actstart}
-
   \begin{center}
     
     {\huge \@actalias \vskip 40pt
@@ -416,16 +457,19 @@ Maharashtra State, Mumbai - 400 004}
     \@starttoc{toc}%
 
     \cleardoublepage
+
+  \begin{center}
+    {\large\bfseries\scshape\@actalias}
+    \par{[\scshape \@title]}
+  \end{center}
+
+    
     
     }
 
 
 \newcommand\reprintcoverpage{%
   
-  \cleardoublepage
-  \setcounter{page}{1}
-  \thispagestyle{actstart}
-
   \begin{center}
     
     {\huge \@actalias \vskip 40pt
@@ -438,6 +482,15 @@ Maharashtra State, Mumbai - 400 004}
     \@starttoc{toc}%
 
     \cleardoublepage
+
+  \begin{center}
+    {\large\bfseries\scshape\@actalias}
+    \ifx#1\@empty
+    \else\footnote{#1}
+    \fi
+    \par{[\scshape \@title]}
+  \end{center}
+
     
     }
     
@@ -447,8 +500,28 @@ Maharashtra State, Mumbai - 400 004}
 \newcommand{\gazEngQuota}{%
 
 
+  
+  %%% Reset and construct Gazette headers
+  \fancyhead{} % clear old format
+  \fancyhead[LE,RO]{\small
+    \fontspec{Shobhika}[%
+    Script=Devanagari,
+    Mapping=devanagarinumerals,
+    ]
+    \themrpage
+  }
+  \fancyhead[C]{
+    \fontspec{Shobhika}[%
+    Script=Devanagari,
+    Mapping=devanagarinumerals,
+    Scale=.9
+    ]
+    \small\bfseries
+    महाराष्ट्र शासन राजपत्र \pr@gazpart, \pr@tarikh / \pr@mrtarikh
+  }
+
 \begin{flushright}
-  \hspace{\fill} \textbf{\pr@rnino}
+  \hspace{\fill} \textbf{RNI No.: \pr@rnino}
 \end{flushright}
 
 
@@ -465,10 +538,9 @@ Maharashtra State, Mumbai - 400 004}
   ]
 
 {\Huge \bfseries महाराष्ट्र शासन राजपत्र}
-
   \vskip 20pt
 
-{\Large \bfseries \pr@gazpart}
+{\LARGE \bfseries \pr@gazpart}
 
 \rule[-\baselineskip]{\linewidth}{2pt}\\
 \rule[4pt] {\linewidth}{0.5pt}\\ % Raising to 4pt centers the text vertically between the lines
@@ -491,23 +563,25 @@ Maharashtra State, Mumbai - 400 004}
 
 {\bfseries \pr@mrint}
 
+  \vskip 20pt
+  \end{center}
 
+  \begin{center}
+
+{\bfseries\scshape \pr@intauth}
 \end{center}
+{\pr@intimation :--}
 
-  \vskip 40pt
+  \vskip 20pt
 
+  \begin{center}
+    {\large\bfseries\scshape\@actalias}
+
+  \end{center} 
+  
     }
 
 
-    \newcommand{\gazActEngQuota}{%
-
-      \begin{center}
-
-        {\Huge Gazette 8 \vskip 40pt}
-        
-      \end{center}
-
-    }
     
 
 %**************************Chapter style*****************************
@@ -530,9 +604,14 @@ Maharashtra State, Mumbai - 400 004}
     %\vskip 40\p@% <------------------ Space between chapter title and first paragraph
   }}
 
-\newcommand{\assent}[1]{(#1)}
-\newcommand{\longtitle}[1]{\gdef\@longtitle{#1}#1}
-\newcommand{\enactingtext}[1]{#1 :---}
+%\newcommand{\assent}[1]{(#1)}
+%\newcommand{\longtitle}[1]{\gdef\@longtitle{#1}}
+\newcommand{\longtitle}[1]{
+  \gdef\@longtitle{#1}
+  \emph{#1}
+
+  \vskip 10pt }
+\newcommand{\enactingtext}[1]{#1 :--}
 \newcommand{\intro}[1]{#1}
 
 %**********************Section/subsection styles********************
@@ -542,14 +621,12 @@ Maharashtra State, Mumbai - 400 004}
 \setcounter{page}{1}
 
 \newcommand{\startact}[1][]{%
+
   \cleardoublepage
-
-  
-
-
+  \setcounter{page}{1}
   \pagenumbering{arabic}
   \thispagestyle{actstart}
-  \setcounter{page}{1}
+
 
 
   \if@billwithdocket
@@ -582,17 +659,6 @@ Maharashtra State, Mumbai - 400 004}
   \if@reprint
     \reprintcoverpage
   \fi
-
-  
-  
-  
-  \begin{center}
-    {\large\bfseries\scshape\@actalias}
-    \ifx#1\@empty
-    \else\footnote{#1}
-    \fi
-    \par{[\scshape \@title]}
-  \end{center}
 }
 
 
@@ -674,7 +740,9 @@ Maharashtra State, Mumbai - 400 004}
 %*****************************************************************
 \parindent 5ex
 %\setlength{\parskip}{1\baselineskip} 
-\renewcommand{\baselinestretch}{1.15}
+%\renewcommand{\baselinestretch}{1.15}
+
+\renewcommand{\baselinestretch}{1}
 
 
 %**************************Widow and orphan************************

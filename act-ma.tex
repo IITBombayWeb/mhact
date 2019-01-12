@@ -4,10 +4,19 @@
 \usepackage{fullpage}
 \usepackage{lastpage}
 \usepackage{polyglossia}
+
+\usepackage{fancyhdr}
 \setmainlanguage{sanskrit}
 \setotherlanguages{english}
 
+
 \usepackage{refcount}
+
+
+\fancyhead{}
+\fancyfoot[c]{p\themrpage}
+\pagestyle{fancy}
+
 
 \newfontfamily\devanagarifont[Script=Devanagari]{Lohit Devanagari} 
 
@@ -49,7 +58,8 @@
 % renew all representation of counters
  \renewcommand{\thesection}{\devanagarinumeral{section}}
  \renewcommand{\thesubsection}{\thesection.\devanagarinumeral{subsection}}
- %\renewcommand{\thepage}{\devanagarinumeral{page}}
+ \newcommand{\themrpage}{\devanagarinumeral{page}}
+% \renewcommand{\thepage}{\devanagarinumeral{page}}
 
 \begin{document}
 
