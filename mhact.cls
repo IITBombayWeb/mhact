@@ -613,6 +613,7 @@ Maharashtra State, Mumbai - 400 004}
   \vskip 10pt }
 \newcommand{\enactingtext}[1]{#1 :--}
 \newcommand{\intro}[1]{#1}
+\newcommand{\content}[1]{#1}
 
 %**********************Section/subsection styles********************
 
