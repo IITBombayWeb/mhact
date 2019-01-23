@@ -485,9 +485,9 @@ Maharashtra State, Mumbai - 400 004}
 
   \begin{center}
     {\large\bfseries\scshape\@actalias}
-    \ifx#1\@empty
-    \else\footnote{#1}
-    \fi
+    % \ifx#1\@empty
+    % \else\footnote{#1}
+    % \fi
     \par{[\scshape \@title]}
   \end{center}
 
@@ -730,8 +730,9 @@ Maharashtra State, Mumbai - 400 004}
 %\newcommand{\actref}[1]{\marginpar{\raggedright\footnotesize{#1}}}
 %\usepackage{marginnote}
 %\newcommand{\actref}[2][]{\marginnote{\footnotesize{#2}}[#1]}
-\newcommand{\actref}[1]{\footnote{\footnotesize{#1}}}
+%\newcommand{\actref}[1]{\footnote{\footnotesize{#1}}}
 
+\newcommand{\actref}[4]{\unskip\footnote{\footnotesize{#1} {#3} of {#2}.}}
 
 
 %********************* Paragraph, line spacing********************
