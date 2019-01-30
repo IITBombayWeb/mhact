@@ -1,9 +1,10 @@
 %%% Sample New Act covering all the necessary features
 
 %\documentclass[billwithdocket]{mhact}
-\documentclass[gaz5a]{mhact}
+%\documentclass[gaz5a]{mhact}
 %\documentclass[gaz8]{mhact}
-%\documentclass[reprint]{mhact}
+\documentclass[reprint]{mhact}
+\usepackage{pdfpages}
 
 
 \begin{document}
@@ -256,6 +257,9 @@ The State Government may, by notification in the \emph{Official
 this Act for such period and subject to such conditions as it deems
 fit on account of any holidays or occasions
 
+\includepdf[pages=-,pagecommand={\pagestyle{fancy}},templatesize={5cm}{10cm},frame]{act-ma.pdf}
+
+\clearpage
 \chapter{Registration of Establishments}
 
 \section{Registration of establishments}
@@ -276,7 +280,7 @@ and self-certified documents as may be prescribed, containing---
 \end{enumerate}
 Provided that, nothing contained hereinabove shall apply to the
 establishments already having valid registration or renewal under the
-Maharashtra Shops and Establishments Act \actref{Mah.}{1948}{79}{}
+Maharashtra Shops and Establishments Act    \actref{Mah.}{1948}{79}{}
 until expiry of their registration or renewal.
 
 \item On receipt of the application along with documents and the fees
@@ -290,6 +294,7 @@ until expiry of their registration or renewal.
   be produced whenever it is demanded by the Facilitator.
 
 \end{subsectionlist}
+
 
 
 \end{document}

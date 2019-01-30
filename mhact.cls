@@ -733,6 +733,7 @@ Maharashtra State, Mumbai - 400 004}
 %\newcommand{\actref}[1]{\footnote{\footnotesize{#1}}}
 
 \newcommand{\actref}[4]{\unskip\footnote{\footnotesize{#1} {#3} of {#2}.}}
+%\newcommand{\actref}[4]{\unskip\marginpar{\footnotesize{#1} {#3} of {#2}.}}
 
 
 %********************* Paragraph, line spacing********************
