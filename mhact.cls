@@ -104,6 +104,7 @@
 
 \RequirePackage{refcount}
 \RequirePackage{graphicx}
+\RequirePackage{pdfpages}
 \RequirePackage{lastpage}
 
 
@@ -305,33 +306,20 @@ heightrounded]{geometry}
 \macroval{printIntimation}{pr@intimation}
 \macroval{printIntAuth}{pr@intauth}
 
-% \global\let\@introducer\@empty
-% \def\introducer#1{\gdef\@introducer{#1}}
 
-% \global\let\@introdesig\@empty
-% \def\introdesig#1{\gdef\@introdesig{#1}}
+\newcommand{\makeheadtoc}[1]{%
+  \cleardoublepage\phantomsection
+    \markboth{#1}{#1}
+      \addcontentsline{toc}{chapter}{#1}
+}
 
-% \global\let\@psmla\@empty
-% \def\psmla#1{\gdef\@psmla{#1}}
+\newcommand{\attachpdf}[2]{%
 
-% \global\let\@intimation\@empty
-% \def\intimation#1{\gdef\@intimation{#1}}
+  \makeheadtoc{#1}
+  \includepdf[landscape, pages=-, pagecommand={\pagestyle{fancy}},%
+  templatesize={20cm}{20cm}]{#2}
 
-% \global\let\@rnino\@empty
-% \def\printRNInumber#1{\gdef\@rnino{#1}}
-
-
-
-% \global\let\@prVarsh\@empty
-% \def\printVarshSerial#1{\gdef\@prVarsh{#1}}
-
-% \global\let\@prAnk\@empty
-% \def\printAnk#1{\gdef\@prAnk{#1}}
-
-
-% \global\let\@assent\@empty
-% \def\assent#1{\gdef\@assent{#1}}
-
+}
 
 
 \author{}
