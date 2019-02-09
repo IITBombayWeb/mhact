@@ -107,6 +107,9 @@
 \RequirePackage{pdfpages}
 \RequirePackage{lastpage}
 
+\RequirePackage[autostyle]{csquotes}
+\MakeOuterQuote{"}
+
 
 %%% Font specifications
 
@@ -681,6 +684,8 @@ Maharashtra State, Mumbai - 400 004}
 \RequirePackage[perpage,hang]{footmisc} 
 
 \@removefromreset{footnote}{chapter}
+
+
 
 %\RequirePackage{perpage} %the perpage package
 %\MakePerPage{footnote} %the perpage package command
