@@ -289,6 +289,9 @@ heightrounded]{geometry}
 \macroval{actedyear}{@actedyear}
 \macroval{introducer}{@introducer}
 \macroval{introdesig}{@introdesig}
+\macroval{introdate}{@introdate}
+
+
 \macroval{psmla}{@psmla}
 \macroval{intimation}{@intimation}
 
@@ -557,10 +560,6 @@ Maharashtra State, Mumbai - 400 004}
   \vskip 20pt
   \end{center}
 
-  \begin{center}
-
-{\bfseries\scshape \pr@intauth}
-\end{center}
 {\pr@intimation :--}
 
   \vskip 20pt
@@ -636,6 +635,11 @@ Maharashtra State, Mumbai - 400 004}
       (इंग्रिजी अनुवाद).
     }
     \gazEngQuota
+
+    \begin{center}
+      {\bfseries\scshape Maharashtra Legislature Secretariat}
+    \end{center}
+    
   \fi
 
   \if@gazacteng
@@ -717,6 +721,47 @@ Maharashtra State, Mumbai - 400 004}
 \newenvironment{subclause}{%
   \begin{enumerate}[label=(\roman*)]
   }{\end{enumerate}}
+
+
+\newenvironment{sor}{%
+  \nolinenumbers
+  \cleardoublepage
+  \chapter*{Statement of Objects and Reasons}
+  \addcontentsline{toc}{chapter}{Statement of Objects and Reasons}
+  
+
+  \begin{enumerate}[label=\arabic*.]
+  }{%
+  \end{enumerate}
+
+  \begin{tabular}{p{0.3\linewidth}p{0.6\linewidth}}
+    & \\ % without this dummy line the table does not span the width
+    Mumbai & \multicolumn{1}{r}{\@introducer} \\
+    \@introdate & \multicolumn{1}{r}{\@introdesig} \\
+  \end{tabular} 
+}
+
+
+\newenvironment{dllist}{%
+  \begin{enumerate}[label=\emph{Section}]
+  }{\end{enumerate}}
+
+\newenvironment{mrdl}{%
+  \nolinenumbers
+  \cleardoublepage
+  \chapter*{Memorandum Regarding Delegated Legislation}
+  \addcontentsline{toc}{chapter}{Memorandum Regarding Delegated Legislation}
+  
+
+  \intro{The Bill involves the following proposals for delegation of legislative
+    powers, namely:---}
+}{
+
+\noindent The above proposals for delegation of legislative powers are of a
+ normal character. 
+}
+
+
 
 \newcommand{\explanation}[1]{\emph{Explanation}: #1}
 
