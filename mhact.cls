@@ -295,6 +295,9 @@ heightrounded]{geometry}
 \macroval{psmla}{@psmla}
 \macroval{intimation}{@intimation}
 
+\macroval{assemblydate}{@assemblydate}
+\macroval{councildate}{@councildate}
+
 
 %\macroval{longtitle}{@longtitle}
 \macroval{assent}{@assent}
@@ -319,11 +322,11 @@ heightrounded]{geometry}
       \addcontentsline{toc}{chapter}{#1}
 }
 
-\newcommand{\attachpdf}[2]{%
-
-  \makeheadtoc{#1}
-  \includepdf[landscape, pages=-, pagecommand={\pagestyle{fancy}},%
-  templatesize={20cm}{20cm}]{#2}
+\RequirePackage{xifthen}
+\newcommand{\attachpdf}[3][]{%
+  \makeheadtoc{#2}
+  \includepdf[#1, pages=-, pagecommand={\pagestyle{fancy}},%
+  templatesize={20cm}{20cm}]{#3}
 
 }
 
@@ -400,7 +403,14 @@ Maharashtra State, Mumbai - 400 004}
       \@introducer\par\@introdesig
 
       \vskip 20pt
-      \textbf{\@intimation}
+      %\textbf{\@intimation}
+      \ifthenelse{\equal{\@assemblydate}}{}{\textbf{[As passed by the
+        Legislative Assembly on \@assemblydate]}}
+
+    \vskip 20pt
+    
+      \ifthenelse{\equal{\@councildate}}{}{\textbf{[As passed by the
+        Legislative Council on \@councildate]}}
 
       
       \vskip 20pt
@@ -444,6 +454,16 @@ Maharashtra State, Mumbai - 400 004}
     {\huge \@actalias \vskip 40pt
 
       \Large \bfseries \scshape \@title}
+
+    \vskip 40pt
+    
+      \ifthenelse{\equal{\@assemblydate}}{}{\textbf{[As passed by the
+        Legislative Assembly on \@assemblydate]}}
+
+    \vskip 20pt
+    
+      \ifthenelse{\equal{\@councildate}}{}{\textbf{[As passed by the
+        Legislative Council on \@councildate]}}
     
   \end{center}
   
@@ -724,10 +744,11 @@ Maharashtra State, Mumbai - 400 004}
 
 
 \newenvironment{sor}{%
+  \makeheadtoc{Statement of Objects and Reasons}
   \nolinenumbers
-  \cleardoublepage
   \chapter*{Statement of Objects and Reasons}
-  \addcontentsline{toc}{chapter}{Statement of Objects and Reasons}
+  %\addcontentsline{toc}{chapter}{Statement of Objects and Reasons}
+  %\cleardoublepage
   
 
   \begin{enumerate}[label=\arabic*.]
@@ -747,10 +768,11 @@ Maharashtra State, Mumbai - 400 004}
   }{\end{enumerate}}
 
 \newenvironment{mrdl}{%
+  \makeheadtoc{Memorandum Regarding Delegated Legislation}
+  %\cleardoublepage
   \nolinenumbers
-  \cleardoublepage
   \chapter*{Memorandum Regarding Delegated Legislation}
-  \addcontentsline{toc}{chapter}{Memorandum Regarding Delegated Legislation}
+  %\addcontentsline{toc}{chapter}{Memorandum Regarding Delegated Legislation}
   
 
   \intro{The Bill involves the following proposals for delegation of legislative
