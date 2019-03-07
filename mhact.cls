@@ -96,13 +96,13 @@
             pdfstartview=Fit,%
             pdfcenterwindow=true,%
             colorlinks,
+            linkcolor={red!50!black},
+            urlcolor={blue!80!black},
             pdfpagelabels,
 	        pdfusetitle]
             {hyperref}
 
             %citecolor={blue!50!black},
-            %urlcolor={blue!80!black}
-            %linkcolor={red!50!black},
 
 \RequirePackage{refcount}
 \RequirePackage{graphicx}
