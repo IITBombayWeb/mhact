@@ -83,9 +83,10 @@
 % fontenc, txfonts: important for character encoding, common font
 % fancyhdr: fancy headr and footer
 %********************************************************************
-\RequirePackage{xcolor}
 \RequirePackage{fancyhdr}
 \RequirePackage[super]{nth}
+
+\RequirePackage{xcolor}
 
 \RequirePackage[bookmarks,%
             breaklinks,%
@@ -95,12 +96,13 @@
             pdfstartview=Fit,%
             pdfcenterwindow=true,%
             colorlinks,
-            linkcolor={red!50!black},
-            citecolor={blue!50!black},
-            urlcolor={blue!80!black}
             pdfpagelabels,
 	        pdfusetitle]
             {hyperref}
+
+            %citecolor={blue!50!black},
+            %urlcolor={blue!80!black}
+            %linkcolor={red!50!black},
 
 \RequirePackage{refcount}
 \RequirePackage{graphicx}
@@ -404,12 +406,12 @@ Maharashtra State, Mumbai - 400 004}
 
       \vskip 20pt
       %\textbf{\@intimation}
-      \ifthenelse{\equal{\@assemblydate}}{}{\textbf{[As passed by the
+      \ifthenelse{\equal{\@assemblydate}{}}{}{\textbf{[As passed by the
         Legislative Assembly on \@assemblydate]}}
 
     \vskip 20pt
     
-      \ifthenelse{\equal{\@councildate}}{}{\textbf{[As passed by the
+      \ifthenelse{\equal{\@councildate}{}}{}{\textbf{[As passed by the
         Legislative Council on \@councildate]}}
 
       
@@ -457,12 +459,12 @@ Maharashtra State, Mumbai - 400 004}
 
     \vskip 40pt
     
-      \ifthenelse{\equal{\@assemblydate}}{}{\textbf{[As passed by the
+      \ifthenelse{\equal{\@assemblydate}{}}{}{\textbf{[As passed by the
         Legislative Assembly on \@assemblydate]}}
 
     \vskip 20pt
     
-      \ifthenelse{\equal{\@councildate}}{}{\textbf{[As passed by the
+      \ifthenelse{\equal{\@councildate}{}}{}{\textbf{[As passed by the
         Legislative Council on \@councildate]}}
     
   \end{center}
@@ -792,9 +794,12 @@ Maharashtra State, Mumbai - 400 004}
 %\newcommand{\actref}[2][]{\marginnote{\footnotesize{#2}}[#1]}
 %\newcommand{\actref}[1]{\footnote{\footnotesize{#1}}}
 
-\newcommand{\actref}[4]{\unskip\footnote{\footnotesize{#1} {#3} of {#2}.}}
 %\newcommand{\actref}[4]{\unskip\marginpar{\footnotesize{#1} {#3} of {#2}.}}
 
+%\newcommand{\actref}[4]{\unskip\footnote{\footnotesize{#1} {#3} of {#2}.}}
+\newcommand{\actref}[4]{%
+  \href{http://legislation.maharashtra.gov.in/acts/#1/#2/#3}{[{#1}
+    {#3} of {#2}]}}
 
 %********************* Paragraph, line spacing********************
 % Indentation 5 characters approx
