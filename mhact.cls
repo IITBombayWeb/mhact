@@ -137,7 +137,7 @@
 %includeall,
 %includeheadfoot,
 includehead,
-nofoot,
+%nofoot,
 nomarginpar,
 bindingoffset=1cm,
 margin=2.5cm,
