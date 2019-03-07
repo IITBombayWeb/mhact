@@ -327,8 +327,13 @@ heightrounded]{geometry}
 \RequirePackage{xifthen}
 \newcommand{\attachpdf}[3][]{%
   \makeheadtoc{#2}
-  \includepdf[#1, pages=-, pagecommand={\pagestyle{fancy}},%
-  templatesize={20cm}{20cm}]{#3}
+
+  \ifthenelse{\equal{#1}{landscape}}{%landscape
+    \includepdf[#1, pages=-, pagecommand={\pagestyle{fancy}},%
+    templatesize={20cm}{20cm}]{#3}
+  }{% portrait
+    \includepdf[pages=-, pagecommand={\pagestyle{fancy}}]{#3}
+  }
 
 }
 
