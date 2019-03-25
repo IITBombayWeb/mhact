@@ -803,8 +803,13 @@ Maharashtra State, Mumbai - 400 004}
 
 %\newcommand{\actref}[4]{\unskip\footnote{\footnotesize{#1} {#3} of {#2}.}}
 \newcommand{\actref}[4]{%
-  \href{http://legislation.maharashtra.gov.in/acts/#1/#2/#3}{[{#1}
-    {#3} of {#2}]}}
+  %\href{http://legislation.maharashtra.gov.in/acts/#1/#2/#3}{[{#1}{#3} of {#2}]}}
+  \ifx\hfuzz#1\hfuzz
+  \href{http://legislation.maharashtra.gov.in/acts/india/#2/#3}{[{#3} of {#2}]}
+  \else
+  \href{http://legislation.maharashtra.gov.in/acts/#1/#2/#3}{[{#1} {#3} of {#2}]}
+  \fi
+}
 
 %********************* Paragraph, line spacing********************
 % Indentation 5 characters approx
