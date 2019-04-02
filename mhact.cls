@@ -297,8 +297,8 @@ heightrounded]{geometry}
 \macroval{psmla}{@psmla}
 \macroval{intimation}{@intimation}
 
-\macroval{assemblydate}{@assemblydate}
-\macroval{councildate}{@councildate}
+% \macroval{assemblydate}{@assemblydate}
+% \macroval{councildate}{@councildate}
 
 
 %\macroval{longtitle}{@longtitle}
@@ -316,6 +316,15 @@ heightrounded]{geometry}
 \macroval{printASKramank}{pr@ask}
 \macroval{printIntimation}{pr@intimation}
 \macroval{printIntAuth}{pr@intauth}
+
+%% Append text to existing command
+\newcommand*{\housedecisions}{}
+\newcommand*\housedecision[1]
+  {\ifx\housedecisions\empty
+     \def\housedecisions{[#1]}%
+   \else
+     \g@addto@macro\housedecisions{ \par \vfill \par [#1]}%
+   \fi}
 
 
 \newcommand{\makeheadtoc}[1]{%
@@ -410,14 +419,17 @@ Maharashtra State, Mumbai - 400 004}
       \@introducer\par\@introdesig
 
       \vskip 20pt
-      %\textbf{\@intimation}
-      \ifthenelse{\equal{\@assemblydate}{}}{}{\textbf{[As passed by the
-        Legislative Assembly on \@assemblydate]}}
 
-    \vskip 20pt
+      \textbf{\housedecisions}
+      
+      %\textbf{\@intimation}
+      % \ifthenelse{\equal{\@assemblydate}{}}{}{\textbf{[As passed by the
+      %   Legislative Assembly on \@assemblydate]}}
+
+    % \vskip 20pt
     
-      \ifthenelse{\equal{\@councildate}{}}{}{\textbf{[As passed by the
-        Legislative Council on \@councildate]}}
+    %   \ifthenelse{\equal{\@councildate}{}}{}{\textbf{[As passed by the
+    %     Legislative Council on \@councildate]}}
 
       
       \vskip 20pt
@@ -464,13 +476,16 @@ Maharashtra State, Mumbai - 400 004}
 
     \vskip 40pt
     
-      \ifthenelse{\equal{\@assemblydate}{}}{}{\textbf{[As passed by the
-        Legislative Assembly on \@assemblydate]}}
 
-    \vskip 20pt
+    \textbf{\housedecisions}
+
+    %   \ifthenelse{\equal{\@assemblydate}{}}{}{\textbf{[As passed by the
+    %     Legislative Assembly on \@assemblydate]}}
+
+    % \vskip 20pt
     
-      \ifthenelse{\equal{\@councildate}{}}{}{\textbf{[As passed by the
-        Legislative Council on \@councildate]}}
+    %   \ifthenelse{\equal{\@councildate}{}}{}{\textbf{[As passed by the
+    %     Legislative Council on \@councildate]}}
     
   \end{center}
   
