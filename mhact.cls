@@ -318,15 +318,17 @@ heightrounded]{geometry}
 \macroval{printIntAuth}{pr@intauth}
 
 %% Append text to existing command
-\newcommand*{\housedecisions}{}
-\newcommand*\housedecision[1]
-  {\ifx\housedecisions\empty
-     \def\housedecisions{[#1]}%
+%% https://tex.stackexchange.com/a/317781/33945
+%% https://tex.stackexchange.com/a/1057/33945
+\newcommand*{\workflowsteps}{}
+\newcommand*\workflowstep[1]
+  {\ifx\workflowsteps\empty
+     \def\workflowsteps{[#1]}%
    \else
-     \g@addto@macro\housedecisions{ \par \vfill \par [#1]}%
+     \g@addto@macro\workflowsteps{ \par \vfill \par [#1]}%
    \fi}
 
-
+ 
 \newcommand{\makeheadtoc}[1]{%
   \cleardoublepage\phantomsection
     \markboth{#1}{#1}
@@ -420,7 +422,7 @@ Maharashtra State, Mumbai - 400 004}
 
       \vskip 20pt
 
-      \textbf{\housedecisions}
+      \textbf{\worflowsteps}
       
       %\textbf{\@intimation}
       % \ifthenelse{\equal{\@assemblydate}{}}{}{\textbf{[As passed by the
@@ -477,7 +479,7 @@ Maharashtra State, Mumbai - 400 004}
     \vskip 40pt
     
 
-    \textbf{\housedecisions}
+    \textbf{\workflowsteps}
 
     %   \ifthenelse{\equal{\@assemblydate}{}}{}{\textbf{[As passed by the
     %     Legislative Assembly on \@assemblydate]}}
