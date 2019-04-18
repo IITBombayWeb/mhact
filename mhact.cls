@@ -48,6 +48,7 @@
 \newif\if@gazbilleng
 \newif\if@gazacteng
 \newif\if@reprint
+\newif\if@ordinance
 
 
 \DeclareOption{billwithdocket}{%
@@ -67,6 +68,11 @@
 }
 
 
+\DeclareOption{ordinance}{%
+  \@ordinancetrue
+}
+
+
 %*****************************************************************
 % Process given options
 % Defaults
@@ -74,7 +80,7 @@
 \DeclareOption*{\PassOptionsToPackage{\CurrentOption}{report}}  
 
 \ProcessOptions
-\LoadClass[11pt,a4paper,openright,twoside]{report}
+\LoadClass[12pt,a4paper,openright,twoside]{report}
 
 
 %***************Some important packages ****************************
@@ -136,13 +142,17 @@
 %height=21cm,
 %includeall,
 %includeheadfoot,
-includehead,
+%includehead,
 %nofoot,
 nomarginpar,
 bindingoffset=1cm,
-margin=2.5cm,
+margin=2cm,
 headheight=1.5cm,
+headsep=0.5cm,
 heightrounded]{geometry}
+
+\parindent=0pt
+
 
 %\RequirePackage[cam,a4,center]{crop}
 
@@ -282,9 +292,11 @@ heightrounded]{geometry}
 %% "some value" will be assigned to clsvar, which can be used in the
 %% page compositions in the document class design
 
+% \long is needed to capture arguments with blank lines
 \newcommand{\macroval}[2]{%
   \global\expandafter\let\csname #2\endcsname \@empty
-  \expandafter\def\csname #1\endcsname##1 {\expandafter\gdef \csname #2\endcsname {##1}}
+  \long\expandafter\def\csname #1\endcsname##1 {\expandafter\gdef \csname
+    #2\endcsname {##1}}
 }
 
 \macroval{actedition}{@actedition}
@@ -293,6 +305,7 @@ heightrounded]{geometry}
 \macroval{introdesig}{@introdesig}
 \macroval{introdate}{@introdate}
 
+\macroval{originDepartment}{@orgdept}
 
 \macroval{psmla}{@psmla}
 \macroval{intimation}{@intimation}
@@ -316,6 +329,11 @@ heightrounded]{geometry}
 \macroval{printASKramank}{pr@ask}
 \macroval{printIntimation}{pr@intimation}
 \macroval{printIntAuth}{pr@intauth}
+\macroval{coveringNoteSlip}{pr@covnote}
+\macroval{sorSignature}{@sorSignature}
+\macroval{mrdlSignature}{@mrdlSignature}
+
+
 
 %% Append text to existing command
 %% https://tex.stackexchange.com/a/317781/33945
@@ -347,6 +365,7 @@ heightrounded]{geometry}
   }
 
 }
+
 
 
 \author{}
@@ -453,16 +472,6 @@ Maharashtra State, Mumbai - 400 004}
   
 }
 
-
-%**************************Copyright page******************************
-\newcommand*{\mycopyright}{%
-	\cleardoublepage\phantomsection 	
-	\thispagestyle{empty}
-	\setlength{\parindent}{0pt}	 
-	 \vspace*{19cm} 
-	{\itshape\copyright\,\footnotesize \@date, \\	
-		All rights reserved}	
-}
 
 
 
@@ -602,9 +611,23 @@ Maharashtra State, Mumbai - 400 004}
 {\bfseries \pr@mrint}
 
   \vskip 20pt
+  \ifx\pr@covnote\empty
+  \else
+  \parbox{\linewidth}{\pr@covnote}
+    %\noindent\includegraphics[width=\linewidth]{\pr@covnote}
+    %\vskip 10pt
+    %\rule{5em}{1pt}
+  \fi
   \end{center}
 
-{\pr@intimation :--}
+  \vskip 20pt
+
+  \if@ordinance
+  \begin{center}
+    \@orgdept
+  \end{center}
+  \fi
+  
 
   \vskip 20pt
 
@@ -779,16 +802,13 @@ Maharashtra State, Mumbai - 400 004}
   }{%
   \end{enumerate}
 
-  \begin{tabular}{p{0.3\linewidth}p{0.6\linewidth}}
-    & \\ % without this dummy line the table does not span the width
-    Mumbai & \multicolumn{1}{r}{\@introducer} \\
-    \@introdate & \multicolumn{1}{r}{\@introdesig} \\
-  \end{tabular} 
+  \tabcolsep=0pt
+  \@sorSignature
 }
 
 
 \newenvironment{dllist}{%
-  \begin{enumerate}[label=\emph{Section}]
+  \begin{enumerate}[label=\emph{Clause}]
   }{\end{enumerate}}
 
 \newenvironment{mrdl}{%
@@ -797,14 +817,10 @@ Maharashtra State, Mumbai - 400 004}
   \nolinenumbers
   \chapter*{Memorandum Regarding Delegated Legislation}
   %\addcontentsline{toc}{chapter}{Memorandum Regarding Delegated Legislation}
-  
 
-  \intro{The Bill involves the following proposals for delegation of legislative
-    powers, namely:---}
 }{
-
-\noindent The above proposals for delegation of legislative powers are of a
- normal character. 
+ \tabcolsep=0pt
+ \@mrdlSignature
 }
 
 
@@ -827,15 +843,6 @@ Maharashtra State, Mumbai - 400 004}
   \href{http://legislation.maharashtra.gov.in/acts/#1/#2/#3}{[{#1} {#3} of {#2}]}
   \fi
 }
-
-%********************* Paragraph, line spacing********************
-% Indentation 5 characters approx
-% Paragraph spacing
-% Line spacing (onehalfspacing is equal to baselinestretch 1.33)
-%*****************************************************************
-\parindent 5ex
-%\setlength{\parskip}{1\baselineskip} 
-%\renewcommand{\baselinestretch}{1.15}
 
 \renewcommand{\baselinestretch}{1}
 
