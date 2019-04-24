@@ -488,28 +488,22 @@ Maharashtra State, Mumbai - 400 004}
   
   \begin{center}
 
-  \if@ordinance
-    \large \@orgdept
-  \fi
+    \if@ordinance
+      \large \@orgdept
+    \fi
     
     
-    {\huge \@actalias \vskip 40pt
+    {\Larg \@actalias}
 
-      \Large \bfseries \scshape \@title}
+    \vskip 40pt
+
+    {\Large \bfseries \scshape \@title}
 
     \vskip 40pt
     
 
     \textbf{\workflowsteps}
 
-    %   \ifthenelse{\equal{\@assemblydate}{}}{}{\textbf{[As passed by the
-    %     Legislative Assembly on \@assemblydate]}}
-
-    % \vskip 20pt
-    
-    %   \ifthenelse{\equal{\@councildate}{}}{}{\textbf{[As passed by the
-    %     Legislative Council on \@councildate]}}
-    
   \end{center}
   
     \chapter*{\contentsname}
@@ -698,7 +692,7 @@ Maharashtra State, Mumbai - 400 004}
   \gdef\@longtitle{#1}
 }
 
-\newcommand{\enactingtext}[1]{#1 :--}
+\newcommand{\enactingtext}[1]{#1}
 \newcommand{\intro}[1]{#1}
 \newcommand{\content}[1]{#1}
 
