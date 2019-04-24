@@ -44,12 +44,17 @@
 % seminar report, and thesis, and between different types of  
 % reports. 
 % *******************************************************************
+\newif\if@default
 \newif\if@billwithdocket
 \newif\if@gazbilleng
 \newif\if@gazacteng
 \newif\if@reprint
 \newif\if@ordinance
 
+
+\DeclareOption{default}{%
+  \@defaulttrue
+}
 
 \DeclareOption{billwithdocket}{%
   \@billwithdockettrue
@@ -477,9 +482,16 @@ Maharashtra State, Mumbai - 400 004}
 
 %*************************  Cover pages *************************************
 
+
 \newcommand\billcoverpage{%
+
   
   \begin{center}
+
+  \if@ordinance
+    \large \@orgdept
+  \fi
+    
     
     {\huge \@actalias \vskip 40pt
 
@@ -505,9 +517,22 @@ Maharashtra State, Mumbai - 400 004}
 
     \cleardoublepage
 
+    
+
   \begin{center}
+
+    \if@ordinance
+      \@orgdept
+    \fi
+    
+    
     {\large\bfseries\scshape\@actalias}
     \par{[\scshape \@title]}
+
+    \vskip 20pt
+    
+    \emph{\@longtitle}
+    
   \end{center}
 
     
@@ -634,6 +659,12 @@ Maharashtra State, Mumbai - 400 004}
   \begin{center}
     {\large\bfseries\scshape\@actalias}
 
+    \vskip 10pt 
+    
+    \emph{\@longtitle}
+    
+    \vskip 10pt 
+    
   \end{center} 
   
     }
@@ -665,9 +696,8 @@ Maharashtra State, Mumbai - 400 004}
 %\newcommand{\longtitle}[1]{\gdef\@longtitle{#1}}
 \newcommand{\longtitle}[1]{
   \gdef\@longtitle{#1}
-  \emph{#1}
+}
 
-  \vskip 10pt }
 \newcommand{\enactingtext}[1]{#1 :--}
 \newcommand{\intro}[1]{#1}
 \newcommand{\content}[1]{#1}
@@ -685,6 +715,9 @@ Maharashtra State, Mumbai - 400 004}
   \pagenumbering{arabic}
   \thispagestyle{actstart}
 
+  \if@default
+    \billcoverpage
+  \fi
 
 
   \if@billwithdocket
@@ -703,9 +736,9 @@ Maharashtra State, Mumbai - 400 004}
     }
     \gazEngQuota
 
-    \begin{center}
-      {\bfseries\scshape Maharashtra Legislature Secretariat}
-    \end{center}
+    % \begin{center}
+    %   {\bfseries\scshape Maharashtra Legislature Secretariat}
+    % \end{center}
     
   \fi
 
@@ -791,11 +824,16 @@ Maharashtra State, Mumbai - 400 004}
 
 
 \newenvironment{sor}{%
-  \makeheadtoc{Statement of Objects and Reasons}
+  \if@ordinance
+    \makeheadtoc{Statement}
+    \chapter*{Statement}
+  \else
+    \makeheadtoc{Statement of Objects and Reasons}
+    \chapter*{Statement of Objects and Reasons}
+  \fi
+
+  
   \nolinenumbers
-  \chapter*{Statement of Objects and Reasons}
-  %\addcontentsline{toc}{chapter}{Statement of Objects and Reasons}
-  %\cleardoublepage
   
 
   \begin{enumerate}[label=\arabic*.]
