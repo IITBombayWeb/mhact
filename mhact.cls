@@ -878,6 +878,13 @@ Maharashtra State, Mumbai - 400 004}
 
 \renewcommand{\baselinestretch}{1}
 
+%%% ********************* Annotations ****************
+\newcommand{\ins}[1]{\underline{#1}}
+\newcommand{\del}[1]{[#1]}
+\newcommand{\subs}[2]{\del{#1} \ins{#2}}
+
+
+
 
 %**************************Widow and orphan************************
 % Widow and orphan settings
