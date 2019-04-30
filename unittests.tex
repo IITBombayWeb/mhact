@@ -1,13 +1,43 @@
-\documentclass[11pt]{report}
+%\documentclass[default]{mhact}
+\documentclass[default]{report}
 \usepackage{times}
+\usepackage{titlesec}
 
 \newcommand{\ins}[1]{\underline{#1}}
 \newcommand{\del}[1]{[#1]}
 \newcommand{\subs}[2]{\del{#1} \ins{#2}}
 
 
+\newcommand{\sectionedit}[2]{%
+	\titlelabel{#1\quad}
+	\section{#2}
+	\titlelabel{\thesection\quad}
+}
+
+\newcommand{\chapteredit}[2]{%
+	\titlelabel{#1\quad}
+	\chapter{#2}
+	\titlelabel{\thechapter\quad}
+}
+
+\usepackage{enumitem}
+\newcommand{\lblitem}[1]{%
+  \def\lblnum{#1} \item
+}
+
+\newenvironment{subsectionlist}[1][99]{%
+  %\def{\lblnum}{1}
+  \begin{enumerate}[label=(\emph{\protect\lblnum)}]
+    \settowidth{\leftmargin}{#1}
+  }{\end{enumerate}}
+
+
 \begin{document}
 
+
+\chapteredit{\ins{2}}{\ins{Preliminary}}
+
+\section{Introduction}
 
 1939, or the Bombay Rents, Hotel Rates and Lodging House Rates
 (Control) Act, 1944 or the Bombay Rents, Hotel and Lodging House Rates
@@ -30,14 +60,19 @@ rent plus an increase of 5 per cent. in
   the purposes of residence, education, business, trade or storage in
   the areas specified in Schedule I and Schedule II.
   \label{it:purpose}
-\item[\ins{1ZAA.}] This is a sample insert subsection
-\item[\del{1ZAA.}] \del{This has been deleted}
+\item [\ins{1ZAA.}] This is a sample insert subsection
+\item [\del{1ZAA.}] \del{This has been deleted}
 \item Notwithstanding anything contained in sub-section
   \ref{it:purpose}, it shall
   also apply to the premises or as the case may be, houses let out in
   the areas to which the Bombay Rents, Hotel and Lodging House Rates
   Provinces and \del{Bayr} \ins{Berar} \subs{Let}{Letting} of Houses and Rent Control Order, 1949
 \end{list}
+
+
+	
+
+\sectionedit{\del{2} \ins{3}}{\del{Bg} \ins{Background}}
 
 
 (Control) Act, 1944 or the Bombay Rents, Hotel and Lodging House Rates
@@ -61,6 +96,20 @@ rent plus an increase of 5 per cent. in
   Provinces and Berar Letting of Houses and Rent Control Order, 1949
 
 \end{enumerate}
+
+\section{Literature}
+\begin{subsectionlist}
+\lblitem{1} Within a period of sixty days from the date of commencement of 
+this Act or the date on which establishment commences its business, the 
+employer of every establishment employing ten or more workers shall submit
+application online in a prescribed form for registration to the Facilitator of
+the local area concerned, together with such fees and such self-declaration
+and self-certified documents as may be prescribed, containing---
+\lblitem{\ins{2}} the name of the employer and the manager, if any;
+\lblitem{\subs{2}{3}} the postal address of the establishment;
+\lblitem{\subs{3}{4}} the name, if any, of the establishment;
+\lblitem{\del{4}} the name, if any, of the establishment;
+\end{subsectionlist}
 
 \end{document}
 

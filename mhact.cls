@@ -803,18 +803,39 @@ Maharashtra State, Mumbai - 400 004}
 %   {\normalfont}}
 
 \RequirePackage{enumitem}
+% \newenvironment{subsectionlist}[1][99]{%
+%   \begin{enumerate}[label=(\arabic*)]
+%     \settowidth{\leftmargin}{#1}
+%   }{\end{enumerate}}
+
+% \newenvironment{clause}{%
+%   \begin{enumerate}[label=(\alph*)]
+%   }{\end{enumerate}}
+
+% \newenvironment{subclause}{%
+%   \begin{enumerate}[label=(\roman*)]
+%   }{\end{enumerate}}
+
+%% The following code will force label to be specified
+%% The explicit label is specified by \lblitem{num}
+
+\newcommand{\lblitem}[1]{%
+  \def\lblnum{#1} \item
+}
+
 \newenvironment{subsectionlist}[1][99]{%
-  \begin{enumerate}[label=(\arabic*)]
+ \begin{enumerate}[label=(\emph{\protect\lblnum)}]
     \settowidth{\leftmargin}{#1}
   }{\end{enumerate}}
 
 \newenvironment{clause}{%
-  \begin{enumerate}[label=(\alph*)]
+  \begin{enumerate}[label=(\protect\lblnum)]
   }{\end{enumerate}}
 
 \newenvironment{subclause}{%
-  \begin{enumerate}[label=(\roman*)]
+  \begin{enumerate}[label=(\protect\lblnum)]
   }{\end{enumerate}}
+
 
 
 \newenvironment{sor}{%
