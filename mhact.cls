@@ -156,7 +156,9 @@ headheight=1.5cm,
 headsep=0.5cm,
 heightrounded]{geometry}
 
-\parindent=0pt
+%\parindent=0pt
+\setlength{\parskip}{\baselineskip}
+%\setlength{\parindent}{3em}
 
 
 %\RequirePackage[cam,a4,center]{crop}
@@ -334,6 +336,7 @@ heightrounded]{geometry}
 \macroval{printASKramank}{pr@ask}
 \macroval{printIntimation}{pr@intimation}
 \macroval{printIntAuth}{pr@intauth}
+\macroval{publisherAddress}{pr@address}
 \macroval{coveringNoteSlip}{pr@covnote}
 \macroval{sorSignature}{@sorSignature}
 \macroval{mrdlSignature}{@mrdlSignature}
@@ -384,15 +387,17 @@ heightrounded]{geometry}
   \thispagestyle{empty}
   \begin{center}
       \putgovlogo\par
-      \vskip 10pt
+      %\vskip 10pt
+
       {\large Government of Maharashtra}\par
       {\Large Law and Judiciary Department}\par
-      \vskip 40pt
+      
+      %\vskip 40pt
     { \Huge \bfseries \@actalias \par}
-      \vskip 40pt
+      %\vskip 40pt
       { \huge \bfseries \@title \par}
 
-      \vskip 60pt
+      %\vskip 60pt
       {\large (\@actedition)}
 
       
@@ -594,7 +599,7 @@ Maharashtra State, Mumbai - 400 004}
 \begin{center}
   \putgovlogo
 
-  \vskip 40pt
+  %\vskip 20pt
 
   \fontspec{Shobhika}[%
   Script=Devanagari,
@@ -604,32 +609,30 @@ Maharashtra State, Mumbai - 400 004}
   ]
 
 {\Huge \bfseries महाराष्ट्र शासन राजपत्र}
-  \vskip 20pt
+  %\vskip 20pt
 
 {\LARGE \bfseries \pr@gazpart}
 
 \rule[-\baselineskip]{\linewidth}{2pt}\\
 \rule[4pt] {\linewidth}{0.5pt}\\ % Raising to 4pt centers the text vertically between the lines
-  \rowstyle{वर्ष \pr@varshser, अंक \pr@ank\ (\pr@ankser)]} \hspace{\fill}
+\rowstyle{वर्ष \pr@varshser, अंक \pr@ank\
+  \ifx\pr@ankser\empty\else(\pr@ankser) \fi ]} \hspace{\fill}
   \rowstyle{\pr@diwas, \pr@tarikh / \pr@mrtarikh} 
   \hspace{\fill}
   \rowstyle{ [ पृष्ठे
     \devanagaridigits{\number\getpagerefnumber{LastPage}},
     किंमत: रुपये  \pr@price }  \\   % ₹   ]
 \rule{\linewidth}{0.5pt}\\
-\rule[\baselineskip]{\linewidth}{2pt}
-
-\textbf{असाधारण क्रमांक \pr@ask }
-
-  \vskip 20pt
-
+\rule[\baselineskip]{\linewidth}{2pt} \\
+\textbf{असाधारण क्रमांक \pr@ask } \\
+  \vskip 10pt
 {\large\bfseries प्राधिकृत प्रकाशन }
 
-  \vskip 20pt
+  %\vskip 20pt
 
 {\bfseries \pr@mrint}
 
-  \vskip 20pt
+  %\vskip 20pt
   \ifx\pr@covnote\empty
   \else
   \parbox{\linewidth}{\pr@covnote}
@@ -639,7 +642,7 @@ Maharashtra State, Mumbai - 400 004}
   \fi
   \end{center}
 
-  \vskip 20pt
+  %\vskip 20pt
 
   \if@ordinance
   \begin{center}
@@ -648,16 +651,16 @@ Maharashtra State, Mumbai - 400 004}
   \fi
   
 
-  \vskip 20pt
+  %\vskip 20pt
 
   \begin{center}
     {\large\bfseries\scshape\@actalias}
 
-    \vskip 10pt 
+    %\vskip 10pt 
     
     \emph{\@longtitle}
     
-    \vskip 10pt 
+    %\vskip 10pt 
     
   \end{center} 
   
@@ -849,15 +852,15 @@ Maharashtra State, Mumbai - 400 004}
 
   
   \nolinenumbers
-  
 
-  \begin{enumerate}[label=\arabic*.]
   }{%
-  \end{enumerate}
-
   \tabcolsep=0pt
-  \@sorSignature
+  \noindent\@sorSignature
 }
+
+\newenvironment{sorlist}{%
+  \begin{enumerate}
+}{\end{enumerate}}
 
 
 \newenvironment{dllist}{%
