@@ -317,11 +317,11 @@ heightrounded]{geometry}
 \macroval{psmla}{@psmla}
 \macroval{intimation}{@intimation}
 
-% \macroval{assemblydate}{@assemblydate}
-% \macroval{councildate}{@councildate}
 
-
-%\macroval{longtitle}{@longtitle}
+% \newcommand{\longtitle}[1]{
+%   \gdef\@longtitle{#1}
+% }
+\macroval{longtitle}{@longtitle}
 \macroval{assent}{@assent}
 
 %%% Printer Metadata %%%
@@ -656,6 +656,12 @@ Maharashtra State, Mumbai - 400 004}
   \begin{center}
     {\large\bfseries\scshape\@actalias}
 
+
+    \ifx\@assent\empty
+    \else
+      {(\emph{\@assent})}
+    \fi
+
     %\vskip 10pt 
     
     \emph{\@longtitle}
@@ -689,11 +695,6 @@ Maharashtra State, Mumbai - 400 004}
     %\vskip 40\p@% <------------------ Space between chapter title and first paragraph
   }}
 
-%\newcommand{\assent}[1]{(#1)}
-%\newcommand{\longtitle}[1]{\gdef\@longtitle{#1}}
-\newcommand{\longtitle}[1]{
-  \gdef\@longtitle{#1}
-}
 
 \newcommand{\enactingtext}[1]{#1}
 \newcommand{\intro}[1]{#1}
@@ -876,7 +877,7 @@ Maharashtra State, Mumbai - 400 004}
 
 }{
  \tabcolsep=0pt
- \@mrdlSignature
+ \noindent\@mrdlSignature
 }
 
 
