@@ -828,7 +828,7 @@ Maharashtra State, Mumbai - 400 004}
 }
 
 \newenvironment{subsectionlist}[1][99]{%
- \begin{enumerate}[label=(\emph{\protect\lblnum)}]
+ \begin{enumerate}[label=(\emph{\protect\lblnum})]
     \settowidth{\leftmargin}{#1}
   }{\end{enumerate}}
 
