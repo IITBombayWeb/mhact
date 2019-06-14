@@ -1,0 +1,23 @@
+#!/bin/bash
+# script to convert TeX file with forward quotes and double quotes to
+# the correct TeX quote
+
+#  'abcd by `abcd (single forward quote by single reverse quote)
+#  "abcd by ``abcd (start double quotes by two reverse quotes)
+#  wxyz" by wxyz'' (end double quotes by two forward quotes)
+
+if [ "$1" = "" ] 
+then
+  echo $0 input.tex
+  exit
+else
+  intex=$1
+fi
+
+#cp $intex $intex.sav
+
+#sed 's/"\([a-zA-z0-9]\)/``\1/g' $intex
+#sed 's/"\b/``/g' $intex | sed 's/\b"/\x27\x27/g' | sed "s/'\b\([^']\)/\`\1/g"
+sed  's/"\b/``/g; s/\b"/\x27\x27/g; s/\x27\b\([^\x27]\)/\`\1/g' $intex
+
+
