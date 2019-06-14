@@ -120,9 +120,9 @@
 \RequirePackage{pdfpages}
 \RequirePackage{lastpage}
 
-\RequirePackage[autostyle,autopunct]{csquotes}
+%\RequirePackage[autostyle,autopunct]{csquotes}
 %\MakeAutoQuote{"}{"}
-\MakeOuterQuote{"}
+%\MakeOuterQuote{"}
 %\MakeInnerQuote{"}
 
 \RequirePackage{soul}
