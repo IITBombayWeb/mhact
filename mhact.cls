@@ -120,11 +120,13 @@
 \RequirePackage{pdfpages}
 \RequirePackage{lastpage}
 
-\RequirePackage[autostyle]{csquotes}
+\RequirePackage[autostyle,autopunct]{csquotes}
+%\MakeAutoQuote{"}{"}
 \MakeOuterQuote{"}
+%\MakeInnerQuote{"}
 
 \RequirePackage{soul}
-\soulregister{\enquote}{1}
+% \soulregister{\enquote}{1}
 
 %%% Font specifications
 
@@ -908,11 +910,12 @@ Maharashtra State, Mumbai - 400 004}
 %%% ********************* Annotations ****************
 %\newcommand{\ins}[1]{\underline{#1}}
 %% plain underline does not break line
-%\newcommand{\ins}[1]{\ul{#1}}
-%% Soul is not compatible with csquotes
+\newcommand{\ins}[1]{\ul{#1}}
+%% soul is not compatible with csquotes
 
-\newcommand{\ins}[1]{\emph{#1}}
-\newcommand{\del}[1]{[#1]}
+%\newcommand{\ins}[1]{\emph{#1}}
+%\newcommand{\del}[1]{[#1]}
+\newcommand{\del}[1]{\st{#1}}
 \newcommand{\subs}[2]{\del{#1} \ins{#2}}
 
 
