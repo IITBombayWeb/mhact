@@ -314,7 +314,7 @@ heightrounded]{geometry}
 \macroval{actedyear}{@actedyear}
 \macroval{introducer}{@introducer}
 \macroval{introdesig}{@introdesig}
-\macroval{introdate}{@introdate}
+%\macroval{introdate}{@introdate}
 
 \macroval{originDepartment}{@orgdept}
 
@@ -342,9 +342,12 @@ heightrounded]{geometry}
 \macroval{printIntAuth}{pr@intauth}
 \macroval{publisherAddress}{pr@address}
 \macroval{coveringNoteSlip}{pr@covnote}
+
+
+%%% Other Containers
+\macroval{prologue}{@prologue}
 \macroval{sorSignature}{@sorSignature}
 \macroval{mrdlSignature}{@mrdlSignature}
-
 
 
 %% Append text to existing command
@@ -573,8 +576,6 @@ Maharashtra State, Mumbai - 400 004}
 \newcommand{\rowstyle}[1]{{\small \bfseries #1}}
 
 \newcommand{\gazEngQuota}{%
-
-
   
   %%% Reset and construct Gazette headers
   \fancyhead{} % clear old format
@@ -595,58 +596,67 @@ Maharashtra State, Mumbai - 400 004}
     महाराष्ट्र शासन राजपत्र \pr@gazpart, \pr@tarikh / \pr@mrtarikh
   }
 
-\begin{flushright}
-  \hspace{\fill} \textbf{RNI No.: \pr@rnino}
-\end{flushright}
+  \begin{flushright}
+    \hspace{\fill} \textbf{RNI No.: \pr@rnino}
+  \end{flushright}
 
 
-\begin{center}
-  \putgovlogo
+  \begin{center}
+    \putgovlogo
 
-  %\vskip 20pt
+    % \vskip 20pt
 
-  \fontspec{Shobhika}[%
-  Script=Devanagari,
-  Mapping=devanagarinumerals,
-  Scale=.9
-  %SizeFeatures={Size=-10}
-  ]
+    \fontspec{Shobhika}[%
+    Script=Devanagari,
+    Mapping=devanagarinumerals,
+    Scale=.9
+    % SizeFeatures={Size=-10}
+    ]
 
-{\Huge \bfseries महाराष्ट्र शासन राजपत्र}
-  %\vskip 20pt
+    {\Huge \bfseries महाराष्ट्र शासन राजपत्र}
+    % \vskip 20pt
 
-{\LARGE \bfseries \pr@gazpart}
+    {\LARGE \bfseries \pr@gazpart}
 
-\rule[-\baselineskip]{\linewidth}{2pt}\\
-\rule[4pt] {\linewidth}{0.5pt}\\ % Raising to 4pt centers the text vertically between the lines
-\rowstyle{वर्ष \pr@varshser, अंक \pr@ank\
-  \ifx\pr@ankser\empty\else(\pr@ankser) \fi ]} \hspace{\fill}
-  \rowstyle{\pr@diwas, \pr@tarikh / \pr@mrtarikh} 
-  \hspace{\fill}
-  \rowstyle{ [ पृष्ठे
-    \devanagaridigits{\number\getpagerefnumber{LastPage}},
-    किंमत: रुपये  \pr@price }  \\   % ₹   ]
-\rule{\linewidth}{0.5pt}\\
-\rule[\baselineskip]{\linewidth}{2pt} \\
-\textbf{असाधारण क्रमांक \pr@ask } \\
-  \vskip 10pt
-{\large\bfseries प्राधिकृत प्रकाशन }
-
-  %\vskip 20pt
-
-{\bfseries \pr@mrint}
-
-  %\vskip 20pt
-  \ifx\pr@covnote\empty
-  \else
-  \parbox{\linewidth}{\pr@covnote}
-    %\noindent\includegraphics[width=\linewidth]{\pr@covnote}
-    %\vskip 10pt
-    %\rule{5em}{1pt}
-  \fi
+    \rule[-\baselineskip]{\linewidth}{2pt}\\
+    \rule[4pt] {\linewidth}{0.5pt}\\ % Raising to 4pt centers the text vertically between the lines
+    \rowstyle{वर्ष \pr@varshser, अंक \pr@ank\
+      \ifx\pr@ankser\empty\else(\pr@ankser) \fi ]} \hspace{\fill}
+    \rowstyle{\pr@diwas, \pr@tarikh / \pr@mrtarikh} 
+    \hspace{\fill}
+    \rowstyle{ [ पृष्ठे % ]
+      \devanagaridigits{\number\getpagerefnumber{LastPage}},
+      किंमत: ₹ \pr@price }  \\   % ₹  रुपये   
+    \rule{\linewidth}{0.5pt}\\
+    \rule[\baselineskip]{\linewidth}{2pt} \\
+    \textbf{असाधारण क्रमांक \pr@ask } \\
+    \vskip 10pt
+    {\large\bfseries प्राधिकृत प्रकाशन }
+    
+    % \vskip 20pt
+    
+    {\bfseries \pr@mrint}
+    
+    % \vskip 20pt
+    \ifx\pr@covnote\empty
+    \else
+    \parbox{\linewidth}{\pr@covnote}
+    % \noindent\includegraphics[width=\linewidth]{\pr@covnote}
+    % \vskip 10pt
+    % \rule{5em}{1pt}
+    \fi
   \end{center}
+  
+  % \vskip 20pt
 
-  %\vskip 20pt
+  \@prologue
+
+  \ifx\@prologue\empty
+  \else
+  \clearpage
+  \fi
+  
+  
 
   \if@ordinance
   \begin{center}
@@ -655,7 +665,7 @@ Maharashtra State, Mumbai - 400 004}
   \fi
   
 
-  %\vskip 20pt
+  % \vskip 20pt
 
   \begin{center}
     {\large\bfseries\scshape\@actalias}
@@ -674,7 +684,7 @@ Maharashtra State, Mumbai - 400 004}
     
   \end{center} 
   
-    }
+} %  End gazEngQuota
 
 
     

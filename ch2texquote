@@ -18,6 +18,6 @@ fi
 
 #sed 's/"\([a-zA-z0-9]\)/``\1/g' $intex
 #sed 's/"\b/``/g' $intex | sed 's/\b"/\x27\x27/g' | sed "s/'\b\([^']\)/\`\1/g"
-sed  's/"\b/``/g; s/\b"/\x27\x27/g; s/\x27\b\([^\x27]\)/\`\1/g' $intex
+sed  's/"\b/``/g; s/\b"/\x27\x27/g; s/\([^a-zA-Z]\)\x27\b\([^\x27]\)/\1\`\2/g' $intex
 
 
