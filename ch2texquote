@@ -5,19 +5,21 @@
 #  'abcd by `abcd (single forward quote by single reverse quote)
 #  "abcd by ``abcd (start double quotes by two reverse quotes)
 #  wxyz" by wxyz'' (end double quotes by two forward quotes)
+#  isn't left untouched
 
-if [ "$1" = "" ] 
+if [ "$2" = "" ] 
 then
-  echo $0 input.tex
+  echo $0 input.tex output.tex
   exit
 else
   intex=$1
+  outtex=$2
 fi
 
 #cp $intex $intex.sav
 
 #sed 's/"\([a-zA-z0-9]\)/``\1/g' $intex
 #sed 's/"\b/``/g' $intex | sed 's/\b"/\x27\x27/g' | sed "s/'\b\([^']\)/\`\1/g"
-sed  's/"\b/``/g; s/\b"/\x27\x27/g; s/\([^a-zA-Z]\)\x27\b\([^\x27]\)/\1\`\2/g' $intex
+sed  's/"\b/``/g; s/\b"/\x27\x27/g; s/\([^a-zA-Z]\)\x27\b\([^\x27]\)/\1\`\2/g' $intex > $outtex
 
 

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Create pdf file of the act after appropriate preprocessing
+# This requires latexmk to automatically rerun tex
+
+if [ "$1" = "" ] 
+then
+  echo $0 input.tex 
+  exit
+else
+  intex=$1
+fi
+
+cp $intex $intex.sav
+
+ch2texquote $intex.sav $intex
+latexmk -xelatex $intex

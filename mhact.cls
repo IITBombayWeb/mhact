@@ -505,7 +505,7 @@ Maharashtra State, Mumbai - 400 004}
     \fi
     
     
-    {\Larg \@actalias}
+    {\Large \@actalias}
 
     \vskip 40pt
 
