@@ -524,12 +524,12 @@ Maharashtra State, Mumbai - 400 004}
     
     \cleardoublepage
 
-    % \@prologue
+    \@prologue
 
-    % \ifx\@prologue\empty
-    % \else
-    % \cleardoublepage
-    % \fi
+    \ifx\@prologue\empty
+    \else
+    \cleardoublepage
+    \fi
  
     
 
