@@ -521,8 +521,16 @@ Maharashtra State, Mumbai - 400 004}
     \chapter*{\contentsname}
     \@starttoc{toc}%
 
+    
     \cleardoublepage
 
+    % \@prologue
+
+    % \ifx\@prologue\empty
+    % \else
+    % \cleardoublepage
+    % \fi
+ 
     
 
   \begin{center}
@@ -908,7 +916,7 @@ Maharashtra State, Mumbai - 400 004}
 %\newcommand{\actref}[4]{\unskip\footnote{\footnotesize{#1} {#3} of {#2}.}}
 \newcommand{\actref}[4]{%
   %\href{http://legislation.maharashtra.gov.in/acts/#1/#2/#3}{[{#1}{#3} of {#2}]}}
-  \ifx\hfuzz#1\hfuzz
+  \ifx\hfuzz#1\hfuzz % https://tex.stackexchange.com/a/53091/33945
   \href{http://legislation.maharashtra.gov.in/acts/india/#2/#3}{[{#3} of {#2}]}
   \else
   \href{http://legislation.maharashtra.gov.in/acts/#1/#2/#3}{[{#1} {#3} of {#2}]}
@@ -920,12 +928,13 @@ Maharashtra State, Mumbai - 400 004}
 %%% ********************* Annotations ****************
 %\newcommand{\ins}[1]{\underline{#1}}
 %% plain underline does not break line
-\newcommand{\ins}[1]{\ul{#1}}
+\newcommand{\ins}[1]{\ul{\protect{#1}}}
+%% if protect is not there, \ins\actreft throws errors of missing }
 %% soul is not compatible with csquotes
 
 %\newcommand{\ins}[1]{\emph{#1}}
 %\newcommand{\del}[1]{[#1]}
-\newcommand{\del}[1]{\st{#1}}
+\newcommand{\del}[1]{\st{\protect{#1}}}
 \newcommand{\subs}[2]{\del{#1} \ins{#2}}
 
 

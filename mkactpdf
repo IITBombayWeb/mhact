@@ -16,7 +16,11 @@ cp $intex $intex.sav
 #ch2texquote $intex.sav $intex
 sed  's/"\b/``/g; s/\b"/\x27\x27/g; s/\([^a-zA-Z]\)\x27\b\([^\x27]\)/\1\`\2/g' $intex.sav > $intex
 
+
+# Clear all tex generated files, including PDF
+latexmk -C $intex
+
 latexmk -xelatex $intex
 
 # Clear regeneratable files
-#latexmk -c $intex
+# latexmk -c $intex
