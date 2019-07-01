@@ -125,8 +125,13 @@
 %\MakeOuterQuote{"}
 %\MakeInnerQuote{"}
 
+
+\RequirePackage{titlesec}
+\RequirePackage{titletoc}
+
 \RequirePackage{soul}
 % \soulregister{\enquote}{1}
+
 
 %%% Font specifications
 
@@ -928,15 +933,29 @@ Maharashtra State, Mumbai - 400 004}
 %%% ********************* Annotations ****************
 %\newcommand{\ins}[1]{\underline{#1}}
 %% plain underline does not break line
-\newcommand{\ins}[1]{\ul{\protect{#1}}}
+%\newcommand{\ins}[1]{\ul{\protect{#1}}}
+%\newcommand{\ins}[1]{\ul{#1}}
 %% if protect is not there, \ins\actreft throws errors of missing }
 %% soul is not compatible with csquotes
 
-%\newcommand{\ins}[1]{\emph{#1}}
-%\newcommand{\del}[1]{[#1]}
-\newcommand{\del}[1]{\st{\protect{#1}}}
+\newcommand{\ins}[1]{\emph{#1}}
+
+\newcommand{\del}[1]{[#1]}
+%\newcommand{\del}[1]{\st{\protect{#1}}}
+%\newcommand{\del}[1]{\st{#1}}
 \newcommand{\subs}[2]{\del{#1} \ins{#2}}
 
+\newcommand{\secnumhead}[2]{%
+	\titlelabel{#1\quad}
+	\section{#2}
+	\titlelabel{\thesection\quad}
+}
+
+\newcommand{\chapnumhead}[2]{%
+	\titlelabel{#1\quad}
+	\chapter{#2}
+	\titlelabel{\thechapter\quad}
+}
 
 
 

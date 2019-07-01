@@ -3,8 +3,12 @@
 \usepackage{times}
 \usepackage{titlesec}
 
-\newcommand{\ins}[1]{\underline{#1}}
-\newcommand{\del}[1]{[#1]}
+\usepackage{soul}
+\newcommand{\ins}[1]{\ul{#1}}
+\newcommand{\del}[1]{\st{#1}}
+
+% \newcommand{\ins}[1]{\underline{#1}}
+% \newcommand{\del}[1]{[#1]}
 \newcommand{\subs}[2]{\del{#1} \ins{#2}}
 
 
@@ -34,8 +38,10 @@
 
 \begin{document}
 
+\tableofcontents
 
 \chapteredit{\ins{2}}{\ins{Preliminary}}
+
 
 \section{Introduction}
 
@@ -72,7 +78,7 @@ rent plus an increase of 5 per cent. in
 
 	
 
-\sectionedit{\del{2} \ins{3}}{\del{Bg} \ins{Background}}
+\sectionedit{\del{2} \ins{3}}{\del{Foreground} \ins{Background}}
 
 
 (Control) Act, 1944 or the Bombay Rents, Hotel and Lodging House Rates
