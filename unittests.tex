@@ -2,10 +2,32 @@
 \documentclass[default]{report}
 \usepackage{times}
 \usepackage{titlesec}
+\usepackage{manyfoot}
+\usepackage{lipsum}
+
+\RequirePackage{xcolor}
+\RequirePackage[bookmarks,%
+            breaklinks,%
+            backref=false,%
+            pdfhighlight=/I,%
+            pdffitwindow=true,%
+            pdfstartview=Fit,%
+            pdfcenterwindow=true,%
+            colorlinks,
+            linkcolor={red!50!black},
+            urlcolor={blue!80!black},
+            pdfpagelabels,
+	        pdfusetitle]
+            {hyperref}
+
+
 
 \usepackage{soul}
-\newcommand{\ins}[1]{\ul{#1}}
-\newcommand{\del}[1]{\st{#1}}
+% \newcommand{\ins}[1]{\protect\ul{#1}}
+% \newcommand{\del}[1]{\protect\st{#1}}
+
+\newcommand{\ins}[1]{\emph{#1}}
+\newcommand{\del}[1]{[#1]}
 
 % \newcommand{\ins}[1]{\underline{#1}}
 % \newcommand{\del}[1]{[#1]}
@@ -36,6 +58,61 @@
   }{\end{enumerate}}
 
 
+\usepackage[hang]{footmisc}
+%% Footnotes (manyfoot)
+
+%\SetFootnoteHook{\hangindent=2em\noindent}
+\newcommand{\Ffootnoterule}{\noindent\rule{\linewidth}{0.5pt}\par \noindent\footnotesize
+  Amending Notes: \vspace{2mm}}
+\SelectFootnoteRule[1]{F}
+%\SelectFootnoteRule[1]{F}[\noindent\footnotesize \smash{Amending Notes:}\vspace{2mm}]
+
+
+\DeclareNewFootnote{F}
+%\SetFootnoteHook{\hangindent=2em\noindent}
+\SelectFootnoteRule[1]{R}[\noindent\footnotesize \smash{Act Refs.:}\vspace{2mm}]
+
+\DeclareNewFootnote{R}[alph]
+
+
+
+\newcommand{\actref}[4]{%
+  %\href{http://legislation.maharashtra.gov.in/acts/#1/#2/#3}{[{#1}{#3} of {#2}]}}
+   \ifx\hfuzz#1\hfuzz % https://tex.stackexchange.com/a/53091/33945
+     \ifx\hfuzz#4\hfuzz % https://tex.stackexchange.com/a/53091/33945
+       \href{http://legislation.maharashtra.gov.in/acts/india/#2/#3}{{#3} of {#2}}
+     \else
+       \href{http://legislation.maharashtra.gov.in/acts/india/#2/#3/#4}{{#3}
+         of {#2}, {#4}}
+     \fi
+   \else
+     \ifx\hfuzz#4\hfuzz % https://tex.stackexchange.com/a/53091/33945
+       \href{http://legislation.maharashtra.gov.in/acts/#1/#2/#3}{{#1} {#3} of {#2}}
+     \else
+      \href{http://legislation.maharashtra.gov.in/acts/#1/#2/#3/#4}{%
+        {#1} {#3} of {#2}, {#4}} 
+     \fi
+   \fi
+}
+
+\newif\ifomit
+\newcommand{\actnote}[1]{\footnoteR{#1}}
+%\newenvironment{amendins}[1]{\footnoteF{#1}[}{]$_{\mathrm{\thefootnoteF}}$}
+\newenvironment{amendins}[1]{[\footnoteF{#1}}{\Footnotemark\thefootnoteF]}
+
+\newcommand\amenddel[1]{%
+  [\footnoteF{#1} * * * \Footnotemark\thefootnoteF]
+}
+
+% \usepackage{verbatim}
+%   %*****\begin{comment}}{\end{comment}\Footnotemark\thefootnoteF]}
+% does not work: file ended while scanning \next 
+
+% \newenvironment{amenddel}[1]{[\footnoteF{#1} 
+%   *****}{\Footnotemark\thefootnoteF]}
+
+
+
 \begin{document}
 
 \tableofcontents
@@ -43,16 +120,20 @@
 \chapteredit{\ins{2}}{\ins{Preliminary}}
 
 
+
 \section{Introduction}
 
 1939, or the Bombay Rents, Hotel Rates and Lodging House Rates
-(Control) Act, 1944 or the Bombay Rents, Hotel and Lodging House Rates
-Control Act, 1947, or the Central Provinces and Berar Letting of
-Houses and Rent Control Order, 1949 issued under the Central Provinces
-and Berar Regulation of Letting of Accommodation Act, 1946 or the
-Hyderabad Houses (Rent, Eviction and Lease) Control Act, 1954, such
-rent plus an increase of 5 per cent. in
-\newcounter{ssec}
+(Control) Act, 1944\actnote{\actref{Bom.}{1944}{22}{}} or the Bombay Rents, Hotel and Lodging House Rates
+Control Act, 1947\actnote{\actref{Mah.}{1947}{32}{3(c)}}, or the
+Central Provinces and Berar Letting of Houses and Rent Control Order,
+1949 issued under the Central Provinces and Berar Regulation of
+\begin{amendins}{These words were inserted by \actref{Mah.}{1993}{27}{2(h)}}
+  Letting of Accommodation Act, 1946 or the Hyderabad Houses (Rent,
+  Eviction and Lease) Control Act, 1954,
+\end{amendins}
+  such rent plus an increase of 5
+per cent. in \newcounter{ssec}
 \begin{list}{\arabic{ssec}.}{%
     \usecounter{ssec}
     \settowidth\labelwidth{ZZAA.}
@@ -62,17 +143,34 @@ rent plus an increase of 5 per cent. in
     \advance\leftmargin\labelsep 
     \advance\leftmargin\labelsep 
   }
-\item This Act shall, in the first instance, apply to premises let for
-  the purposes of residence, education, business, trade or storage in
+\item This Act shall, in the first instance,
+  \begin{amendins}{These words were substituted for the words ``when a
+      society has passed a resolution to change'' by
+      \actref{Mah.}{1986}{20}{99ab}.
+    }
+  apply to premises let for
+  the purposes of residence,
+  \end{amendins}
+  education, business, trade or storage in
   the areas specified in Schedule I and Schedule II.
   \label{it:purpose}
 \item [\ins{1ZAA.}] This is a sample insert subsection
 \item [\del{1ZAA.}] \del{This has been deleted}
-\item Notwithstanding anything contained in sub-section
-  \ref{it:purpose}, it shall
+
+% \begin{amenddel}{Clause 2 was deleted by
+%     \actref{Mah.}{1993}{23}{5c}}
+% \end{amenddel}
+
+\amenddel{Clause 2 was deleted by \actref{Mah.}{1993}{23}{5c}}
+
+\item \amenddel{The word ``Nevertheless'' was deleted by
+    \actref{Mah.}{2012}{33}{29f}} Notwithstanding anything contained in sub-section~1 it shall
   also apply to the premises or as the case may be, houses let out in
   the areas to which the Bombay Rents, Hotel and Lodging House Rates
-  Provinces and \del{Bayr} \ins{Berar} \subs{Let}{Letting} of Houses and Rent Control Order, 1949
+  Provinces and \del{Bayr} \ins{Berar} \subs{Let}{Letting} of Houses
+  and Rent Control Order, 1949
+
+    
 \end{list}
 
 
@@ -101,6 +199,13 @@ rent plus an increase of 5 per cent. in
   the areas to which the Bombay Rents, Hotel and Lodging House Rates
   Provinces and Berar Letting of Houses and Rent Control Order, 1949
 
+  \amenddel{%
+    The following section was deleted by \actref{Mah.}{1972}{20}{12m}
+    \begin{enumerate}
+    \item \lipsum[1]
+    \item \lipsum[2-5]
+    \end{enumerate}
+}
 \end{enumerate}
 
 \section{Literature}
