@@ -353,6 +353,9 @@ bindingoffset=0.5cm,
 \macroval{printIntAuth}{pr@intauth}
 \macroval{publisherAddress}{pr@address}
 \macroval{coveringNoteSlip}{pr@covnote}
+\macroval{amendlastdate}{pr@amenddate}
+\macroval{reprintYear}{pr@reprintyr}
+\macroval{reprintPrice}{pr@reprintpr}
 
 
 %%% Other Containers
@@ -530,6 +533,9 @@ Maharashtra State, Mumbai - 400 004}
   \end{center}
   
     \chapter*{\contentsname}
+
+    \pagenumbering{roman}
+    \setcounter{page}{1}
     \@starttoc{toc}%
 
     
@@ -566,19 +572,54 @@ Maharashtra State, Mumbai - 400 004}
 
 
 \newcommand\reprintcoverpage{%
-  
+  \thispagestyle{empty}
   \begin{center}
-    
-    {\huge \@actalias \vskip 40pt
+      \putgovlogo\par
 
-      \Large \bfseries \scshape \@title}
+      {\large \scshape Government of Maharashtra}
+
+      {\Large \scshape Law and Judiciary Department}
+
+      {\huge \@actalias \vskip 40pt
+
+      \Large \bfseries \@title}
+
+      \vspace{\fill}
+
+      {(\pr@amenddate)}
+
+      
+      \vspace{\fill}
+
+      {\small Printed in India by The Manager, Government Central
+        Press, Mumbai, and published by The Director, Government
+        Printing, Stationary and Publications, Maharashtra State,
+        Mumbai 400 004}
+
+      {\bfseries\pr@reprintyr}
+
+      {[Price---Rs. \pr@reprintpr]}
     
   \end{center}
   
-    \chapter*{\contentsname}
-    \@starttoc{toc}%
-
     \cleardoublepage
+    \begin{center}
+      {\large \bfseries \@title}
+      
+      \rule{0.25\linewidth}{0.5pt}
+    \end{center}
+  
+    \chapter*{\contentsname}
+    \pagenumbering{roman}
+    \setcounter{page}{1}
+    \@starttoc{toc}%
+    \thispagestyle{actstart}
+    
+    \cleardoublepage
+
+    \pagenumbering{arabic}
+    \setcounter{page}{1}
+    \thispagestyle{empty}
 
   \begin{center}
     {\large\bfseries\scshape\@actalias}
@@ -589,7 +630,7 @@ Maharashtra State, Mumbai - 400 004}
   \end{center}
 
     
-    }
+} % reprintcoverpage
     
 
 \newcommand{\rowstyle}[1]{{\small \bfseries #1}}
