@@ -5,6 +5,9 @@
 \usepackage{manyfoot}
 \usepackage{lipsum}
 
+
+\usepackage{soul}
+
 \RequirePackage{xcolor}
 \RequirePackage[bookmarks,%
             breaklinks,%
@@ -20,31 +23,47 @@
 	        pdfusetitle]
             {hyperref}
 
+%\newcommand{\href}[2]{#2}
 
 
-\usepackage{soul}
+
+\newcommand{\ins}[1]{\ul{#1}}
+\newcommand{\del}[1]{\st{#1}}
+
 % \newcommand{\ins}[1]{\protect\ul{#1}}
 % \newcommand{\del}[1]{\protect\st{#1}}
 
-\newcommand{\ins}[1]{\emph{#1}}
-\newcommand{\del}[1]{[#1]}
+% \newcommand{\ins}[1]{\emph{#1}}
+% \newcommand{\del}[1]{[#1]}
 
 % \newcommand{\ins}[1]{\underline{#1}}
 % \newcommand{\del}[1]{[#1]}
 \newcommand{\subs}[2]{\del{#1} \ins{#2}}
 
+\newcommand{\chapnumhead}[2]{%
 
-\newcommand{\sectionedit}[2]{%
-	\titlelabel{#1\quad}
-	\section{#2}
-	\titlelabel{\thesection\quad}
+  
+  \titleformat{\chapter}[display]
+  {\centering\large\bfseries\scshape}
+  {\chaptertitlename \space#1}
+  {\baselineskip}{}{}
+  \chapter{\texorpdfstring{#2}{}}
+  %% for soul to work correctly in headings with hyperref
+  %% https://tex.stackexchange.com/a/240438/33945
+
+  \titleformat{\chapter}[display]
+  {\centering\large\bfseries\scshape}
+  {\chaptertitlename \space\thechapter}
+  {\baselineskip}{}{}
 }
 
-\newcommand{\chapteredit}[2]{%
+\newcommand{\secnumhead}[2]{%
 	\titlelabel{#1\quad}
-	\chapter{#2}
+	\section{\texorpdfstring{#2}{}}
 	\titlelabel{\thechapter\quad}
 }
+
+
 
 \usepackage{enumitem}
 \newcommand{\lblitem}[1]{%
@@ -98,10 +117,11 @@
 \newif\ifomit
 \newcommand{\actnote}[1]{\footnoteR{#1}}
 %\newenvironment{amendins}[1]{\footnoteF{#1}[}{]$_{\mathrm{\thefootnoteF}}$}
-\newenvironment{amendins}[1]{[\footnoteF{#1}}{\Footnotemark\thefootnoteF]}
+\newenvironment{amendins}[1]{\footnoteF{#1}[}{]\Footnotemark\thefootnoteF}
 
 \newcommand\amenddel[1]{%
-  [\footnoteF{#1} * * * \Footnotemark\thefootnoteF]
+  \footnoteF{#1}[ * * * ]\Footnotemark\thefootnoteF
+  %\footnoteF{#1}[ * * * ]\footnotemarkF
 }
 
 % \usepackage{verbatim}
@@ -117,7 +137,7 @@
 
 \tableofcontents
 
-\chapteredit{\ins{2}}{\ins{Preliminary}}
+\chapnumhead{\ins{2}}{\ins{Preliminary}}
 
 
 
@@ -176,7 +196,7 @@ per cent. in \newcounter{ssec}
 
 	
 
-\sectionedit{\del{2} \ins{3}}{\del{Foreground} \ins{Background}}
+\secnumhead{\del{2} \ins{3}}{\del{Foreground} \ins{Background}}
 
 
 (Control) Act, 1944 or the Bombay Rents, Hotel and Lodging House Rates

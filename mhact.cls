@@ -155,15 +155,21 @@
 %width=15cm,
 %height=21cm,
 %includeall,
-%includeheadfoot,
 %includehead,
-%nofoot,
+%includefoot,
+%margin=2cm,
+%heightrounded,
+includeheadfoot,
 nomarginpar,
-bindingoffset=1cm,
-margin=2cm,
+top=1cm,
 headheight=1.5cm,
 headsep=0.5cm,
-heightrounded]{geometry}
+footskip=0.5cm,
+bottom=2cm,
+left=2.5cm,
+right=2.5cm,
+bindingoffset=0.5cm,
+]{geometry}
 
 %\parindent=0pt
 \setlength{\parskip}{\baselineskip}
@@ -709,7 +715,9 @@ Maharashtra State, Mumbai - 400 004}
   {\parindent \z@ \raggedright \normalfont
     \centering
         \bfseries\MakeUppercase\@chapapp\space \thechapter% <-- Chapter #
+	%\vskip 5\p@
         \par\nobreak
+        \vskip -10\p@%
         %\vskip 20\p@% <-------------- Space between Chapter # and title
     {\large \bfseries\scshape #1}\par\nobreak% <------------------ Chapter title
     %\vskip 40\p@% <------------------ Space between chapter title and first paragraph
@@ -810,17 +818,53 @@ Maharashtra State, Mumbai - 400 004}
 \@removefromreset{section}{chapter}
 
 
-\RequirePackage[perpage,hang]{footmisc} 
 
+%%% Amendments, commentary, footnotes, marginnotes
+\RequirePackage[perpage,hang]{footmisc} 
+\RequirePackage{manyfoot}
 \@removefromreset{footnote}{chapter}
 
+\newcommand{\Ffootnoterule}{\noindent\rule{\linewidth}{0.5pt}\par\noindent\footnotesize
+  Amending Notes: \vspace{2mm}}
+\SelectFootnoteRule[1]{F}
+\DeclareNewFootnote{F}
 
 
-%\RequirePackage{perpage} %the perpage package
-%\MakePerPage{footnote} %the perpage package command
+\newcommand{\Rfootnoterule}{\noindent\rule{0.5\linewidth}{0.5pt}\par\noindent\footnotesize
+  Act Refs.: \vspace{2mm}}
+%\SelectFootnoteRule[1]{R}[\noindent\footnotesize \smash{Act Refs.:}\vspace{2mm}]
+\SelectFootnoteRule[1]{R}
+\DeclareNewFootnote{R}[alph]
+
+\newcommand{\actnote}[1]{\footnoteR{#1}}
+
+%% Amendments for insertion and deletion
+\newenvironment{amendins}[1]{\footnoteF{#1}[\ignorespaces}{%
+\ifhmode\unskip\fi]\Footnotemark\thefootnoteF}
+%% removes the additional space after [ and before ]
+%%% Ref. David Carlisle: https://tex.stackexchange.com/a/179034/33945
+
+\newcommand\amenddel[1]{\footnoteF{#1}[ * * * ]\Footnotemark\thefootnoteF}
 
 
-
+\newcommand{\actref}[4]{%
+  %\href{http://legislation.maharashtra.gov.in/acts/#1/#2/#3}{[{#1}{#3} of {#2}]}}
+   \ifx\hfuzz#1\hfuzz % https://tex.stackexchange.com/a/53091/33945
+     \ifx\hfuzz#4\hfuzz % https://tex.stackexchange.com/a/53091/33945
+       \href{http://legislation.maharashtra.gov.in/acts/india/#2/#3}{{#3} of {#2}}
+     \else
+       \href{http://legislation.maharashtra.gov.in/acts/india/#2/#3/#4}{{#3}
+         of {#2}, {#4}}
+     \fi
+   \else
+     \ifx\hfuzz#4\hfuzz % https://tex.stackexchange.com/a/53091/33945
+       \href{http://legislation.maharashtra.gov.in/acts/#1/#2/#3}{{#1} {#3} of {#2}}
+     \else
+      \href{http://legislation.maharashtra.gov.in/acts/#1/#2/#3/#4}{%
+        {#1} {#3} of {#2}, {#4}} 
+     \fi
+   \fi
+}
 
               
 \renewcommand\thesection {\@arabic\c@section}
@@ -829,23 +873,8 @@ Maharashtra State, Mumbai - 400 004}
   \z@{-.7\baselineskip\@plus-\baselineskip}{.5\baselineskip}%
   {\normalfont\bfseries\hsize1\textwidth \raggedright}}
 
-% \def\subsection{\@startsection{subsection}{2}%
-%   \z@{.5\baselineskip\@plus.7\baselineskip}{\z@}%
-%   {\normalfont}}
 
 \RequirePackage{enumitem}
-% \newenvironment{subsectionlist}[1][99]{%
-%   \begin{enumerate}[label=(\arabic*)]
-%     \settowidth{\leftmargin}{#1}
-%   }{\end{enumerate}}
-
-% \newenvironment{clause}{%
-%   \begin{enumerate}[label=(\alph*)]
-%   }{\end{enumerate}}
-
-% \newenvironment{subclause}{%
-%   \begin{enumerate}[label=(\roman*)]
-%   }{\end{enumerate}}
 
 %% The following code will force label to be specified
 %% The explicit label is specified by \lblitem{num}
@@ -911,22 +940,6 @@ Maharashtra State, Mumbai - 400 004}
 
 \newcommand{\explanation}[1]{\emph{Explanation}: #1}
 
-%\newcommand{\actref}[1]{\marginpar{\raggedright\footnotesize{#1}}}
-%\usepackage{marginnote}
-%\newcommand{\actref}[2][]{\marginnote{\footnotesize{#2}}[#1]}
-%\newcommand{\actref}[1]{\footnote{\footnotesize{#1}}}
-
-%\newcommand{\actref}[4]{\unskip\marginpar{\footnotesize{#1} {#3} of {#2}.}}
-
-%\newcommand{\actref}[4]{\unskip\footnote{\footnotesize{#1} {#3} of {#2}.}}
-\newcommand{\actref}[4]{%
-  %\href{http://legislation.maharashtra.gov.in/acts/#1/#2/#3}{[{#1}{#3} of {#2}]}}
-  % \ifx\hfuzz#1\hfuzz % https://tex.stackexchange.com/a/53091/33945
-  % \href{http://legislation.maharashtra.gov.in/acts/india/#2/#3}{[{#3} of {#2}]}
-  % \else
-  \href{http://legislation.maharashtra.gov.in/acts/#1/#2/#3}{[{#1} {#3} of {#2}]}
-%  \fi
-}
 
 \renewcommand{\baselinestretch}{1}
 
@@ -939,6 +952,9 @@ Maharashtra State, Mumbai - 400 004}
 
 \newcommand{\ins}[1]{\ul{#1}}
 \newcommand{\del}[1]{\st{#1}}
+%% for soul to work correctly in headings with hyperref
+%% https://tex.stackexchange.com/a/240438/33945
+
 
 
 %\newcommand{\ins}[1]{\ul{\protect{#1}}}
@@ -953,18 +969,26 @@ Maharashtra State, Mumbai - 400 004}
 
 \newcommand{\subs}[2]{\del{#1} \ins{#2}}
 
-\newcommand{\secnumhead}[2]{%
-	\titlelabel{#1\quad}
-	\section{#2}
-	\titlelabel{\thesection\quad}
-}
 
 \newcommand{\chapnumhead}[2]{%
-	\titlelabel{#1\quad}
-	\chapter{#2}
-	\titlelabel{\thechapter\quad}
+  \titleformat{\chapter}[display]
+  {\centering\large\bfseries\scshape}
+  {\chaptertitlename \space#1}
+  {\baselineskip}{}{}
+  \chapter{\texorpdfstring{#2}{}}
+  %% for soul to work correctly in headings with hyperref
+  %% https://tex.stackexchange.com/a/240438/33945
+  \titleformat{\chapter}[display]
+  {\centering\large\bfseries\scshape}
+  {\chaptertitlename \space\thechapter}
+  {\baselineskip}{}{}
 }
 
+\newcommand{\secnumhead}[2]{%
+	\titlelabel{#1\quad}
+	\section{\texorpdfstring{#2}{}}
+	\titlelabel{\thechapter\quad}
+}
 
 
 %**************************Widow and orphan************************
