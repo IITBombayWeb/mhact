@@ -356,6 +356,8 @@ bindingoffset=0.5cm,
 \macroval{amendlastdate}{pr@amenddate}
 \macroval{reprintYear}{pr@reprintyr}
 \macroval{reprintPrice}{pr@reprintpr}
+\macroval{amendPrologue}{@amendprologue}
+\macroval{sorref}{@sorref}
 
 
 %%% Other Containers
@@ -573,36 +575,37 @@ Maharashtra State, Mumbai - 400 004}
 
 \newcommand\reprintcoverpage{%
   \thispagestyle{empty}
-  \begin{center}
-      \putgovlogo\par
+  a
 
-      {\large \scshape Government of Maharashtra}
+  % \begin{center}
+  %     \putgovlogo\par
 
-      {\Large \scshape Law and Judiciary Department}
+  %     {\large \scshape Government of Maharashtra}
 
-      {\huge \@actalias \vskip 40pt
+  %     {\Large \scshape Law and Judiciary Department}
 
-      \Large \bfseries \@title}
+  %     {\huge \@actalias \vskip 40pt
 
-      \vspace{\fill}
+  %     \Large \bfseries \@title}
 
-      {(\pr@amenddate)}
+  %     \vspace{\fill}
+
+  %     {(\pr@amenddate)}
 
       
-      \vspace{\fill}
+  %     \vspace{\fill}
 
-      {\small Printed in India by The Manager, Government Central
-        Press, Mumbai, and published by The Director, Government
-        Printing, Stationary and Publications, Maharashtra State,
-        Mumbai 400 004}
+  %     {\small Printed in India by The Manager, Government Central
+  %       Press, Mumbai, and published by The Director, Government
+  %       Printing, Stationary and Publications, Maharashtra State,
+  %       Mumbai 400 004}
 
-      {\bfseries\pr@reprintyr}
+  %     {\bfseries\pr@reprintyr}
 
-      {[Price---Rs. \pr@reprintpr]}
+  %     {[Price---Rs. \pr@reprintpr]}
     
-  \end{center}
+  % \end{center}
   
-    \cleardoublepage
     \begin{center}
       {\large \bfseries \@title}
       
@@ -622,13 +625,24 @@ Maharashtra State, Mumbai - 400 004}
     \thispagestyle{empty}
 
   \begin{center}
-    {\large\bfseries\scshape\@actalias}
+    {\large\bfseries\scshape\@actalias}\footnote{\@sorref}
     % \ifx#1\@empty
     % \else\footnote{#1}
     % \fi
     \par{[\scshape \@title]}
-  \end{center}
 
+    \ifx\@assent\empty
+    \else
+      {\bfseries (\@assent)}
+    \fi
+  \end{center}
+  
+  \noindent\@amendprologue
+
+  \ifx\@amendprologue\empty
+  \else
+  \clearpage
+  \fi
     
 } % reprintcoverpage
     
@@ -784,10 +798,10 @@ Maharashtra State, Mumbai - 400 004}
 
 \newcommand{\startact}[1][]{%
 
-  \cleardoublepage
-  \setcounter{page}{1}
-  \pagenumbering{arabic}
-  \thispagestyle{actstart}
+  % \cleardoublepage
+  % \setcounter{page}{1}
+  % \pagenumbering{arabic}
+  % \thispagestyle{actstart}
 
   \if@default
     \billcoverpage
@@ -809,10 +823,6 @@ Maharashtra State, Mumbai - 400 004}
       (इंग्रिजी अनुवाद).
     }
     \gazEngQuota
-
-    % \begin{center}
-    %   {\bfseries\scshape Maharashtra Legislature Secretariat}
-    % \end{center}
     
   \fi
 
@@ -863,30 +873,52 @@ Maharashtra State, Mumbai - 400 004}
 %%% Amendments, commentary, footnotes, marginnotes
 \RequirePackage[perpage,hang]{footmisc} 
 \RequirePackage{manyfoot}
+\RequirePackage{longtable}
 \@removefromreset{footnote}{chapter}
 
-\newcommand{\Ffootnoterule}{\noindent\rule{\linewidth}{0.5pt}\par\noindent\footnotesize
-  Amending Notes: \vspace{2mm}}
+\def{\mfr}{%
+  \kern -3pt
+  \hrule width 7in 
+  \kern 2pt
+}
+
+%\newcommand{\Ffootnoterule}{\mfr\par\noindent\footnotesize Amendments (Textual): \vspace{2mm}}
+%\newcommand{\Ffootnoterule}{\footnoterule\par\noindent\footnotesize Amendments (Textual): \vspace{2mm}}
+\newcommand{\Ffootnoterule}{\noindent\rule{0.5\linewidth}{0.5pt}\par\noindent\footnotesize Amendments (Textual): \vspace{2mm}}
 \SelectFootnoteRule[1]{F}
 \DeclareNewFootnote{F}
 
+\newcommand{\Cfootnoterule}{\noindent\rule{0.5\linewidth}{0.5pt}\par\noindent\footnotesize Modifications etc. (not altering text): \vspace{2mm}}
+\SelectFootnoteRule[1]{C}
+\DeclareNewFootnote{C}
 
-\newcommand{\Rfootnoterule}{\noindent\rule{0.5\linewidth}{0.5pt}\par\noindent\footnotesize
-  Act Refs.: \vspace{2mm}}
+
+\newcommand{\Ifootnoterule}{\noindent\rule{0.5\linewidth}{0.5pt}\par\noindent\footnotesize Commencement Information: \vspace{2mm}}
+\SelectFootnoteRule[1]{I}
+\DeclareNewFootnote{I}
+
+\newcommand{\Rfootnoterule}{\par\noindent\footnotesize
+  Marginal Citations: \vspace{2mm}}
 %\SelectFootnoteRule[1]{R}[\noindent\footnotesize \smash{Act Refs.:}\vspace{2mm}]
 \SelectFootnoteRule[1]{R}
 \DeclareNewFootnote{R}[alph]
 
-\newcommand{\actnote}[1]{\footnoteR{#1}}
+%\newcommand{\citenote}[1]{\footnoteR{#1}}
+\newcommand{\citenote}[2]{\footnoteR{#2\label{fnm:#1}}}
 
-%% Amendments for insertion and deletion
-\newenvironment{amendins}[1]{\footnoteF{#1}[\ignorespaces}{%
-\ifhmode\unskip\fi]\Footnotemark\thefootnoteF}
+\newcommand{\Cnote}[1]{\footnoteC{\label{fnc:#1}}}
+\newcommand{\Inote}[1]{\footnoteI{\label{fni:#1}}}
+
+
+%% Amendments for insertion and deletion, with uniqkey
+\newenvironment{amendins}[2]{\def\mylab{cf:#1}\footnoteF{#2\label{\mylab}}[\ignorespaces}{\ifhmode\unskip\fi]\footref{\mylab}}
 %% removes the additional space after [ and before ]
 %%% Ref. David Carlisle: https://tex.stackexchange.com/a/179034/33945
+\newcommand{\amenddel}[2]{\def\mylab{cf:#1}\footnoteF{#2\label{\mylab}}[ * * * * ]\footref{\mylab}}
 
-\newcommand\amenddel[1]{\footnoteF{#1}[ * * * ]\Footnotemark\thefootnoteF}
+%\newenvironment{amendins}[1]{\footnoteF{#1}[\ignorespaces}{ \ifhmode\unskip\fi]\Footnotemark\thefootnoteF}
 
+% \newcommand\amenddel[1]{\footnoteF{#1}[ * * * ]\Footnotemark\thefootnoteF}
 
 \newcommand{\actref}[4]{%
   %\href{http://legislation.maharashtra.gov.in/acts/#1/#2/#3}{[{#1}{#3} of {#2}]}}

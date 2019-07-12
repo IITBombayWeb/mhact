@@ -4,25 +4,12 @@
 \usepackage{titlesec}
 \usepackage{manyfoot}
 \usepackage{lipsum}
+\usepackage{longtable}
 
 
 \usepackage{soul}
 
 \RequirePackage{xcolor}
-\RequirePackage[bookmarks,%
-            breaklinks,%
-            backref=false,%
-            pdfhighlight=/I,%
-            pdffitwindow=true,%
-            pdfstartview=Fit,%
-            pdfcenterwindow=true,%
-            colorlinks,
-            linkcolor={red!50!black},
-            urlcolor={blue!80!black},
-            pdfpagelabels,
-	        pdfusetitle]
-            {hyperref}
-
 %\newcommand{\href}[2]{#2}
 
 
@@ -78,6 +65,25 @@
 
 
 \usepackage[hang]{footmisc}
+
+
+
+\RequirePackage[bookmarks,%
+            breaklinks,%
+            backref=false,%
+            pdfhighlight=/I,%
+            pdffitwindow=true,%
+            pdfstartview=Fit,%
+            pdfcenterwindow=true,%
+            colorlinks,
+            linkcolor={red!50!black},
+            urlcolor={blue!80!black},
+            pdfpagelabels,
+	        pdfusetitle]
+            {hyperref}
+
+
+
 %% Footnotes (manyfoot)
 
 %\SetFootnoteHook{\hangindent=2em\noindent}
@@ -114,15 +120,20 @@
    \fi
 }
 
-\newif\ifomit
-\newcommand{\actnote}[1]{\footnoteR{#1}}
+\newcommand{\citenote}[2]{\footnoteR{#2\label{fnm:#1}}}
+%\newcommand{\citenote}[2]{#1:#2}
 %\newenvironment{amendins}[1]{\footnoteF{#1}[}{]$_{\mathrm{\thefootnoteF}}$}
-\newenvironment{amendins}[1]{\footnoteF{#1}[}{]\Footnotemark\thefootnoteF}
+\newenvironment{amendins}[2]{\def\mylab{cf:#1}\footnoteF{#2\label{\mylab}}[\ignorespaces}{\ifhmode\unskip\fi]\footref{\mylab}}
 
-\newcommand\amenddel[1]{%
-  \footnoteF{#1}[ * * * ]\Footnotemark\thefootnoteF
-  %\footnoteF{#1}[ * * * ]\footnotemarkF
-}
+%\newenvironment{amendins}[2]{\footnoteF{#2}[\ignorespaces}{ \ifhmode\unskip\fi]\Footnotemark\thefootnoteF}
+
+%\newenvironment{amendins}[2]{[}{]}
+
+%\newcommand\amenddel[1]{\footnoteF{#1}[ * * * ]\Footnotemark\thefootnoteF}
+
+\newcommand{\amenddel}[2]{\def\mylab{cf:#1}\footnoteF{#2\label{\mylab}}[ * * * * ]\footref{\mylab}}
+
+%\newcommand\amenddel[1]{}{}
 
 % \usepackage{verbatim}
 %   %*****\begin{comment}}{\end{comment}\Footnotemark\thefootnoteF]}
@@ -144,11 +155,11 @@
 \section{Introduction}
 
 1939, or the Bombay Rents, Hotel Rates and Lodging House Rates
-(Control) Act, 1944\actnote{\actref{Bom.}{1944}{22}{}} or the Bombay Rents, Hotel and Lodging House Rates
-Control Act, 1947\actnote{\actref{Mah.}{1947}{32}{3(c)}}, or the
+(Control) Act, 1944\citenote{uniqkey1}{\actref{Bom.}{1944}{22}{}} or the Bombay Rents, Hotel and Lodging House Rates
+Control Act, 1947\citenote{uniqkey2}{\actref{Mah.}{1947}{32}{3(c)}}, or the
 Central Provinces and Berar Letting of Houses and Rent Control Order,
 1949 issued under the Central Provinces and Berar Regulation of
-\begin{amendins}{These words were inserted by \actref{Mah.}{1993}{27}{2(h)}}
+\begin{amendins}{F12}{These words were inserted by \actref{Mah.}{1993}{27}{2(h)}}
   Letting of Accommodation Act, 1946 or the Hyderabad Houses (Rent,
   Eviction and Lease) Control Act, 1954,
 \end{amendins}
@@ -164,7 +175,7 @@ per cent. in \newcounter{ssec}
     \advance\leftmargin\labelsep 
   }
 \item This Act shall, in the first instance,
-  \begin{amendins}{These words were substituted for the words ``when a
+  \begin{amendins}{F22}{These words were substituted for the words ``when a
       society has passed a resolution to change'' by
       \actref{Mah.}{1986}{20}{99ab}.
     }
@@ -173,17 +184,16 @@ per cent. in \newcounter{ssec}
   \end{amendins}
   education, business, trade or storage in
   the areas specified in Schedule I and Schedule II.
-  \label{it:purpose}
 \item [\ins{1ZAA.}] This is a sample insert subsection
 \item [\del{1ZAA.}] \del{This has been deleted}
 
-% \begin{amenddel}{Clause 2 was deleted by
+% \begin{amenddel}{F41}{Clause 2 was deleted by
 %     \actref{Mah.}{1993}{23}{5c}}
 % \end{amenddel}
 
-\amenddel{Clause 2 was deleted by \actref{Mah.}{1993}{23}{5c}}
+\amenddel{F41}{Clause 2 was deleted by \actref{Mah.}{1993}{23}{5c}}
 
-\item \amenddel{The word ``Nevertheless'' was deleted by
+\item \amenddel{F43}{The word ``Nevertheless'' was deleted by
     \actref{Mah.}{2012}{33}{29f}} Notwithstanding anything contained in sub-section~1 it shall
   also apply to the premises or as the case may be, houses let out in
   the areas to which the Bombay Rents, Hotel and Lodging House Rates
@@ -199,12 +209,22 @@ per cent. in \newcounter{ssec}
 \secnumhead{\del{2} \ins{3}}{\del{Foreground} \ins{Background}}
 
 
-(Control) Act, 1944 or the Bombay Rents, Hotel and Lodging House Rates
-Control Act, 1947, or the Central Provinces and Berar Letting of
-Houses and Rent Control Order, 1949 issued under the Central Provinces
-and Berar Regulation of Letting of Accommodation Act, 1946 or the
-Hyderabad Houses (Rent, Eviction and Lease) Control Act, 1954, such
-rent plus an increase of 5 per cent. in
+(Control) Act, 1944\citenote{M23}{\actref{Mah.}{1944}{20}{}} or the
+Bombay Rents, Hotel and Lodging House Rates Control Act, 1947,
+\begin{amendins}{F32}{Inserted by \actref{Mah.}{2014}{20}{3c}}
+or the
+Central Provinces and Berar Letting of Houses and Rent Control Order,
+1949 issued
+\begin{amendins}{F33}{Substituted the words ``and other similar acts'' by
+    \actref{Mah.}{2018}{10}{8c}}
+  under the Central Provinces and Berar Regulation of
+  Letting of Accommodation Act, 1946
+\end{amendins}
+  or the Hyderabad Houses (Rent,
+Eviction and Lease) Control Act, 1954,
+\end{amendins}
+such rent plus an increase of 5 
+per cent. in
 \begin{enumerate}
 \item This Act shall, in the first instance, apply to premises let for
   the purposes of residence, education, business, trade or storage in
@@ -219,7 +239,7 @@ rent plus an increase of 5 per cent. in
   the areas to which the Bombay Rents, Hotel and Lodging House Rates
   Provinces and Berar Letting of Houses and Rent Control Order, 1949
 
-  \amenddel{%
+  \amenddel{F45}{%
     The following section was deleted by \actref{Mah.}{1972}{20}{12m}
     \begin{enumerate}
     \item \lipsum[1]
@@ -228,12 +248,28 @@ rent plus an increase of 5 per cent. in
 }
 \end{enumerate}
 
+\clearpage
+\section{Prologue}
+
+\begin{longtable}{llcll}
+  Amended by Mah. & 5 of 1962\footnote{Default} & & Amended by Mah. & 29 of
+  1973\citenote{M13}{%
+    Maharashtra Ordinance No. VII of 1973 was repealed by
+    \actref{Mah.}{1969}{35}{4}}
+  (30-5-1973) \\
+  " " "  & 16 of 1969 & & " " " & 50 of 1977 (27-9-1977) 
+\end{longtable}
+      
+
 \section{Literature}
 \begin{subsectionlist}
 \lblitem{1} Within a period of sixty days from the date of commencement of 
 this Act or the date on which establishment commences its business, the 
 employer of every establishment employing ten or more workers shall submit
-application online in a prescribed form for registration to the Facilitator of
+\citenote{M43}{\actref{Mah.}{1993}{23}{4k}} application online in a prescribed form for registration to the Facilitator of
+1973\citenote{M13}{%
+Maharashtra Ordinance No. VII of 1973 was repealed by
+\actref{Mah.}{1969}{35}{4}}
 the local area concerned, together with such fees and such self-declaration
 and self-certified documents as may be prescribed, containing---
 \lblitem{\ins{2}} the name of the employer and the manager, if any;
