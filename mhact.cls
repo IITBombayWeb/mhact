@@ -872,7 +872,8 @@ Maharashtra State, Mumbai - 400 004}
 
 %%% Amendments, commentary, footnotes, marginnotes
 %\RequirePackage[perpage,hang]{footmisc} 
-\RequirePackage{footmisc} 
+\RequirePackage[hang]{footmisc} 
+% hang for indented footnotes
 \RequirePackage{manyfoot}
 \RequirePackage{longtable}
 \@removefromreset{footnote}{chapter}
@@ -898,17 +899,77 @@ Maharashtra State, Mumbai - 400 004}
 \SelectFootnoteRule[1]{I}
 \DeclareNewFootnote{I}
 
-\newcommand{\Rfootnoterule}{\par\noindent\footnotesize
+\newcommand{\Mfootnoterule}{\par\noindent\footnotesize
   Marginal Citations: \vspace{2mm}}
 %\SelectFootnoteRule[1]{R}[\noindent\footnotesize \smash{Act Refs.:}\vspace{2mm}]
-\SelectFootnoteRule[1]{R}
-\DeclareNewFootnote{R}[alph]
+\SelectFootnoteRule[1]{M}
+\DeclareNewFootnote{M}[alph]
 
-%\newcommand{\citenote}[1]{\footnoteR{#1}}
-\newcommand{\citenote}[2]{\footnoteR{#2\label{fnm:#1}}}
 
-\newcommand{\Cnote}[1]{\footnoteC{\label{fnc:#1}}}
-\newcommand{\Inote}[1]{\footnoteI{\label{fni:#1}}}
+\newcommand\manyfoottarget{\makebox[0pt][r]{\hypertarget{Hfootnote.\theHfootnote
+}\quad}}
+\patchcmd\MFL@fnoteplain{\rule}{\manyfoottarget\rule}{}{\fail}
+%% Needed to get hyperlinks working with manyfoot
+%% https://tex.stackexchange.com/a/498999/33945
+
+
+
+\renewcommand{\thefootnoteM}{M\arabic{footnoteM}}
+\renewcommand{\thefootnoteC}{C\arabic{footnoteC}}
+\renewcommand{\thefootnoteI}{I\arabic{footnoteI}}
+\renewcommand{\thefootnoteF}{F\arabic{footnoteF}}
+
+\newcommand{\citenote}[2]{%
+  %% Takes two arguments: \citenote{uniqkey}{actref}
+  %% inserts the marker at the location as well as the foonote
+  \footnoteM{#2\label{fnm:#1}}}
+
+\newcommand{\Cnote}[2]{%
+  %% Takes two arguments: \Cnote{uniqkey}{Foonote Text}
+  %% Does not insert the marker. Has to be explicitly inserted using a
+  %% \Cnoteref{} command. This is so that the same marker can be
+  %% referred in multiple locations
+  %% \Cnote{} and \Cnoteref{} must appear in the same page
+  \stepcounter{footnoteC}%
+  \FootnotemarkC{\thefootnoteC}%
+  \FootnotetextC{\thefootnoteC}{#2\label{fnc:#1}}}
+
+  %\footnotetextC[\thefootnoteC]{#2\label{fnc:#1}}}
+  %% plain footnotetextC throws an error in the presence of hyperref
+  %% when thefootnote has a prefix C
+
+\newcommand{\Inote}[2]{%
+  %% Takes two arguments: \Inote{uniqkey}{Foonote Text}
+  %% Does not insert the marker. Has to be explicitly inserted using a
+  %% \Inoteref{} command. This is so that the same marker can be
+  %% referred in multiple locations
+  %% \Inote{} and \Inoteref{} must appear in the same page
+  \stepcounter{footnoteI}%
+  \FootnotemarkI{\thefootnoteI}%
+  \FootnotetextI{\thefootnoteI}{#2\label{fni:#1}}}
+
+\newcommand{\Fnote}[2]{%
+  %% Takes two arguments: \Fnote{uniqkey}{Amendment Note}
+  %% Does not insert the marker. Has to be explicitly inserted using a
+  %% pair of \FnoteBegin{} \FnoteEnd commands.
+  %% This is so that the same marker can be
+  %% referred in multiple locations
+  %% \Fnote{} and \FnoteBegin{} must appear in the same page
+  %% \FnoteEnd{} can appear in another page
+  \stepcounter{footnoteF}%
+  \FootnotemarkI{\thefootnoteF}%
+  \FootnotetextF{\thefootnoteF}{#2\label{fnf:#1}}}
+
+
+
+
+
+\newcommand{\Cnoteref}[1]{\protect\footref{fnc:#1}}
+\newcommand{\Inoteref}[1]{\footref{fni:#1}}
+\newcommand{\FnoterefBegin}[1]{\footref{fnf:#1}[\ignorespaces}
+\newcommand{\FnoterefEnd}[1]{]\footref{fnf:#1}}
+
+
 
 
 %% Amendments for insertion and deletion, with uniqkey
