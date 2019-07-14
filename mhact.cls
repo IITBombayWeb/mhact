@@ -871,16 +871,17 @@ Maharashtra State, Mumbai - 400 004}
 
 
 %%% Amendments, commentary, footnotes, marginnotes
-\RequirePackage[perpage,hang]{footmisc} 
+%\RequirePackage[perpage,hang]{footmisc} 
+\RequirePackage{footmisc} 
 \RequirePackage{manyfoot}
 \RequirePackage{longtable}
 \@removefromreset{footnote}{chapter}
 
-\def{\mfr}{%
-  \kern -3pt
-  \hrule width 7in 
-  \kern 2pt
-}
+% \def{\mfr}{%
+%   \kern -3pt
+%   \hrule width 7in 
+%   \kern 2pt
+% }
 
 %\newcommand{\Ffootnoterule}{\mfr\par\noindent\footnotesize Amendments (Textual): \vspace{2mm}}
 %\newcommand{\Ffootnoterule}{\footnoterule\par\noindent\footnotesize Amendments (Textual): \vspace{2mm}}

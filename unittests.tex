@@ -87,18 +87,45 @@
 %% Footnotes (manyfoot)
 
 %\SetFootnoteHook{\hangindent=2em\noindent}
-\newcommand{\Ffootnoterule}{\noindent\rule{\linewidth}{0.5pt}\par \noindent\footnotesize
-  Amending Notes: \vspace{2mm}}
-\SelectFootnoteRule[1]{F}
+% \newcommand{\Ffootnoterule}{\noindent\rule{\linewidth}{0.5pt}\par \noindent\footnotesize
+%   Amending Notes: \vspace{2mm}}
+% \SelectFootnoteRule[1]{F}
 %\SelectFootnoteRule[1]{F}[\noindent\footnotesize \smash{Amending Notes:}\vspace{2mm}]
 
 
-\DeclareNewFootnote{F}
+%\DeclareNewFootnote{F}
 %\SetFootnoteHook{\hangindent=2em\noindent}
-\SelectFootnoteRule[1]{R}[\noindent\footnotesize \smash{Act Refs.:}\vspace{2mm}]
+% \SelectFootnoteRule[1]{M}[\noindent\footnotesize \smash{Act Refs.:}\vspace{2mm}]
+% \DeclareNewFootnote{M}[alph]
 
-\DeclareNewFootnote{R}[alph]
+\newcommand{\Ffootnoterule}{\noindent\rule{0.5\linewidth}{0.5pt}\par\noindent\footnotesize Amendments (Textual): \vspace{2mm}}
+\SelectFootnoteRule[1]{F}
+\DeclareNewFootnote{F}
 
+\newcommand{\Cfootnoterule}{\noindent\rule{0.5\linewidth}{0.5pt}\par\noindent\footnotesize Modifications etc. (not altering text): \vspace{2mm}}
+\SelectFootnoteRule[1]{C}
+\DeclareNewFootnote{C}
+
+
+\newcommand{\Ifootnoterule}{\noindent\rule{0.5\linewidth}{0.5pt}\par\noindent\footnotesize Commencement Information: \vspace{2mm}}
+\SelectFootnoteRule[1]{I}
+\DeclareNewFootnote{I}
+
+\newcommand{\Mfootnoterule}{\noindent\rule{0.5\linewidth}{0.5pt}\par\par\noindent\footnotesize
+  Marginal Citations: \vspace{2mm}}
+%\SelectFootnoteRule[1]{R}[\noindent\footnotesize \smash{Act Refs.:}\vspace{2mm}]
+\SelectFootnoteRule[1]{M}
+\DeclareNewFootnote{M}[alph]
+
+
+\usepackage{etoolbox}
+\makeatletter
+\newcommand\manyfoottarget{\makebox[0pt][r]{\hypertarget{Hfootnote.\theHfootnote
+}\quad}}
+\patchcmd\MFL@fnoteplain{\rule}{\manyfoottarget\rule}{}{\fail}
+\makeatother
+%% Needed to get hyperlinks working with manyfoot
+%% https://tex.stackexchange.com/a/498999/33945
 
 
 \newcommand{\actref}[4]{%
@@ -120,7 +147,59 @@
    \fi
 }
 
-\newcommand{\citenote}[2]{\footnoteR{#2\label{fnm:#1}}}
+\renewcommand{\thefootnoteM}{M\arabic{footnoteM}}
+\renewcommand{\thefootnoteC}{C\arabic{footnoteC}}
+\renewcommand{\thefootnoteI}{I\arabic{footnoteI}}
+\renewcommand{\thefootnoteF}{F\arabic{footnoteF}}
+
+\newcommand{\citenote}[2]{%
+  %% Takes two arguments: \citenote{uniqkey}{actref}
+  %% inserts the marker at the location as well as the foonote
+  \footnoteM{#2\label{fnm:#1}}}
+
+\newcommand{\Cnote}[2]{%
+  %% Takes two arguments: \Cnote{uniqkey}{Foonote Text}
+  %% Does not insert the marker. Has to be explicitly inserted using a
+  %% \Cnoteref{} command. This is so that the same marker can be
+  %% referred in multiple locations
+  %% \Cnote{} and \Cnoteref{} must appear in the same page
+  \stepcounter{footnoteC}
+  \FootnotetextC{\thefootnoteC}{#2\label{fnc:#1}}}
+
+  %\footnotetextC[\thefootnoteC]{#2\label{fnc:#1}}}
+  %% plain footnotetextC throws an error in the presence of hyperref
+  %% when thefootnote has a prefix C
+
+\newcommand{\Inote}[2]{%
+  %% Takes two arguments: \Inote{uniqkey}{Foonote Text}
+  %% Does not insert the marker. Has to be explicitly inserted using a
+  %% \Inoteref{} command. This is so that the same marker can be
+  %% referred in multiple locations
+  %% \Inote{} and \Inoteref{} must appear in the same page
+  \stepcounter{footnoteI}
+  \FootnotetextI{\thefootnoteI}{#2\label{fni:#1}}}
+
+\newcommand{\Fnote}[2]{%
+  %% Takes two arguments: \Fnote{uniqkey}{Amendment Note}
+  %% Does not insert the marker. Has to be explicitly inserted using a
+  %% pair of \FnoteBegin{} \FnoteEnd commands.
+  %% This is so that the same marker can be
+  %% referred in multiple locations
+  %% \Fnote{} and \FnoteBegin{} must appear in the same page
+  %% \FnoteEnd{} can appear in another page
+  \stepcounter{footnoteF}
+  \FootnotetextF{\thefootnoteF}{#2\label{fnf:#1}}}
+
+
+
+
+
+\newcommand{\Cnoteref}[1]{\protect\footref{fnc:#1}}
+\newcommand{\Inoteref}[1]{\footref{fni:#1}}
+\newcommand{\FnoterefBegin}[1]{\footref{fnf:#1}[\ignorespaces}
+\newcommand{\FnoterefEnd}[1]{]\footref{fnf:#1}}
+
+
 %\newcommand{\citenote}[2]{#1:#2}
 %\newenvironment{amendins}[1]{\footnoteF{#1}[}{]$_{\mathrm{\thefootnoteF}}$}
 \newenvironment{amendins}[2]{\def\mylab{cf:#1}\footnoteF{#2\label{\mylab}}[\ignorespaces}{\ifhmode\unskip\fi]\footref{\mylab}}
@@ -148,21 +227,33 @@
 
 \tableofcontents
 
+
+
 \chapnumhead{\ins{2}}{\ins{Preliminary}}
+\Inoteref{I1}
+\Inote{I1}{For statement of
+  object and reasons see Mah. Gazzette}
 
 
 
 \section{Introduction}
 
-1939, or the Bombay Rents, Hotel Rates and Lodging House Rates
-(Control) Act, 1944\citenote{uniqkey1}{\actref{Bom.}{1944}{22}{}} or the Bombay Rents, Hotel and Lodging House Rates
-Control Act, 1947\citenote{uniqkey2}{\actref{Mah.}{1947}{32}{3(c)}}, or the
+
+1939\Cnoteref{C1},
+\Cnote{C1}{Extended by \actref{Mah.}{1983}{30}{}}
+or the Bombay Rents\Cnoteref{C1}, Hotel Rates and Lodging House Rates
+(Control) Act, 1944\citenote{M10}{\actref{Bom.}{1944}{22}{}} or the Bombay Rents, Hotel and Lodging House Rates
+Control Act, 1947\citenote{M11}{\actref{Mah.}{1947}{32}{3(c)}}, or the
 Central Provinces and Berar Letting of Houses and Rent Control Order,
 1949 issued under the Central Provinces and Berar Regulation of
-\begin{amendins}{F12}{These words were inserted by \actref{Mah.}{1993}{27}{2(h)}}
-  Letting of Accommodation Act, 1946 or the Hyderabad Houses (Rent,
-  Eviction and Lease) Control Act, 1954,
-\end{amendins}
+% \begin{amendins}{F12}{These words were inserted by \actref{Mah.}{1993}{27}{2(h)}}
+%   Letting of Accommodation Act, 1946 or the Hyderabad Houses (Rent,
+%   Eviction and Lease) Control Act, 1954,
+% \end{amendins}
+\Fnote{F12}{These words were inserted by \actref{Mah.}{1993}{27}{2(h)}}
+\FnoterefBegin{F12}Letting of Accommodation Act, 1946 or the Hyderabad Houses (Rent,
+Eviction and Lease) Control Act, 1954,\FnoterefEnd{F12}
+
   such rent plus an increase of 5
 per cent. in \newcounter{ssec}
 \begin{list}{\arabic{ssec}.}{%
@@ -175,26 +266,29 @@ per cent. in \newcounter{ssec}
     \advance\leftmargin\labelsep 
   }
 \item This Act shall, in the first instance,
-  \begin{amendins}{F22}{These words were substituted for the words ``when a
+  \Fnote{F22}{These words were substituted for the words ``when a
       society has passed a resolution to change'' by
       \actref{Mah.}{1986}{20}{99ab}.
     }
-  apply to premises let for
-  the purposes of residence,
-  \end{amendins}
+  \FnoterefBegin{F22}apply to premises let for
+  the purposes of residence,\FnoterefEnd{F22}
   education, business, trade or storage in
   the areas specified in Schedule I and Schedule II.
 \item [\ins{1ZAA.}] This is a sample insert subsection
 \item [\del{1ZAA.}] \del{This has been deleted}
 
-% \begin{amenddel}{F41}{Clause 2 was deleted by
-%     \actref{Mah.}{1993}{23}{5c}}
-% \end{amenddel}
 
-\amenddel{F41}{Clause 2 was deleted by \actref{Mah.}{1993}{23}{5c}}
+\Fnote{F41}{Clause 2 was deleted by \actref{Mah.}{1993}{23}{5c}}
+\FnoterefBegin{F41} 
+* * *
+\FnoterefEnd{F41} 
 
-\item \amenddel{F43}{The word ``Nevertheless'' was deleted by
-    \actref{Mah.}{2012}{33}{29f}} Notwithstanding anything contained in sub-section~1 it shall
+\item \Fnote{F43}{The word ``Nevertheless'' was deleted by
+    \actref{Mah.}{2012}{33}{29f}}
+  \FnoterefBegin{F43} 
+  * * *
+  \FnoterefEnd{F43} 
+  Notwithstanding anything contained in sub-section~1 it shall
   also apply to the premises or as the case may be, houses let out in
   the areas to which the Bombay Rents, Hotel and Lodging House Rates
   Provinces and \del{Bayr} \ins{Berar} \subs{Let}{Letting} of Houses
@@ -208,21 +302,23 @@ per cent. in \newcounter{ssec}
 
 \secnumhead{\del{2} \ins{3}}{\del{Foreground} \ins{Background}}
 
+\Cnote{C11}{Extended by \actref{Mah.}{2011}{84}{}}
+\Cnote{C2}{Extended by \actref{Mah.}{1991}{93}{}}
 
 (Control) Act, 1944\citenote{M23}{\actref{Mah.}{1944}{20}{}} or the
 Bombay Rents, Hotel and Lodging House Rates Control Act, 1947,
-\begin{amendins}{F32}{Inserted by \actref{Mah.}{2014}{20}{3c}}
-or the
+\Fnote{F32}{Inserted by \actref{Mah.}{2014}{20}{3c}}
+\FnoterefBegin{F32}or the
 Central Provinces and Berar Letting of Houses and Rent Control Order,
-1949 issued
-\begin{amendins}{F33}{Substituted the words ``and other similar acts'' by
+1949 issued\Cnoteref{C11}
+\Fnote{F33}{Substituted the words ``and other similar acts'' by
     \actref{Mah.}{2018}{10}{8c}}
-  under the Central Provinces and Berar Regulation of
+\FnoterefBegin{F33} under the Central Provinces and Berar Regulation of
   Letting of Accommodation Act, 1946
-\end{amendins}
+\FnoterefEnd{F33}
   or the Hyderabad Houses (Rent,
-Eviction and Lease) Control Act, 1954,
-\end{amendins}
+Eviction and Lease) Control Act, 1954,\Cnoteref{C2}
+\FnoterefEnd{F32}
 such rent plus an increase of 5 
 per cent. in
 \begin{enumerate}
@@ -239,13 +335,17 @@ per cent. in
   the areas to which the Bombay Rents, Hotel and Lodging House Rates
   Provinces and Berar Letting of Houses and Rent Control Order, 1949
 
-  \amenddel{F45}{%
+\FnoterefBegin{F45}
+  \Fnote{F45}{%
     The following section was deleted by \actref{Mah.}{1972}{20}{12m}
     \begin{enumerate}
     \item \lipsum[1]
     \item \lipsum[2-5]
     \end{enumerate}
-}
+  }
+  * * * \FnoterefEnd{F45} 
+
+
 \end{enumerate}
 
 \clearpage
@@ -267,7 +367,7 @@ per cent. in
 this Act or the date on which establishment commences its business, the 
 employer of every establishment employing ten or more workers shall submit
 \citenote{M43}{\actref{Mah.}{1993}{23}{4k}} application online in a prescribed form for registration to the Facilitator of
-1973\citenote{M13}{%
+1973\citenote{M45}{%
 Maharashtra Ordinance No. VII of 1973 was repealed by
 \actref{Mah.}{1969}{35}{4}}
 the local area concerned, together with such fees and such self-declaration
