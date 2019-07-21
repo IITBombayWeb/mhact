@@ -957,13 +957,13 @@ Maharashtra State, Mumbai - 400 004}
   %% \Fnote{} and \FnoteBegin{} must appear in the same page
   %% \FnoteEnd{} can appear in another page
   \stepcounter{footnoteF}%
-  \FootnotemarkI{\thefootnoteF}%
+  \FootnotemarkI{\thefootnoteF}[%
+  %\def{\lblprehook}}\FootnotemarkI{\thefootnoteF}[}%
   \FootnotetextF{\thefootnoteF}{#2\label{fnf:#1}}}
 
 
 
-
-
+ 
 \newcommand{\Cnoteref}[1]{\protect\footref{fnc:#1}}
 \newcommand{\Inoteref}[1]{\footref{fni:#1}}
 \newcommand{\FnoterefBegin}[1]{\footref{fnf:#1}[\ignorespaces}
@@ -1014,12 +1014,14 @@ Maharashtra State, Mumbai - 400 004}
 %% The following code will force label to be specified
 %% The explicit label is specified by \lblitem{num}
 
+\def\lblprehook{}
 \newcommand{\lblitem}[1]{%
   \def\lblnum{#1} \item
+  \def\lblprehook{}
 }
 
 \newenvironment{subsectionlist}[1][99]{%
- \begin{enumerate}[label=(\emph{\protect\lblnum})]
+  \begin{enumerate}[label=\protect\lblprehook(\emph{\protect\lblnum})]
     \settowidth{\leftmargin}{#1}
   }{\end{enumerate}}
 
