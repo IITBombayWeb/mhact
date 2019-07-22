@@ -957,9 +957,13 @@ Maharashtra State, Mumbai - 400 004}
   %% \Fnote{} and \FnoteBegin{} must appear in the same page
   %% \FnoteEnd{} can appear in another page
   \stepcounter{footnoteF}%
-  \FootnotemarkI{\thefootnoteF}[%
-  %\def{\lblprehook}}\FootnotemarkI{\thefootnoteF}[}%
-  \FootnotetextF{\thefootnoteF}{#2\label{fnf:#1}}}
+  \FootnotetextF{\thefootnoteF}{#2\label{fnf:#1}}%
+   \@ifnextchar\lblitem{%
+     \renewcommand{\lblprehook}{\FootnotemarkI{\thefootnoteF}[}%
+   }{\FootnotemarkI{\thefootnoteF}[}%
+   %\@ifnextchar\lblitem{prehook}{nohook}
+  % \def{\lblprehook}}\FootnotemarkI{\thefootnoteF}[}%
+}
 
 
 
