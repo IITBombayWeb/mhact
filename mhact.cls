@@ -948,6 +948,15 @@ Maharashtra State, Mumbai - 400 004}
   \FootnotemarkI{\thefootnoteI}%
   \FootnotetextI{\thefootnoteI}{#2\label{fni:#1}}}
 
+
+\newcommand{\Cnoteref}[1]{\protect\footref{fnc:#1}}
+\newcommand{\Inoteref}[1]{\footref{fni:#1}}
+\newcommand{\FnoterefBegin}[1]{\footref{fnf:#1}[\ignorespaces}
+\newcommand{\FnoterefEnd}[1]{]\footref{fnf:#1}}
+
+\newsavebox{\lblbox}
+
+
 \newcommand{\Fnote}[2]{%
   %% Takes two arguments: \Fnote{uniqkey}{Amendment Note}
   %% Does not insert the marker. Has to be explicitly inserted using a
@@ -957,22 +966,27 @@ Maharashtra State, Mumbai - 400 004}
   %% \Fnote{} and \FnoteBegin{} must appear in the same page
   %% \FnoteEnd{} can appear in another page
   \stepcounter{footnoteF}%
-  \FootnotetextF{\thefootnoteF}{#2\label{fnf:#1}}%
-   \@ifnextchar\lblitem{%
-     \renewcommand{\lblprehook}{\FootnotemarkI{\thefootnoteF}[}%
-   }{\FootnotemarkI{\thefootnoteF}[}%
-   %\@ifnextchar\lblitem{prehook}{nohook}
-  % \def{\lblprehook}}\FootnotemarkI{\thefootnoteF}[}%
+  %\FootnotetextF{\thefootnoteF}{#2\label{fnf:#1}}%
+  %\footnoteF{#2\label{fnf:#1}}%
+  %% Peek next command to decide placement of prefix mark
+  %% https://tex.stackexchange.com/a/348945/33945
+  \@ifnextchar\lblitem{%
+  %  \renewcommand{\lblprehook}{\footnoteF{#2\label{fnf:#1}}}
+  %}{\footnoteF{#2\label{fnf:#1}}}}%
+    % \renewcommand{\lblprehook}{\footnoteF{#2\label{fnf:#1}}}%
+    % }{\footnoteF{#2\label{fnf:#1}}}
+    \renewcommand{\lblprehook}{\FootnotemarkF{\thefootnoteF}}%
+  }{\FootnotemarkF{\thefootnoteF}[}%
 }
+    %  \renewcommand{\lblprehook}{\FnoterefBegin{#1}}%
+    %}{\FootnotemarkF{\thefootnoteF}[}%
+   %\@ifnextchar\lblitem{prehook}{nohook}
+   %\def{\lblprehook}}\FootnotemarkI{\thefootnoteF}[}%
+%}
 
 
 
  
-\newcommand{\Cnoteref}[1]{\protect\footref{fnc:#1}}
-\newcommand{\Inoteref}[1]{\footref{fni:#1}}
-\newcommand{\FnoterefBegin}[1]{\footref{fnf:#1}[\ignorespaces}
-\newcommand{\FnoterefEnd}[1]{]\footref{fnf:#1}}
-
 
 
 
@@ -1025,7 +1039,7 @@ Maharashtra State, Mumbai - 400 004}
 }
 
 \newenvironment{subsectionlist}[1][99]{%
-  \begin{enumerate}[label=\protect\lblprehook(\emph{\protect\lblnum})]
+  \begin{enumerate}[label=\lblprehook(\emph{\protect\lblnum})]
     \settowidth{\leftmargin}{#1}
   }{\end{enumerate}}
 
