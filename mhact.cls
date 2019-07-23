@@ -948,14 +948,7 @@ Maharashtra State, Mumbai - 400 004}
   \FootnotemarkI{\thefootnoteI}%
   \FootnotetextI{\thefootnoteI}{#2\label{fni:#1}}}
 
-
-\newcommand{\Cnoteref}[1]{\protect\footref{fnc:#1}}
-\newcommand{\Inoteref}[1]{\footref{fni:#1}}
-\newcommand{\FnoterefBegin}[1]{\footref{fnf:#1}[\ignorespaces}
-\newcommand{\FnoterefEnd}[1]{]\footref{fnf:#1}}
-
-\newsavebox{\lblbox}
-
+\newsavebox{\fnbox}
 
 \newcommand{\Fnote}[2]{%
   %% Takes two arguments: \Fnote{uniqkey}{Amendment Note}
@@ -965,28 +958,49 @@ Maharashtra State, Mumbai - 400 004}
   %% referred in multiple locations
   %% \Fnote{} and \FnoteBegin{} must appear in the same page
   %% \FnoteEnd{} can appear in another page
+  %
   \stepcounter{footnoteF}%
-  %\FootnotetextF{\thefootnoteF}{#2\label{fnf:#1}}%
-  %\footnoteF{#2\label{fnf:#1}}%
+  \FootnotetextF{\thefootnoteF}{#2\label{fnf:#1}}%
+  % \savebox{\fnbox}{%
+  %   \footnoteF{#2\label{fnf:#1}}[ 
+  % }
   %% Peek next command to decide placement of prefix mark
   %% https://tex.stackexchange.com/a/348945/33945
   \@ifnextchar\lblitem{%
-  %  \renewcommand{\lblprehook}{\footnoteF{#2\label{fnf:#1}}}
-  %}{\footnoteF{#2\label{fnf:#1}}}}%
-    % \renewcommand{\lblprehook}{\footnoteF{#2\label{fnf:#1}}}%
-    % }{\footnoteF{#2\label{fnf:#1}}}
-    \renewcommand{\lblprehook}{\FootnotemarkF{\thefootnoteF}}%
+  % %  None of the fnf labels are defined 
+  %   \renewcommand{\lblprehook}{\usebox{\fnbox}}
+  % }{\usebox{\fnbox}}%
+  %  along with stepcounter and FootnotetextF above, sets correct marks
+  %  and refs, but marks not hyperlined to page and refs hyperlinked
+  %  to wrong page 
+  \renewcommand{\lblprehook}{\FootnotemarkF{\thefootnoteF}[}%
   }{\FootnotemarkF{\thefootnoteF}[}%
+  %  
+  %   %% ref gives the number of the clause
+  %   \renewcommand{\lblprehook}{\footnoteF{#2}\label{fnf:#1}[}
+  % }{\footnoteF{#2\label{fnf:#1}}}%
+  %   
+  %   fnf:F11 undefined
+  %\renewcommand{\lblprehook}{\footnoteF{#2\protect\label{fnf:#1}}[}
+  % }{\footnoteF{#2\label{fnf:#1}}}%
+  %   
+  %
+  % This also does not define \label fnf:F11
+  % \renewcommand{\lblprehook}{%
+  % \stepcounter{footnoteF}%
+  % \FootnotetextF{\thefootnoteF}{#2\label{fnf:#1}}%
+  % \FootnotemarkF{\thefootnoteF}[}%
+  % }{\footnoteF{#2\label{fnf:#1}}[}%
 }
-    %  \renewcommand{\lblprehook}{\FnoterefBegin{#1}}%
-    %}{\FootnotemarkF{\thefootnoteF}[}%
-   %\@ifnextchar\lblitem{prehook}{nohook}
-   %\def{\lblprehook}}\FootnotemarkI{\thefootnoteF}[}%
-%}
 
 
 
  
+\newcommand{\Cnoteref}[1]{\protect\footref{fnc:#1}}
+\newcommand{\Inoteref}[1]{\footref{fni:#1}}
+\newcommand{\FnoterefBegin}[1]{\footref{fnf:#1}[\ignorespaces}
+\newcommand{\FnoterefEnd}[1]{]\footref{fnf:#1}}
+
 
 
 
@@ -1039,7 +1053,7 @@ Maharashtra State, Mumbai - 400 004}
 }
 
 \newenvironment{subsectionlist}[1][99]{%
-  \begin{enumerate}[label=\lblprehook(\emph{\protect\lblnum})]
+  \begin{enumerate}[label=\protect\lblprehook(\emph{\protect\lblnum})]
     \settowidth{\leftmargin}{#1}
   }{\end{enumerate}}
 
