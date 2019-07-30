@@ -625,7 +625,8 @@ Maharashtra State, Mumbai - 400 004}
     \thispagestyle{empty}
 
   \begin{center}
-    {\large\bfseries\scshape\@actalias}\footnote{\@sorref}
+    {\large\bfseries\scshape\@actalias}\footnoteD{\@sorref}
+    %{\large\bfseries\scshape\@actalias}\footnote{\@sorref}
     % \ifx#1\@empty
     % \else\footnote{#1}
     % \fi
@@ -872,9 +873,12 @@ Maharashtra State, Mumbai - 400 004}
 
 %%% Amendments, commentary, footnotes, marginnotes
 %\RequirePackage[perpage,hang]{footmisc} 
-\RequirePackage[hang]{footmisc} 
-% hang for indented footnotes
+\RequirePackage[hang,stable]{footmisc} 
+%% hang for indented footnotes
+
 \RequirePackage{manyfoot}
+%\RequirePackage[ruled]{bigfoot}
+% some footnotes appear in pages before with bigfoot
 \RequirePackage{longtable}
 \@removefromreset{footnote}{chapter}
 
@@ -884,26 +888,42 @@ Maharashtra State, Mumbai - 400 004}
 %   \kern 2pt
 % }
 
+\SelectFootnoteRule{default}
+\DeclareNewFootnote{D}
+
+\newcommand{\Mfootnoterule}{\noindent\rule{0.5\linewidth}{0.5pt}\\\noindent\footnotesize
+  \smash{Marginal Citations:} \vspace{2mm}}
+%\SelectFootnoteRule[1]{R}[\noindent\footnotesize \smash{Act Refs.:}\vspace{2mm}]
+\SelectFootnoteRule[1]{M}
+\DeclareNewFootnote{M}[alph]
+
+
+
 %\newcommand{\Ffootnoterule}{\mfr\par\noindent\footnotesize Amendments (Textual): \vspace{2mm}}
 %\newcommand{\Ffootnoterule}{\footnoterule\par\noindent\footnotesize Amendments (Textual): \vspace{2mm}}
-\newcommand{\Ffootnoterule}{\noindent\rule{0.5\linewidth}{0.5pt}\par\noindent\footnotesize Amendments (Textual): \vspace{2mm}}
+\newcommand{\Ffootnoterule}{\noindent\rule{0.5\linewidth}{0.5pt}\\\noindent\footnotesize
+  \smash{Amendments (Textual):}\vspace{2mm}} 
 \SelectFootnoteRule[1]{F}
 \DeclareNewFootnote{F}
 
-\newcommand{\Cfootnoterule}{\noindent\rule{0.5\linewidth}{0.5pt}\par\noindent\footnotesize Modifications etc. (not altering text): \vspace{2mm}}
+
+\newcommand{\Ifootnoterule}{\noindent\smash{\rule{0.5\linewidth}{0.5pt}}\\%
+  \noindent\footnotesize \smash{Commencement Information:} \vspace{2mm}}
+% \newcommand{\Ifootnoterule}{\defaultfootnoterule\\%
+%    \noindent\footnotesize \smash{Commencement Information:} \vspace{2mm}}
+\SelectFootnoteRule[1]{I}
+%\SelectFootnoteRule{default}
+\DeclareNewFootnote{I}
+
+\newcommand{\Cfootnoterule}{\noindent\rule{0.5\linewidth}{0.5pt}\\\noindent\footnotesize Modifications etc. (not altering text):\vspace{2mm}}
 \SelectFootnoteRule[1]{C}
 \DeclareNewFootnote{C}
 
 
-\newcommand{\Ifootnoterule}{\noindent\rule{0.5\linewidth}{0.5pt}\par\noindent\footnotesize Commencement Information: \vspace{2mm}}
-\SelectFootnoteRule[1]{I}
-\DeclareNewFootnote{I}
-
-\newcommand{\Mfootnoterule}{\par\noindent\footnotesize
-  Marginal Citations: \vspace{2mm}}
-%\SelectFootnoteRule[1]{R}[\noindent\footnotesize \smash{Act Refs.:}\vspace{2mm}]
-\SelectFootnoteRule[1]{M}
-\DeclareNewFootnote{M}[alph]
+\setlength{\skip\footinsF}{0pt}
+\setlength{\skip\footinsI}{0pt}
+\setlength{\skip\footinsC}{0pt}
+\setlength{\skip\footinsM}{0pt}
 
 
 \newcommand\manyfoottarget{\makebox[0pt][r]{\hypertarget{Hfootnote.\theHfootnote
@@ -948,7 +968,7 @@ Maharashtra State, Mumbai - 400 004}
   \FootnotemarkI{\thefootnoteI}%
   \FootnotetextI{\thefootnoteI}{#2\label{fni:#1}}}
 
-\newsavebox{\fnbox}
+%\newsavebox{\fnbox}
 
 \newcommand{\Fnote}[2]{%
   %% Takes two arguments: \Fnote{uniqkey}{Amendment Note}
@@ -959,43 +979,54 @@ Maharashtra State, Mumbai - 400 004}
   %% \Fnote{} and \FnoteBegin{} must appear in the same page
   %% \FnoteEnd{} can appear in another page
   %
-  \stepcounter{footnoteF}%
-  \FootnotetextF{\thefootnoteF}{#2\label{fnf:#1}}%
-  % \savebox{\fnbox}{%
-  %   \footnoteF{#2\label{fnf:#1}}[ 
-  % }
-  %% Peek next command to decide placement of prefix mark
-  %% https://tex.stackexchange.com/a/348945/33945
-  \@ifnextchar\lblitem{%
-  % %  None of the fnf labels are defined 
-  %   \renewcommand{\lblprehook}{\usebox{\fnbox}}
-  % }{\usebox{\fnbox}}%
-  %  along with stepcounter and FootnotetextF above, sets correct marks
-  %  and refs, but marks not hyperlined to page and refs hyperlinked
-  %  to wrong page 
-  \renewcommand{\lblprehook}{\FootnotemarkF{\thefootnoteF}[}%
-  }{\FootnotemarkF{\thefootnoteF}[}%
-  %  
-  %   %% ref gives the number of the clause
-  %   \renewcommand{\lblprehook}{\footnoteF{#2}\label{fnf:#1}[}
-  % }{\footnoteF{#2\label{fnf:#1}}}%
-  %   
-  %   fnf:F11 undefined
-  %\renewcommand{\lblprehook}{\footnoteF{#2\protect\label{fnf:#1}}[}
-  % }{\footnoteF{#2\label{fnf:#1}}}%
-  %   
-  %
-  % This also does not define \label fnf:F11
-  % \renewcommand{\lblprehook}{%
-  % \stepcounter{footnoteF}%
-  % \FootnotetextF{\thefootnoteF}{#2\label{fnf:#1}}%
-  % \FootnotemarkF{\thefootnoteF}[}%
-  % }{\footnoteF{#2\label{fnf:#1}}[}%
+    \stepcounter{footnoteF}%
+    \FootnotetextF{\thefootnoteF}{#2\label{fnf:#1}}%
+    % \savebox{\fnbox}{%
+    % \footnoteF{#2\label{fnf:#1}}[ 
+    % }
+    %%   Peek next command to decide placement of prefix mark
+    %%   https://tex.stackexchange.com/a/348945/33945
+    \@ifnextchar\lblitem{%
+      % % None of the fnf labels are defined 
+      % \renewcommand{\lblprehook}{\usebox{\fnbox}}
+      % }{\usebox{\fnbox}}%
+      %   
+      %   along with stepcounter and FootnotetextF above, sets correct marks
+      %   and refs, but marks not hyperlined to page and refs hyperlinked
+      %   to wrong page 
+        \renewcommand{\lblprehook}{\FootnotemarkF{\thefootnoteF}[}%
+      }{%
+        %\ifx\protect\@typeset@protect
+         \FootnotemarkF{\thefootnoteF}[%
+        %\else
+        %  \relax
+        %\fi
+      }
+    % 
+    % ref displays the number of the current item and not footnote
+    % \renewcommand{\lblprehook}{\footnoteF{#2}\label{fnf:#1}[}
+    % }{\footnoteF{#2\label{fnf:#1}}}%
+    %   
+    %   fnf:F11 undefined
+    %   \renewcommand{\lblprehook}{\footnoteF{#2\protect\label{fnf:#1}}[}
+    % }{\footnoteF{#2\label{fnf:#1}}}%
+    %   
+    %   
+    %   This also does not define \label fnf:F11
+    %   \renewcommand{\lblprehook}{%
+    %   \stepcounter{footnoteF}%
+    %   \FootnotetextF{\thefootnoteF}{#2\label{fnf:#1}}%
+    %   \FootnotemarkF{\thefootnoteF}[}%
+    % }{\footnoteF{#2\label{fnf:#1}}[}%
+  % \else%
+  %   \relax%
+  % \fi%
 }
-
+  
 
 
  
+\newcommand{\Mnoteref}[1]{\protect\footref{fnm:#1}}
 \newcommand{\Cnoteref}[1]{\protect\footref{fnc:#1}}
 \newcommand{\Inoteref}[1]{\footref{fni:#1}}
 \newcommand{\FnoterefBegin}[1]{\footref{fnf:#1}[\ignorespaces}
@@ -1048,8 +1079,8 @@ Maharashtra State, Mumbai - 400 004}
 
 \def\lblprehook{}
 \newcommand{\lblitem}[1]{%
-  \def\lblnum{#1} \item
-  \def\lblprehook{}
+  \def\lblnum{#1} \item%
+  \def\lblprehook{}%
 }
 
 \newenvironment{subsectionlist}[1][99]{%
@@ -1140,10 +1171,10 @@ Maharashtra State, Mumbai - 400 004}
 
 
 \newcommand{\chapnumhead}[2]{%
-  \titleformat{\chapter}[display]
-  {\centering\large\bfseries\scshape}
-  {\chaptertitlename \space#1}
-  {\baselineskip}{}{}
+  \titleformat{\chapter}[display]% command [shape]
+  {\centering\large\bfseries\scshape}% format
+  {\chaptertitlename \space#1}% label
+  {\baselineskip}{}{}%sep before-code after-code
   \chapter{\texorpdfstring{#2}{}}
   %% for soul to work correctly in headings with hyperref
   %% https://tex.stackexchange.com/a/240438/33945
