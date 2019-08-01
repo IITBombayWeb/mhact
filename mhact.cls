@@ -877,7 +877,7 @@ Maharashtra State, Mumbai - 400 004}
 %% hang for indented footnotes
 
 \RequirePackage{manyfoot}
-%\RequirePackage[ruled]{bigfoot}
+\RequirePackage[ruled]{bigfoot}
 % some footnotes appear in pages before with bigfoot
 \RequirePackage{longtable}
 \@removefromreset{footnote}{chapter}
@@ -915,7 +915,8 @@ Maharashtra State, Mumbai - 400 004}
 %\SelectFootnoteRule{default}
 \DeclareNewFootnote{I}
 
-\newcommand{\Cfootnoterule}{\noindent\rule{0.5\linewidth}{0.5pt}\\\noindent\footnotesize Modifications etc. (not altering text):\vspace{2mm}}
+\newcommand{\Cfootnoterule}{\noindent\smash{\rule{0.5\linewidth}{0.5pt}}\\%
+  \noindent\footnotesize Modifications etc. (not altering text):\vspace{2mm}}
 \SelectFootnoteRule[1]{C}
 \DeclareNewFootnote{C}
 
@@ -979,8 +980,10 @@ Maharashtra State, Mumbai - 400 004}
   %% \Fnote{} and \FnoteBegin{} must appear in the same page
   %% \FnoteEnd{} can appear in another page
   %
-    \stepcounter{footnoteF}%
-    \FootnotetextF{\thefootnoteF}{#2\label{fnf:#1}}%
+  % Keeping these two lines here leads to enumerate label overlapping
+  % with page footnote
+   % \stepcounter{footnoteF}%
+   % \FootnotetextF{\thefootnoteF}{#2\label{fnf:#1}}%
     % \savebox{\fnbox}{%
     % \footnoteF{#2\label{fnf:#1}}[ 
     % }
@@ -994,10 +997,15 @@ Maharashtra State, Mumbai - 400 004}
       %   along with stepcounter and FootnotetextF above, sets correct marks
       %   and refs, but marks not hyperlined to page and refs hyperlinked
       %   to wrong page 
-        \renewcommand{\lblprehook}{\FootnotemarkF{\thefootnoteF}[}%
-      }{%
+      \stepcounter{footnoteF}%
+      \FootnotetextF{\thefootnoteF}{#2\label{fnf:#1}}%
+      \renewcommand{\lblprehook}{\FootnotemarkF{\thefootnoteF}[}%
+    }{%
         %\ifx\protect\@typeset@protect
-         \FootnotemarkF{\thefootnoteF}[%
+        % Keeping this line here leads to enumerate label overlapping
+        % with page footnote
+        % \FootnotemarkF{\thefootnoteF}[%
+        \footnoteF{#2\label{fnf:#1}}[%
         %\else
         %  \relax
         %\fi
@@ -1052,14 +1060,14 @@ Maharashtra State, Mumbai - 400 004}
        \href{http://legislation.maharashtra.gov.in/acts/india/#2/#3}{{#3} of {#2}}
      \else
        \href{http://legislation.maharashtra.gov.in/acts/india/#2/#3/#4}{{#3}
-         of {#2}, {#4}}
+         of {#2}, s.~{#4}}
      \fi
    \else
      \ifx\hfuzz#4\hfuzz % https://tex.stackexchange.com/a/53091/33945
        \href{http://legislation.maharashtra.gov.in/acts/#1/#2/#3}{{#1} {#3} of {#2}}
      \else
       \href{http://legislation.maharashtra.gov.in/acts/#1/#2/#3/#4}{%
-        {#1} {#3} of {#2}, {#4}} 
+        {#1} {#3} of {#2}, s.~{#4}} 
      \fi
    \fi
 }
