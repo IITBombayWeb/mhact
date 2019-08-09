@@ -1,0 +1,139 @@
+
+\documentclass[default]{report}
+\usepackage{times}
+\usepackage{lipsum}
+
+
+
+\RequirePackage{xcolor}
+\RequirePackage[bookmarks,%
+            breaklinks,%
+            backref=false,%
+            pdfhighlight=/I,%
+            pdffitwindow=true,%
+            pdfstartview=Fit,%
+            pdfcenterwindow=true,%
+            colorlinks,
+            linkcolor={red!50!black},
+            urlcolor={blue!80!black},
+            pdfpagelabels,
+	        pdfusetitle]
+            {hyperref}
+
+%\newcommand{\href}[2]{#2}
+
+
+
+\usepackage{soul}
+%\global\let\ins\ul
+%\newcommand{\ins}[1]{\texorpdfstring{\ul{#1}}}
+\newcommand{\ins}[1]{\ul{#1}}
+\newcommand{\del}[1]{\st{#1}}
+
+   % \let\ins\ul
+   % \let\del\so
+
+
+% \usepackage{ulem}
+% \newcommand{\ins}[1]{\uline{#1}}
+% \newcommand{\del}[1]{\sout{#1}}
+
+
+\newcommand{\subs}[2]{\del{#1} \ins{#2}}
+
+
+\usepackage{titlesec}
+
+\renewcommand{\thechapter}{\Roman{chapter}}
+
+\titleformat{\chapter}[display]
+{\centering\large\bfseries\scshape}
+{\chaptertitlename \space\thechapter}
+{\baselineskip}{}{}
+
+\makeatletter
+\newcommand{\chapnumhead}[2]{%
+
+  
+  \titleformat{\chapter}[display]
+  {\centering\large\bfseries\scshape}
+  {\chaptertitlename \space#1}
+  {\baselineskip}{}{}
+
+  %{\baselineskip}{\st{Asdf}\ul}{}
+  % \def\@makechapterhead##1{%
+  %   % \vspace*{50\p@}% <----------------- space before Chapter #
+  %   {\parindent \z@ \raggedright \normalfont
+  %     \centering
+  %       \bfseries\MakeUppercase\@chapapp\space #1% <-- Chapter #
+  %       \par\nobreak
+  %       {\large \bfseries\scshape ##1}\par\nobreak% <------Chapter title
+  %     }}
+    
+
+    \chapter{\texorpdfstring{#2}{}}
+    \titleformat{\chapter}[display]
+    {\centering\large\bfseries\scshape}
+    {\chaptertitlename \space\thechapter}
+    {\baselineskip}{}{}
+}
+\makeatother
+
+\newcommand{\secnumhead}[2]{%
+	\titlelabel{#1\quad}
+
+        
+	\section{\texorpdfstring{#2}{}}
+	\titlelabel{\thechapter\quad}
+}
+
+\begin{document}
+
+\tableofcontents
+
+\chapnumhead{\ins{2}}{\ins{Preliminary}}
+%\chapnumhead{2}{\ins{Preliminary}}
+%\secnumhead{\ins{2}}{Preliminary}
+\secnumhead{\del{1} \ins{4}}{Title and \ins{Commencement}}
+%\secnumhead{\del{1} \ins{4}}{Title and Commencement}
+%\section{\texorpdfstring{\st{Name} Old} {New}}
+
+
+\lipsum[1]
+
+\del{%
+  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus
+  elit, vestibulum ut, placerat ac, adipiscing vitae, felis. Curabitur
+  dictum gravida mauris. Nam arcu libero, nonummy eget, consectetuer
+  id, vulputate a, magna. Donec vehicula augue eu neque. Pellentesque
+  habitant morbi tristique senectus et netus et malesuada fames ac
+  turpis egestas. Mauris ut leo. Cras viverra metus rhoncus sem. Nulla
+  et lectus vestibulum urna fringilla ultrices. Phasellus eu tellus
+  sit amet tortor gravida placerat.  Integer sapien est, iaculis in,
+  pretium quis, viverra ac, nunc. Praesent eget sem vel leo ultrices
+  bibendum. Aenean faucibus. Morbi dolor nulla, malesuada eu, pulvinar
+  at, mollis ac, nulla. Curabitur auctor semper nulla. Donec varius
+  orci eget risus. Duis nibh mi, congue eu, accumsan eleifend,
+  sagittis quis, diam. Duis eget orci sit amet orci dignissim rutrum
+}
+
+
+\ins{ ultrices bibendum. Aenean faucibus. Morbi dolor nulla, malesuada
+  eu, pulvinar at, mollis ac, nulla. Curabitur auctor semper
+  nulla. Donec varius orci eget risus. Duis nibh mi, congue eu,
+  accumsan eleifend, sagittis quis, diam. Duis eget orci sit amet orci
+  dignissim rutrum }
+
+\chapnumhead{3}{Preliminary}
+
+\del{asdf} \ins{Correct phrase}
+% \del{\lipsum[1]}
+% \ins{\lipsum[2]}
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
