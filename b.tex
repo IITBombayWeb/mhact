@@ -43,6 +43,7 @@
 
 
 \usepackage{titlesec}
+\usepackage{titletoc}
 
 \renewcommand{\thechapter}{\Roman{chapter}}
 
@@ -79,11 +80,15 @@
 }
 \makeatother
 
-\newcommand{\secnumhead}[2]{%
-	\titlelabel{#1\quad}
-
-        
-	\section{\texorpdfstring{#2}{}}
+\newcommand{\secnumhead}[3][]{%
+	\titlelabel{#2\quad}
+        \titlecontents{section}[2em]
+        {\vspace{12pt}}
+        % {\normalfont\normalsize\contentslabel{2em}}
+        {\normalfont\normalsize\contentslabel[#2]{2em}}
+        {\hspace*{-2em}\uppercase}
+        {\titlerule*[.75em]{.}\contentspage}
+	\section{\texorpdfstring{#3}{}}
 	\titlelabel{\thechapter\quad}
 }
 
@@ -94,6 +99,7 @@
 \chapnumhead{\ins{2}}{\ins{Preliminary}}
 %\chapnumhead{2}{\ins{Preliminary}}
 %\secnumhead{\ins{2}}{Preliminary}
+%\secnumhead{2}{Preliminary}
 \secnumhead{\del{1} \ins{4}}{Title and \ins{Commencement}}
 %\secnumhead{\del{1} \ins{4}}{Title and Commencement}
 %\section{\texorpdfstring{\st{Name} Old} {New}}
