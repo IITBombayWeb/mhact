@@ -818,6 +818,9 @@ Maharashtra State, Mumbai - 400 004}
   \fi
   
   \if@gazbilleng
+    \setcounter{page}{1}
+    \pagenumbering{arabic}
+    \thispagestyle{actstart}
     \gdef\pr@gazpart{असाधारण भाग पाच-अ}
     \gdef\pr@mrint{
       महाराष्ट्र विधानसभेत  व महाराष्ट्र विधानपरिषदेत सादर केलेली विधेयके
@@ -828,6 +831,9 @@ Maharashtra State, Mumbai - 400 004}
   \fi
 
   \if@gazacteng
+    \setcounter{page}{1}
+    \pagenumbering{arabic}
+    \thispagestyle{actstart}
     \gdef\pr@gazpart{असाधारण भाग आठ}
     \gdef\pr@mrint{महाराष्ट्र विधानमंडळाचे अधिनियम व राज्यपालांनी प्रख्यापित
       केलेले अध्यादेश व केलेले विनियम आणि विधी व न्याय विभागाकडून आलेली विधेयके
