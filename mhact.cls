@@ -576,42 +576,49 @@ Maharashtra State, Mumbai - 400 004}
 
 \newcommand\reprintcoverpage{%
   \thispagestyle{empty}
-  a
-
-  % \begin{center}
-  %     \putgovlogo\par
-
-  %     {\large \scshape Government of Maharashtra}
-
-  %     {\Large \scshape Law and Judiciary Department}
-
-  %     {\huge \@actalias \vskip 40pt
-
-  %     \Large \bfseries \@title}
-
-  %     \vspace{\fill}
-
-  %     {(\pr@amenddate)}
-
-      
-  %     \vspace{\fill}
-
-  %     {\small Printed in India by The Manager, Government Central
-  %       Press, Mumbai, and published by The Director, Government
-  %       Printing, Stationary and Publications, Maharashtra State,
-  %       Mumbai 400 004}
-
-  %     {\bfseries\pr@reprintyr}
-
-  %     {[Price---Rs. \pr@reprintpr]}
-    
-  % \end{center}
   
+
+  \begin{center}
+      \putgovlogo\par
+
+      {\large \scshape Government of Maharashtra}
+
+      {\Large \scshape Law and Judiciary Department}
+
+      \vspace{\stretch{1}}
+
+      {\huge \bfseries \@actalias \vskip 40pt
+
+      \Large \bfseries \@title}
+
+      \vspace{\stretch{3}}
+
+      ({\itshape \pr@amenddate})
+
+      \vfill
+      
+      \includegraphics[width=1cm]{flowericon.pdf}
+      
+      \vfill
+
+      {\small Printed in India by The Manager, Government Central
+        Press, Mumbai, and published by The Director, Government
+        Printing, Stationary and Publications, Maharashtra State,
+        Mumbai 400 004}
+
+      {\bfseries\pr@reprintyr}
+
+      {[Price---Rs. \pr@reprintpr]}
+    
+  \end{center}
+  
+  \clearpage
     \begin{center}
       {\large \bfseries \@title}
       
       \rule{0.25\linewidth}{0.5pt}
     \end{center}
+
   
     \chapter*{\contentsname}
     \pagenumbering{roman}
