@@ -172,7 +172,8 @@ bindingoffset=0.5cm,
 ]{geometry}
 
 %\parindent=0pt
-\setlength{\parskip}{\baselineskip}
+%\setlength{\parskip}{\baselineskip}
+\setlength{\parskip}{1ex plus 1ex minus 1pt}
 %\setlength{\parindent}{3em}
 
 
@@ -1081,9 +1082,9 @@ Maharashtra State, Mumbai - 400 004}
               
 \renewcommand\thesection {\@arabic\c@section}
               
-\def\section{\@startsection{section}{1}%
-  \z@{-.7\baselineskip\@plus-\baselineskip}{.5\baselineskip}%
-  {\normalfont\bfseries\hsize1\textwidth \raggedright}}
+% \def\section{\@startsection{section}{1}%
+%   \z@{-.7\baselineskip\@plus-\baselineskip}{.5\baselineskip}%
+%   {\normalfont\bfseries\hsize1\textwidth \raggedright}}
 
 
 \RequirePackage{enumitem}
@@ -1098,16 +1099,19 @@ Maharashtra State, Mumbai - 400 004}
 }
 
 \newenvironment{subsectionlist}[1][99]{%
-  \begin{enumerate}[label=\protect\lblprehook(\emph{\protect\lblnum})]
+  \begin{enumerate}[topsep=0pt,partopsep=0pt,parsep=0.5\parsep,
+    label=\protect\lblprehook(\emph{\protect\lblnum})]
     \settowidth{\leftmargin}{#1}
   }{\end{enumerate}}
 
 \newenvironment{clause}{%
-  \begin{enumerate}[label=(\protect\lblnum)]
+  \begin{enumerate}[topsep=0pt,partopsep=0pt,parsep=0.5\parsep,
+    label=(\protect\lblnum)]
   }{\end{enumerate}}
 
 \newenvironment{subclause}{%
-  \begin{enumerate}[label=(\protect\lblnum)]
+  \begin{enumerate}[topsep=0pt,partopsep=0pt,parsep=0.5\parsep,
+    label=(\protect\lblnum)]
   }{\end{enumerate}}
 
 
@@ -1188,20 +1192,36 @@ Maharashtra State, Mumbai - 400 004}
   \titleformat{\chapter}[display]% command [shape]
   {\centering\large\bfseries\scshape}% format
   {\chaptertitlename \space#1}% label
-  {\baselineskip}{}{}%sep before-code after-code
+  {-1ex}{}{}%sep before-code after-code (sep between label and
+            %heading)
+  \titlespacing*{\chapter}{1ex}{*0}{-1ex}
   \chapter{\texorpdfstring{#2}{}}
   %% for soul to work correctly in headings with hyperref
   %% https://tex.stackexchange.com/a/240438/33945
   \titleformat{\chapter}[display]
   {\centering\large\bfseries\scshape}
   {\chaptertitlename \space\thechapter}
-  {\baselineskip}{}{}
+  {0ex}{}{}
 }
 
 \newcommand{\secnumhead}[2]{%
-	\titlelabel{#1\quad}
+
+        \titleformat{\section}% command [shape]
+        {\bfseries}% format
+        {#1\quad}% label
+        {0ex}{}{}%sep before-code after-code (sep between label and
+        
+	%\titlelabel{#1\quad}
+
+        \titlespacing*{\section}{-1ex}{*0}{*0}
 	\section{\texorpdfstring{#2}{}}
-	\titlelabel{\thechapter\quad}
+	%\titlelabel{\thesection\quad}
+
+        \titleformat{\section}% command [shape]
+        {\bfseries}% format
+        {\thesection\quad}% label
+        {0ex}{}{}%sep before-code after-code (sep between label and
+        
 }
 
 
