@@ -8,12 +8,62 @@
 
 \makeatletter
 
-\titlecontents{section}[2em]
-    {\vspace{12pt}}
-    %{\normalfont\normalsize\contentslabel{2em}}
-    {\normalfont\normalsize\contentslabel[ab]{2em}}
+
+\titlecontents{chapter}[2em]
+    {\vspace{12pt}\filcenter\scshape}
+    {\contentslabel{2em} \quad}
     {\hspace*{-2em}\uppercase}
-    {\titlerule*[.75em]{.}\contentspage}
+    {}
+
+
+%%% centering-headings-list-of-contents-but-not-chapters
+%%% https://tex.stackexchange.com/questions/214631/
+
+    
+% \newcommand{\chapnumhead}[3][]{%
+% 	\titlelabel{#2\quad}
+%         \titlecontents{chapter}[2em]
+%         {\vspace{12pt}}
+%         % {\normalfont\normalsize\contentslabel{2em}}
+%         {\normalfont\normalsize\contentslabel[#2]{2em}}
+%         {\hspace*{-2em}\uppercase}
+%         {\titlerule*[.75em]{.}\contentspage}
+% }
+
+\newcommand{\chapnumhead}[3][]{%
+
+	%\titlelabel{#2\quad}
+ 
+  \titlecontents{chapter}[2em]
+  {\vspace{12pt}\centering}
+  {\normalfont\bfseries\normalsize\contentslabel[Chapter #2]{5em}}
+  {}
+  {}
+  
+  \titleformat{\chapter}[display]% command [shape]
+  {\centering\bfseries\scshape}% format
+  {\chaptertitlename \space#1}% label
+  {-1ex}{}{}%sep before-code after-code (sep between label and
+            %heading)
+        
+
+  
+  \titlespacing*{\chapter}{1ex}{*0}{-1ex}
+  \chapter[#3]{\texorpdfstring{#2}{}}
+  %% for soul to work correctly in headings with hyperref
+  %% https://tex.stackexchange.com/a/240438/33945
+  \titleformat{\chapter}[display]
+  {\centering\large\bfseries\scshape}
+  {\chaptertitlename \space\thechapter}
+  {0ex}{}{}
+}
+
+% \titlecontents{section}[2em]
+%     {\vspace{12pt}}
+%     %{\normalfont\normalsize\contentslabel{2em}}
+%     {\normalfont\normalsize\contentslabel[ab]{2em}}
+%     {\hspace*{-2em}\uppercase}
+%     {\titlerule*[.75em]{.}\contentspage}
 
 
 
@@ -161,6 +211,13 @@
 \begin{document}
 
  \pagenumbering{roman}
+
+
+  % \titleformat{\chapter}[display]% command [shape]
+  % {\centering\large\scshape}% format
+  % {\chaptertitlename}% label
+  % {-1ex}{}{}%sep before-code after-code (sep between label and
+ 
  \tableofcontents
  \cleardoublepage
 % \listoftables
@@ -172,7 +229,7 @@
 % \pagenumbering{arabic}
 
 
-\chapter{Footnote in Section Headings}
+\chapnumhead{3}{Footnote in Section Headings}
 
 \secnumhead[Intro]{2}{Introduction}
 
