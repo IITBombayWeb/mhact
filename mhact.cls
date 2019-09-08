@@ -331,7 +331,7 @@ bindingoffset=0.5cm,
 \macroval{originDepartment}{@orgdept}
 
 \macroval{psmla}{@psmla}
-\macroval{intimation}{@intimation}
+%\macroval{intimation}{@intimation}
 
 
 % \newcommand{\longtitle}[1]{
@@ -350,9 +350,9 @@ bindingoffset=0.5cm,
 \macroval{printMarathiTarikh}{pr@mrtarikh}
 \macroval{printPrice}{pr@price}
 \macroval{printASKramank}{pr@ask}
-\macroval{printIntimation}{pr@intimation}
-\macroval{printIntAuth}{pr@intauth}
-\macroval{publisherAddress}{pr@address}
+%\macroval{printIntimation}{pr@intimation}
+%\macroval{printIntAuth}{pr@intauth}
+%\macroval{publisherAddress}{pr@address}
 \macroval{coveringNoteSlip}{pr@covnote}
 \macroval{amendlastdate}{pr@amenddate}
 \macroval{reprintYear}{pr@reprintyr}
