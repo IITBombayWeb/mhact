@@ -88,6 +88,9 @@
 \LoadClass[12pt,a4paper,openright,twoside]{report}
 
 
+
+
+
 %***************Some important packages ****************************
 % hyperref: for linking various labels
 % graphicx: to add graphics
@@ -124,6 +127,20 @@
 %\MakeAutoQuote{"}{"}
 %\MakeOuterQuote{"}
 %\MakeInnerQuote{"}
+
+\RequirePackage{tabularx}
+
+% \RequirePackage{comment}
+
+% \if@gazbilleng
+%   \includecomment{gaz5a}
+%   \excludecomment{gaz8}
+% \fi  
+
+% \if@gazacteng
+%   \includecomment{gaz8}
+%   \excludecomment{gaz5a}
+% \fi
 
 
 \RequirePackage{titlesec}
