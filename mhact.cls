@@ -130,17 +130,17 @@
 
 \RequirePackage{tabularx}
 
-% \RequirePackage{comment}
+\RequirePackage{comment}
 
-% \if@gazbilleng
-%   \includecomment{gaz5a}
-%   \excludecomment{gaz8}
-% \fi  
+\if@gazbilleng
+  \includecomment{gaz5a}
+  \excludecomment{gaz8}
+\fi  
 
-% \if@gazacteng
-%   \includecomment{gaz8}
-%   \excludecomment{gaz5a}
-% \fi
+\if@gazacteng
+  \includecomment{gaz8}
+  \excludecomment{gaz5a}
+\fi
 
 
 \RequirePackage{titlesec}
