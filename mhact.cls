@@ -132,6 +132,10 @@
 
 \RequirePackage{comment}
 
+\excludecomment{gaz5a}
+\excludecomment{gaz8}
+
+
 \if@gazbilleng
   \includecomment{gaz5a}
   \excludecomment{gaz8}

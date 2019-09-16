@@ -21,6 +21,7 @@ sed  's/"\b/``/g; s/\b"/\x27\x27/g; s/\([^a-zA-Z]\)\x27\b\([^\x27]\)/\1\`\2/g' $
 latexmk -C $intex
 
 latexmk -xelatex $intex
+xelatex $intex # otherwise ToC and FnoteEnd are not inserted
 
 # Clear regeneratable files
 # latexmk -c $intex
