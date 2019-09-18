@@ -559,11 +559,15 @@ Maharashtra State, Mumbai - 400 004}
     \chapter*{\contentsname}
 
     \pagenumbering{roman}
+    \thispagestyle{empty}
     \setcounter{page}{1}
     \@starttoc{toc}%
 
     
     \cleardoublepage
+    \setcounter{page}{1}
+    \pagenumbering{arabic}
+    \thispagestyle{empty}
 
     \@prologue
 
