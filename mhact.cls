@@ -46,8 +46,8 @@
 % *******************************************************************
 \newif\if@default
 \newif\if@billwithdocket
-\newif\if@gazbilleng
-\newif\if@gazacteng
+\newif\if@gazFiveA
+\newif\if@gazEight
 \newif\if@reprint
 \newif\if@ordinance
 
@@ -61,11 +61,11 @@
 }
 
 \DeclareOption{gaz5a}{%
-  \@gazbillengtrue
+  \@gazFiveAtrue
 }
 
 \DeclareOption{gaz8}{%
-  \@gazactengtrue
+  \@gazEighttrue
 }
 
 \DeclareOption{reprint}{%
@@ -136,12 +136,12 @@
 \excludecomment{gaz8}
 
 
-\if@gazbilleng
+\if@gazFiveA
   \includecomment{gaz5a}
   \excludecomment{gaz8}
 \fi  
 
-\if@gazacteng
+\if@gazEight
   \includecomment{gaz8}
   \excludecomment{gaz5a}
 \fi
@@ -248,7 +248,7 @@ bindingoffset=0.5cm,
   \cfoot{\small\bfseries\thepage}
 
 
-  \if@gazbilleng
+  \if@gazFiveA
   \cfoot{
     \small
     \fontspec{Shobhika}[%
@@ -259,7 +259,7 @@ bindingoffset=0.5cm,
   }
   \fi
 
-  \if@gazacteng
+  \if@gazEight
   \cfoot{
     \small
     \fontspec{Shobhika}[%
@@ -850,27 +850,27 @@ Maharashtra State, Mumbai - 400 004}
     \AtEndDocument{\makedocket}  
   \fi
   
-  \if@gazbilleng
+  \if@gazFiveA
     \setcounter{page}{1}
     \pagenumbering{arabic}
     \thispagestyle{actstart}
     \gdef\pr@gazpart{असाधारण भाग पाच-अ}
     \gdef\pr@mrint{
       महाराष्ट्र विधानसभेत  व महाराष्ट्र विधानपरिषदेत सादर केलेली विधेयके
-      (इंग्रिजी अनुवाद).
+      (इंग्रजी  अनुवाद).
     }
     \gazEngQuota
     
   \fi
 
-  \if@gazacteng
+  \if@gazEight
     \setcounter{page}{1}
     \pagenumbering{arabic}
     \thispagestyle{actstart}
     \gdef\pr@gazpart{असाधारण भाग आठ}
     \gdef\pr@mrint{महाराष्ट्र विधानमंडळाचे अधिनियम व राज्यपालांनी प्रख्यापित
-      केलेले अध्यादेश व केलेले विनियम आणि विधी व न्याय विभागाकडून आलेली विधेयके
-      (इंग्रिजी अनुवाद). 
+      केलेले अध्यादेश व केलेले विनियम आणि विधि व न्याय विभागाकडून आलेली विधेयके
+      (इंग्रजी अनुवाद). 
       }
     \gazEngQuota
   \fi
