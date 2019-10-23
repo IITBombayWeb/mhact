@@ -1220,14 +1220,14 @@ Maharashtra State, Mumbai - 400 004}
 \newcommand{\subs}[2]{\del{#1} \ins{#2}}
 
 
-\newcommand{\chapnumhead}[2]{%
+\newcommand{\chapnumhead}[3]{%
   \titleformat{\chapter}[display]% command [shape]
   {\centering\large\bfseries\scshape}% format
   {\chaptertitlename \space#1}% label
   {-1ex}{}{}%sep before-code after-code (sep between label and
             %heading)
   \titlespacing*{\chapter}{1ex}{*0}{-1ex}
-  \chapter{\texorpdfstring{#2}{}}
+  \chapter[#2]{\texorpdfstring{#3}{}}
   %% for soul to work correctly in headings with hyperref
   %% https://tex.stackexchange.com/a/240438/33945
   \titleformat{\chapter}[display]
@@ -1236,7 +1236,7 @@ Maharashtra State, Mumbai - 400 004}
   {0ex}{}{}
 }
 
-\newcommand{\secnumhead}[2]{%
+\newcommand{\secnumhead}[3]{%
 
         \titleformat{\section}% command [shape]
         {\bfseries}% format
@@ -1246,7 +1246,7 @@ Maharashtra State, Mumbai - 400 004}
 	%\titlelabel{#1\quad}
 
         \titlespacing*{\section}{-1ex}{*0}{*0}
-	\section{\texorpdfstring{#2}{}}
+	\section[#2]{\texorpdfstring{#3}{}}
 	%\titlelabel{\thesection\quad}
 
         \titleformat{\section}% command [shape]
