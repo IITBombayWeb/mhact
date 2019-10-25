@@ -1238,12 +1238,18 @@ Maharashtra State, Mumbai - 400 004}
 
 \newcommand{\secnumhead}[3]{%
 
-        \titleformat{\section}% command [shape]
-        {\bfseries}% format
-        {#1\quad}% label
-        {0ex}{}{}%sep before-code after-code (sep between label and
+        % \titleformat{\section}% command [shape]
+        % {\bfseries}% format
+        % {#1\quad}% label
+        % {0ex}{}{}%sep before-code after-code (sep between label and
         
-	%\titlelabel{#1\quad}
+	\titlelabel{#1\quad}
+        \titlecontents{section}[2em]
+        {\vspace{12pt}}
+        % {\normalfont\normalsize\contentslabel{2em}}
+        {\normalfont\normalsize\contentslabel[#1]{2em}}
+        {\hspace*{-2em}\uppercase}
+        {\titlerule*[.75em]{.}\contentspage}
 
         \titlespacing*{\section}{-1ex}{*0}{*0}
 	\section[#2]{\texorpdfstring{#3}{}}
