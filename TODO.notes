@@ -90,6 +90,10 @@ Fri Oct 25 23:18:17 IST 2019
     page view port positions itself at the location where the footnote
     label is inserted, not to the actual footnote at the bottom of the page.
 
+Fri Oct 25 23:51:39 IST 2019
+ * [resolved] Anand's tocHead.tex file failed because of some 
+   unusual text \ins\Fnote  (ins should not come for Notes)
+ * not attending to this for now
 
 
 
