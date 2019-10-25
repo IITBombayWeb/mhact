@@ -1,0 +1,78 @@
+Mon Sep  9 00:08:34 IST 2019
+ * included secnumhead code from s.tex in mhact.cls for Fnote stripping in ToC
+ * but inclusion of Fnote in secnumhead throws error related to
+   >> ! Undefined control sequence.  <argument> \fail 
+   >>  l.946 ...ain{\rule}{\manyfoottarget\rule}{}{\fail}
+   meaning the patchcmd did not replace
+ * need to isolate this problem and debug
+
+Tue Sep 10 00:11:50 IST 2019
+ * commenting out bigfoot packaged removed the above error
+ * Cnote in section heading works without the removal
+ * But Fnote still throw other errors
+     >>  Undefined control sequence.
+     >> \lblitem #1->\def \lblnum
+ * by including \protect\Fnote the error goes away 
+   However, the markers are inserted in the contents, with a wrong number
+ * included \protect in the definition of \FnoterefEnd
+
+ * unable to include \protect\footnoteF in the def of \Fnote as with other 
+   notes definition
+
+ * understand protect, fragile cmds and moving args
+  https://tex.stackexchange.com/questions/12698/what-is-the-purpose-of-protect
+  https://tex.stackexchange.com/questions/4736/what-is-the-difference-between-fragile-and-robust-commands
+
+Tue Sep 10 23:04:03 IST 2019
+
+ * https://www.giss.nasa.gov/tools/latex/fragile.html 
+ A fragile command that appears in a moving argument must be preceded by a \protect command. The \protect applies only to the immediately following command; if arguments of this command also contain fragile commands, the latter must be protected with their own \protect.
+
+Fri Sep 13 14:08:52 IST 2019
+ * \fail comes even for a doc without any footnotes (pua.tex)
+ * \ins{\actref{}{}{}{}} does not work (pua.tex). Have removed ins for now
+   <<<
+   ! Argument of \actref has an extra }.
+   >>> 
+ * Fixed by using a \protect\actref.  Only that works. using \ul{\protect#1} 
+   does not underline for normal text
+
+Tue Oct 15 22:54:22 IST 2019
+ TODO:
+   1. Fnote in section heading 
+      csa.tex: Problem = Fnote markers appear in ToC
+      If \protect\Fnote is not used, it throws errors
+
+    Hypothesis: If \Fnote fails because of trying to work with \lblitem following, we can do away with it temporarily, and let it be in the end of the previous clause.
+
+  
+    When  
+        \@ifnextchar\lblitem{%
+     is commented out
+     without \protect\Fnote the opening mark [ goes away in ToC
+     (no errors)
+     but closing mark ] remains
+
+     Removing \protect in \FnoterefEnd does not help. Throws errors
+     This problem is there in for Cnoteref in s.tex as well
+     This means the temp replacement done in secnumhead is not working
+     Debug that first
+     The problem seems to be with \let. Even though \optarg takes gobbled up 
+     null value, soon after the Cnote is reverted to old \optarg also 
+     shows the reverted definition. This did not happen with Cnote, only with Cnoteref
+
+     Actually even Cnote has the same problem, optarg post does hold the reverted definition.  So the problem may be with footref
+
+     Even that does not seem to be the case when having a mere argument,
+     as in Lab#1
+
+
+   2. Fnote
+
+Fri Oct 25 11:10:32 IST 2019
+
+  Section heading with 3 args and label in toc working
+  * modify fnote and cnote commands to get hyperref links working
+  * work/tocHead.tex (given by anand) does not compile (commented out some 
+    portions to get it working)
+
