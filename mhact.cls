@@ -909,15 +909,17 @@ Maharashtra State, Mumbai - 400 004}
 \@removefromreset{section}{chapter}
 
 
+\RequirePackage{manyfoot}
 
 %%% Amendments, commentary, footnotes, marginnotes
 %\RequirePackage[perpage,hang]{footmisc} 
 \RequirePackage[hang,stable]{footmisc} 
 %% hang for indented footnotes
 
-\RequirePackage{manyfoot}
-\RequirePackage[ruled]{bigfoot}
+%\RequirePackage[ruled]{bigfoot}
+% with bigfoot hyperlinks don't work
 % some footnotes appear in pages before with bigfoot
+
 \RequirePackage{longtable}
 \@removefromreset{footnote}{chapter}
 
@@ -990,13 +992,21 @@ Maharashtra State, Mumbai - 400 004}
   %% \Cnoteref{} command. This is so that the same marker can be
   %% referred in multiple locations
   %% \Cnote{} and \Cnoteref{} must appear in the same page
-  \stepcounter{footnoteC}%
-  \FootnotemarkC{\thefootnoteC}%
-  \FootnotetextC{\thefootnoteC}{#2\label{fnc:#1}}}
-
+  \ifx\protect\@typeset@protect
+    \footnoteC{#2\label{fnc:#1}}
+  \else
+    \relax
+  \fi
+  %% Needed to get hyperlinks working with manyfoot
+  %% https://tex.stackexchange.com/a/498999/33945
+  %% https://tex.stackexchange.com/a/8670/33945
+  % \stepcounter{footnoteC}%
+  % \FootnotemarkC{\thefootnoteC}%
+  % \FootnotetextC{\thefootnoteC}{#2\label{fnc:#1}}
   %\footnotetextC[\thefootnoteC]{#2\label{fnc:#1}}}
   %% plain footnotetextC throws an error in the presence of hyperref
   %% when thefootnote has a prefix C
+}
 
 \newcommand{\Inote}[2]{%
   %% Takes two arguments: \Inote{uniqkey}{Foonote Text}
@@ -1004,9 +1014,15 @@ Maharashtra State, Mumbai - 400 004}
   %% \Inoteref{} command. This is so that the same marker can be
   %% referred in multiple locations
   %% \Inote{} and \Inoteref{} must appear in the same page
-  \stepcounter{footnoteI}%
-  \FootnotemarkI{\thefootnoteI}%
-  \FootnotetextI{\thefootnoteI}{#2\label{fni:#1}}}
+  % \stepcounter{footnoteI}%
+  % \FootnotemarkI{\thefootnoteI}%
+  % \FootnotetextI{\thefootnoteI}{#2\label{fni:#1}}
+  \ifx\protect\@typeset@protect
+    \footnoteI{#2\label{fni:#1}}
+  \else
+    \relax
+  \fi
+}
 
 %\newsavebox{\fnbox}
 
@@ -1075,7 +1091,7 @@ Maharashtra State, Mumbai - 400 004}
  
 \newcommand{\Mnoteref}[1]{\protect\footref{fnm:#1}}
 \newcommand{\Cnoteref}[1]{\protect\footref{fnc:#1}}
-\newcommand{\Inoteref}[1]{\footref{fni:#1}}
+\newcommand{\Inoteref}[1]{\protect\footref{fni:#1}}
 \newcommand{\FnoterefBegin}[1]{\footref{fnf:#1}[\ignorespaces}
 \newcommand{\FnoterefEnd}[1]{]\footref{fnf:#1}}
 

@@ -76,3 +76,12 @@ Fri Oct 25 11:10:32 IST 2019
   * work/tocHead.tex (given by anand) does not compile (commented out some 
     portions to get it working)
 
+Fri Oct 25 23:18:17 IST 2019
+  * hyperlinks in PDF workd when bigfoot was commented
+  * originally thought that it works because introducing
+      \ifx\protect\@typeset@protect
+    that was present in s.tex
+  * However links in ?noteref donot get a 'go to page' link
+  * in s.tex both Cnote and Cnoteref get a hyperlink to page
+
+
