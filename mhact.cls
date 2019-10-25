@@ -102,6 +102,14 @@
 
 \RequirePackage{xcolor}
 
+
+\RequirePackage{manyfoot}
+
+%%% Amendments, commentary, footnotes, marginnotes
+%\RequirePackage[perpage,hang]{footmisc} 
+\RequirePackage[hang,stable]{footmisc} 
+%% hang for indented footnotes
+
 \RequirePackage[bookmarks,%
             breaklinks,%
             backref=false,%
@@ -909,12 +917,6 @@ Maharashtra State, Mumbai - 400 004}
 \@removefromreset{section}{chapter}
 
 
-\RequirePackage{manyfoot}
-
-%%% Amendments, commentary, footnotes, marginnotes
-%\RequirePackage[perpage,hang]{footmisc} 
-\RequirePackage[hang,stable]{footmisc} 
-%% hang for indented footnotes
 
 %\RequirePackage[ruled]{bigfoot}
 % with bigfoot hyperlinks don't work

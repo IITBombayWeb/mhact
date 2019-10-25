@@ -83,5 +83,13 @@ Fri Oct 25 23:18:17 IST 2019
     that was present in s.tex
   * However links in ?noteref donot get a 'go to page' link
   * in s.tex both Cnote and Cnoteref get a hyperlink to page
+  * [solved] noteref links also work when manyfoot and footmisc
+    is included before hyperref
+
+  * [bug] minor: footref hyperlinks to the correct page, but the
+    page view port positions itself at the location where the footnote
+    label is inserted, not to the actual footnote at the bottom of the page.
+
+
 
 
